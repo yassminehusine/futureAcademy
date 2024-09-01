@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\dashboardController; 
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\materialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,20 @@ Route::group(['prefix'=>'courses'],function(){
     Route::get('/destroy/{id}', [CoursesController::class, 'destroy'])->name('course.destroy');
 })->middleware('auth');
 // End Courses Controller
+
+// Start materials Controller
+Route::group(['prefix'=>'materials'],function(){
+    Route::get('/create',[materialController::class,'create'])->name('material.create');
+    Route::get('/index', [materialController::class, 'index'])->name('material.index');
+    Route::post('/store',[materialController::class,'store'])->name('material.store');
+    Route::get('/edit/{id}',[materialController::class,'edit'])->name('material.edit');
+    Route::post('/update/{id}',[materialController::class,'update'])->name('material.update');
+    Route::get('/destroy/{id}', [materialController::class, 'destroy'])->name('material.destroy');
+})->middleware('auth');
+// End materials Controller
+
+
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
