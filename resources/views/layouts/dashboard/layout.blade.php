@@ -25,24 +25,18 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('assets')}}/plugins/summernote/summernote-bs4.min.css">
   <link rel="stylesheet" href="{{asset('assets')}}/css/index.css">
-   <!-- Font Table -->
-   <link rel="stylesheet" href="{{asset('assets')}}/plugins/fontawesome-free/css/all.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('assets')}}/plugins/fontawesome-free/css/all.min.css">
-  <!-- jsGrid -->
-  <link rel="stylesheet" href="{{asset('assets')}}/plugins/jsgrid/jsgrid.min.css">
-  <link rel="stylesheet" href="{{asset('assets')}}/plugins/jsgrid/jsgrid-theme.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+  <!-- Other CSS files -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body    class="hold-transition sidebar-mini layout-fixed">
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
 <!-- ./Wrapper -->
 <div class="wrapper">
     <!-- Preloader -->
@@ -194,6 +188,7 @@
         <img src="https://futureacademyedu.com/wp-content/uploads/2023/02/Logo-2048x1491.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Future Academyed</span>
       </a>
+  
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
@@ -205,6 +200,7 @@
             <a href="#" class="d-block">{{auth()->user()->name}}</a>
           </div>
         </div>
+  
         <!-- SidebarSearch Form -->
         <div class="form-inline">
           <div class="input-group" data-widget="sidebar-search">
@@ -219,7 +215,9 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @if(auth()->user()->role === 'Admin')
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+           @if(auth()->user()->role === 'Admin')
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -266,24 +264,66 @@
                 </li>
               </ul>
             </li>   
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <!-- <i class="fa-solid fa-bookmark"></i> -->
+                <i class="nav-icon fas fa-bookmark"></i>
+                <p>
+                  Courses
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('course.create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>create course</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('course.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> show course </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                    Logout
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+            </li>
             @endif
+            <ul class="nav nav-treeview">
             <li class="nav-item">
               <a  href="{{route('user.profile',['id' => Auth::user()->id])}}" class="nav-link">
               <i class="fa-solid fa-address-card"></i>
                 <p>
                   Profile
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
             </li>   
-           <li class="nav-item">
-                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
-                  <p> {{ __('Logout') }}</p>
-              </a>
+            <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                    Logout
+                </p>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                 @csrf
-               </form>
-           </li>
+            </form>
+          </li>
+           </ul>
+          
         </nav>
         <!-- /.sidebar-menu -->
       </div>
@@ -327,11 +367,9 @@
       <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
-  </div>
+</div>
   <!-- ./wrapper -->
-<!-- ./wrapper -->
 </body>
-<!-- jQuery -->
 <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('assets')}}/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -384,10 +422,36 @@
 <!-- jsGrid -->
 <script src="{{asset('assets')}}/plugins/jsgrid/demos/db.js"></script>
 <script src="{{asset('assets')}}/plugins/jsgrid/jsgrid.min.js"></script>
+<script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="{{asset('assets')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
+<script src="{{asset('assets')}}/dist/js/adminlte.min.js"></script>
+<!-- Summernote -->
+<script src="{{asset('assets')}}/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- CodeMirror -->
+<script src="{{asset('assets')}}/plugins/codemirror/codemirror.js"></script>
+<script src="{{asset('assets')}}/plugins/codemirror/mode/css/css.js"></script>
+<script src="{{asset('assets')}}/plugins/codemirror/mode/xml/xml.js"></script>
+<script src="{{asset('assets')}}/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="{{asset('assets')}}/dist/js/demo.js"></script> -->
+<script>
+  $(function () {
+    // Summernote
+    $('#summernote').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
+</script>
+AdminLTE App -->
 <!-- <script src="../../dist/js/adminlte.min.js"></script> -->
 <!-- AdminLTE for demo purposes -->
-<!-- <script src="../../dist/js/demo.js"></script> -->
+<script src="../../dist/js/demo.js"></script>
 
 <!-- Page specific script -->
 <script>

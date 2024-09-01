@@ -17,14 +17,11 @@ return new class extends Migration
             $table->string('description');
             $table->string('image')->nullable();
             $table->string('credit_hours');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

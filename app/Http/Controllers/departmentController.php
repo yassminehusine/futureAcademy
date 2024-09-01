@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\DTO\departmentDTO;
 use App\Http\Requests\departmentRequest;
 use App\Repository\interface\IdepartmentRepository;
@@ -12,6 +11,10 @@ class departmentController extends Controller
 
     public function __construct(IdepartmentRepository $departmentRepository)
     {
+        $this->middleware(['auth', 'Admin']);
+        $this->middleware('Admin')->only([
+            'create', 'store', 'edit', 'update', 'destroy'
+        ]);
         $this->departmentRepository = $departmentRepository;
     }
 
@@ -31,36 +34,30 @@ class departmentController extends Controller
         
         $data = departmentDTO::handleInputs($request);
         $this->departmentRepository->create($data);
+        Alert::success('Success Toast','success');
         return redirect()->route('department.index');
-        toast('Success Toast','success');
-    }
+      
 
+    }
     public function show(string $id)
     {
         $department = $this->departmentRepository->getById($id);
         return view('layouts.dashboard.department.show', compact('department'));
     }
-
     public function edit($id)
     {
         $department = $this->departmentRepository->getById($id);
         return view('layouts.dashboard.department.edit', compact('department'));
     }
-
     public function update(departmentRequest $request, string $id)
     {
-        // Convert the request to a DTO
         $data = departmentDTO::handleInputs($request);
-
-        // Pass the DTO data as an array to the repository
         $this->departmentRepository->update($data, $id);
-
         return redirect()->route('department.index')->with('success', 'Department updated successfully');
     }
-
-    public function destroy($id)
-    {
+    public function destroy($id){
         $this->departmentRepository->delete($id);
+        Alert::success('Success', 'Department deleted successfully');
         return redirect()->back();
     }
 }

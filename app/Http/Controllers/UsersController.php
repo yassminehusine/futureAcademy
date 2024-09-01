@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 // use App\Http\Requests\departmentRequest;
 // use App\Repository\departmentRepository;
 // use App\Enums\Role;
+use App\Enums\departmentRolse;
+use App\Enums\Rolse;
 use App\Http\Requests\UserRequest;
 use App\DTO\UserDTO;
 use App\Repository\interface\IUserRepository;
@@ -16,7 +18,9 @@ class UsersController extends Controller{
     protected $departmentRepository;
     public function __construct(IUserRepository $userRepository,IdepartmentRepository  $departmentRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','Admin'])->except([
+            'main'
+        ]);
         $this->userRepository = $userRepository;
         $this->departmentRepository = $departmentRepository;
     }
@@ -30,7 +34,19 @@ class UsersController extends Controller{
        return view('layouts.dashboard.users.index' , compact('users'));
     }
     public function  main(){
-        return view('layouts.dashboard.layout2');
+        $doctors = $this->userRepository->getCount(Rolse::DOCTORS);
+        $students = $this->userRepository->getCount(Rolse::STUDENTS);
+        $admin = $this->userRepository->getCount(Rolse::ADMIN);
+        $totalDepartments = 0;
+        foreach (departmentRolse::cases() as $role) {
+         $totalDepartments += $this->departmentRepository->getCountByRole($role);
+        }
+        return view('layouts.dashboard.layout2',[
+            'doctors' => $doctors,
+           'students' => $students,
+           'admin' => $admin,
+           'totalDepartments' => $totalDepartments,
+        ]);
     }
     /**
      * Show the form for creating a new resource.

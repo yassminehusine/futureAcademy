@@ -11,7 +11,7 @@ class CourseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class CourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'course_name' => 'required',
+            'description' => 'required',
+            'image' => 'nullable', 
+            'credit_hours' => 'required',
+            'department_id' => 'required',
         ];
     }
 }

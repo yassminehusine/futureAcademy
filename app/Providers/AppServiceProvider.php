@@ -1,5 +1,7 @@
 <?php
 namespace App\Providers;
+use App\Repository\coursesRepository;
+use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\IdepartmentRepository;
 use App\Repository\departmentRepository;
 use App\Repository\interface\IUserRepository;
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
         }
         $this->app->singleton(IUserRepository::class,UserRepository::class);
         $this->app->singleton(IdepartmentRepository::class,departmentRepository::class);
+        $this->app->singleton(IcoursesRepository::class,coursesRepository::class);
     }
 
     /**

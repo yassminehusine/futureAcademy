@@ -1,6 +1,6 @@
 <?php
 namespace App\Repository;
-use App\Enums\Role;
+use App\Enums\Rolse;
 use App\Models\User;
 use App\Repository\Interface\IUserRepository;
 use Illuminate\Support\Facades\Auth;
@@ -30,12 +30,12 @@ class UserRepository implements IUserRepository
     public function delete($id){
         return User::findOrFail($id)->delete(); 
     }
-    public function getUsersByRole(Role $role)
+    public function getUsersByRole(Rolse $role)
     {
         return User::where('role', $role->value)->get();
     }
 
-    public function getCount(Role $role)
+    public function getCount(Rolse  $role)
     {
         return User::where('role', $role->value)->count(); // Count users by role
     }

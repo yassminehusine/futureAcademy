@@ -36,6 +36,9 @@ class departmentRepository implements IdepartmentRepository
     {
         return departmentModel::where('department_name', $role->value)->get();
     }
+    public  function getCountByRole(departmentRolse $role){
+        return departmentModel::where('department_name', $role->value)->count();
+    }
 }
 
 

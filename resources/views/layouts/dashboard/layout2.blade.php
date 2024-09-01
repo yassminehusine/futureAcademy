@@ -33,8 +33,19 @@
   <!-- Other CSS files -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{asset('assets')}}/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{asset('assets')}}/plugins/summernote/summernote-bs4.min.css">
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="{{asset('assets')}}/plugins/codemirror/codemirror.css">
+  <link rel="stylesheet" href="{{asset('assets')}}/plugins/codemirror/theme/monokai.css">
+  <!-- SimpleMDE -->
+  <link rel="stylesheet" href="{{asset('assets')}}/plugins/simplemde/simplemde.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"]);
 <!-- ./Wrapper -->
 <div class="wrapper">
     <!-- Preloader -->
@@ -210,13 +221,12 @@
             </div>
           </div>
         </div>
-  
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-                 @if(auth()->user()->role === 'Admin')
+           @if(auth()->user()->role === 'Admin')
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -263,25 +273,66 @@
                 </li>
               </ul>
             </li>   
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <!-- <i class="fa-solid fa-bookmark"></i> -->
+                <i class="nav-icon fas fa-bookmark"></i>
+                <p>
+                  Courses
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('course.create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>create course</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('course.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> show course </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                    Logout
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+            </li>
             @endif
+            <ul class="nav nav-treeview">
             <li class="nav-item">
               <a  href="{{route('user.profile',['id' => Auth::user()->id])}}" class="nav-link">
               <i class="fa-solid fa-address-card"></i>
                 <p>
                   Profile
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
-            </li> 
+            </li>   
             <li class="nav-item">
-           <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
-                       <p> {{ __('Logout') }}</p>
-                  </a>
+            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                    Logout
+                </p>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                 @csrf
-               </form>
-           </li>
-            
+            </form>
+          </li>
+           </ul>
+          
         </nav>
         <!-- /.sidebar-menu -->
       </div>
@@ -317,12 +368,11 @@
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
-  
-                  <p>New Orders</p>
+                  <h3>{{$admin}}</h3>
+                  <p>Admins</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="fa fa-user"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -332,12 +382,12 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+                  <h3>{{$students}}</h3>
   
-                  <p>Bounce Rate</p>
+                  <p>Students</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="fa fa-users"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -347,9 +397,9 @@
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3>{{$doctors}}</h3>
   
-                  <p>User Registrations</p>
+                  <p>DOCTORS</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -362,12 +412,12 @@
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>65</h3>
+                  <h3>{{$totalDepartments}}</h3>
   
-                  <p>Unique Visitors</p>
+                  <p>Department</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
+                  <i class=" fa fa-building"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>

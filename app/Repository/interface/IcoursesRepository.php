@@ -1,8 +1,8 @@
 <?php
 namespace App\Repository\interface;
-use App\DTO\departmentDTO;
 use App\Enums\departmentRolse;
-interface IdepartmentRepository
+use App\Enums\Rolse;
+interface IcoursesRepository
 {
     public function getAll();
     public function getById($id);
@@ -10,7 +10,7 @@ interface IdepartmentRepository
     public function update( $request, $id); // Updated to match interface
     public function delete( $id);
     public function getByRole(departmentRolse $role);
-    public  function getCountByRole(departmentRolse $role);
+    public function getUsersByRole(Rolse $role);
 }
 
 

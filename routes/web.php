@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\dashboardController; 
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\CoursesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,9 +47,17 @@ Route::group(['prefix'=>'users'],function(){
     Route::get('/destroy/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
     Route::get('/profile/{id}',[UsersController::class,'show'])->name('user.profile'); 
 })->middleware('auth');
-
-
 // End Rout Usres
+// Start Courses Controller
+Route::group(['prefix'=>'courses'],function(){
+    Route::get('/create',[CoursesController::class,'create'])->name('course.create');
+    Route::get('/index', [CoursesController::class, 'index'])->name('course.index');
+    Route::post('/store',[CoursesController::class,'store'])->name('course.store');
+    Route::get('/edit/{id}',[CoursesController::class,'edit'])->name('course.edit');
+    Route::post('/update/{id}',[CoursesController::class,'update'])->name('course.update');
+    Route::get('/destroy/{id}', [CoursesController::class, 'destroy'])->name('course.destroy');
+})->middleware('auth');
+// End Courses Controller
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Rolse;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,16 +17,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-            'name',
-            'image', 
-            'role',
-            'academic_years',
-            'GPA',
-            'phone',
-            'address',
-            'email',
-            'department_id', 
-            'password',
+        'name',
+        'image', 
+        'role',
+        'academic_years',
+        'GPA',
+        'phone',
+        'address',
+        'email',
+        'department_id', 
+        'password',
     ];
 
     /**
@@ -49,8 +48,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-public function department()
-{
+    public function department()
+    {
         return $this->belongsTo(departmentModel::class);
+    }
+
+    /**
+     * Check if the user has a specific role.
+     *
+     * @param  Rolse  $role
+     * @return bool
+     */
+    public function hasRole(Rolse $role): bool
+    {
+        return $this->role === $role->value;
+    }
 }
-}
+
+
+
+
+?>

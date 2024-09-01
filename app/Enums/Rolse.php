@@ -3,7 +3,7 @@
 namespace App\Enums;
 //   $table->enum('role', ['Admin', 'doctors', 'students'])->nullable();
 //   $table->enum('academic_years', ['1', '2', '3', '4', 'graduated'])->nullable();
-enum Role: string
+enum Rolse: string
 {
     case ADMIN = 'Admin';
     case DOCTORS = 'doctors';
