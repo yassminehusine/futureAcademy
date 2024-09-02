@@ -226,7 +226,7 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-           @if(auth()->user()->role === 'Admin')
+           @if(auth()->user()->role === 'Admin' || auth()->user()->role === 'doctors')
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -293,6 +293,30 @@
                   <a href="{{ route('course.index') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> show course </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <!-- <i class="fa-solid fa-bookmark"></i> -->
+                <i class="fa-solid fa-id-card"></i>
+                <p>
+                   user_courses
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('user_course.create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>create user_course</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('user_course.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> show user_course </p>
                   </a>
                 </li>
               </ul>

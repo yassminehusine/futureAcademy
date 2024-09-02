@@ -14,7 +14,7 @@ class CoursesController extends Controller
     protected $departmentRepository;
     protected $userRepository;
     public function __construct(IcoursesRepository $courseRepository, IdepartmentRepository $departmentRepository){
-        $this->middleware(['auth', 'Admin','doctors']);
+        $this->middleware(['auth','Doctors']);
         $this->courseRepository = $courseRepository;
         $this->departmentRepository = $departmentRepository;
     }

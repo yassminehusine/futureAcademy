@@ -19,11 +19,9 @@ class Admin
         if (!auth()->check()) {
             return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
         }
-
         if (!auth()->user()->hasRole(Rolse::ADMIN)) {
             return redirect()->route('home')->with('error', 'You do not have admin access.');
         }
-
         return $next($request);
     }
 }

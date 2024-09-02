@@ -63,6 +63,11 @@ class User extends Authenticatable
     {
         return $this->role === $role->value;
     }
+    public function userCourses()
+    {
+        return $this->hasMany(user_course::class);
+    }
+   
 }
 
 

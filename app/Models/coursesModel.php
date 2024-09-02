@@ -20,4 +20,8 @@ class coursesModel extends Model
     public function department(){
         return $this->belongsTo(departmentModel::class);
     }
+  
+    public function userCourses(){
+        return $this->hasMany(user_course::class);
+    }
 }

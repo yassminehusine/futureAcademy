@@ -1,12 +1,8 @@
 <?php
-
+use App\Http\Controllers\user_coursesController;
 use  Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\UsersController;
 use  App\Http\Controllers\departmentController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\AdminRegisterController;
-use App\Http\Controllers\dashboardController; 
-use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\CoursesController;
 
 /*
@@ -35,7 +31,7 @@ Route::group(['prefix'=> 'departments'],function(){
     Route::get('/edit/{id}',[ departmentController::class,'edit'])->name('department.edit');
     Route::post('/update/{id}',[ departmentController::class,'update'])->name('department.update');
     Route::get('/destroy/{id}', [departmentController::class, 'destroy'])->name('department.destroy');  
-});
+})->middleware('auth');
 // End Route Departments 
 // Route Users
 Route::group(['prefix'=>'users'],function(){
@@ -58,9 +54,18 @@ Route::group(['prefix'=>'courses'],function(){
     Route::get('/destroy/{id}', [CoursesController::class, 'destroy'])->name('course.destroy');
 })->middleware('auth');
 // End Courses Controller
+// starts User_Course
+Route::group(['prefix'=>'user_courses'],function(){
+    Route::get('/create',[user_coursesController ::class,'create'])->name('user_course.create');
+    Route::get('/index', [user_coursesController::class, 'index'])->name('user_course.index');
+    Route::post('/store',[user_coursesController::class,'store'])->name('user_course.store');
+    Route::get('/edit/{id}',[user_coursesController::class,'edit'])->name('user_course.edit');
+    Route::post('/update/{id}',[user_coursesController::class,'update'])->name('user_course.update');
+    Route::get('/destroy/{id}', [user_coursesController::class, 'destroy'])->name('user_course.destroy');
+})->middleware('auth');
+// End user_Course
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 // Route::post('/register', [RegisterController::class, 'register'])->name('register');
 // Route::post('/register', [RegisterController::class, 'register']);
 // Route::middleware(['auth', 'admin'])->group(function () {

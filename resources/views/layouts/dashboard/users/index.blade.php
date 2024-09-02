@@ -46,9 +46,14 @@
                             <td>{{ $user->address }}</td>
                             <td>{{ $user->department->department_name ?? 'N/A' }}</td>
                             <td>
-                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ route('user.destroy', $user->id) }}" class="btn btn-danger" 
-                           onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                        <a href="{{ route('user.edit', $user->id) }}">
+                            <i class="fa fa-edit text-info"></i>
+                        </a>
+                        <a href="{{ route('user.destroy', $user->id) }} "
+                        onclick="return confirm('Are you sure you want to delete this user?')">
+                         <i class="fa fa-trash text-danger"> </i>
+                          
+                        </a>
                     </td>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
