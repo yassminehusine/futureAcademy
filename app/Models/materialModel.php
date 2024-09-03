@@ -9,7 +9,7 @@ class materialModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'material'
+    protected $table = 'material';
 
     protected $fillable = [
     'title',
@@ -20,5 +20,5 @@ class materialModel extends Model
     'file_size',
     'user_id',
     'file_format',
-    'course_id',]
+    'course_id',];
 }
