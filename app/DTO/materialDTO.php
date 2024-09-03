@@ -4,14 +4,17 @@ use Spatie\LaravelData\Data;
 use App\Http\Requests\materialRequest;
 class materialDTO extends Data{
     public function __construct(
-     ){
-      public string $title,
+        public string $title,
         public string $description,
         public string $material_type,
-      public string $file_path,
+        public string $file_path,
         public string $video_duration,
         public string $file_size,
         public string $user_id,
+        public string $file_format,
+        public string $course_id,
+     ){
+      
      }
     public static function handleInputs(materialRequest $materialRequest){
         $data = [
@@ -22,6 +25,10 @@ class materialDTO extends Data{
             'user_id' => $materialRequest->user_id,
           'file_size' => $materialRequest->file_size,
           'video_duration' => $materialRequest->video_duration,
+            'file_format' => $materialRequest->file_format,
+            'course_id' => $materialRequest->course_id,
+          
+          
         ];
         
          return $data;
