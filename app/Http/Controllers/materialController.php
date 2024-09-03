@@ -24,7 +24,7 @@ class materialController extends Controller
     public function index()
     {
         $materials = $this->materialRepository->getAll();
-        materialModel::with('course')->get();
+        // materialModel::with('course')->get();
        return view('layouts.dashboard.materials.index',compact('materials'));
     }
     /**

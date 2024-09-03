@@ -5,7 +5,7 @@ use App\DTO\assignmentDTO;
 use App\Models\assignmentModel;
 use App\Repository\interface\IassignmentRepository;
 use App\Repository\interface\IcoursesRepository;
-use DB;
+use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class assignmentController extends Controller
@@ -14,7 +14,7 @@ class assignmentController extends Controller
     protected $assignmentRepository;
     protected $userRepository;
     public function __construct(IcoursesRepository $courseRepository, IassignmentRepository $assignmentRepository){
-        $this->middleware(['doctors']);
+        $this->middleware(['Doctors']);
         $this->courseRepository = $courseRepository;
         $this->assignmentRepository = $assignmentRepository;
     }
@@ -23,9 +23,15 @@ class assignmentController extends Controller
      **/
     public function index()
     {
-        $assignments = $this->assignmentRepository->getAll();
-        assignmentModel::with('course')->get();
-       return view('layouts.dashboard.assignments.index',compact('assignments'));
+        if (Auth::user()->role == "Admin"){
+             $assignments = $this->assignmentRepository->getAll();
+        // assignmentModel::with('course')->get();
+       return view('layouts.dashboard.assignments.index',compact('assignments'));}
+       else {
+        $assignments = assignmentModel::with('user_courses')->get();
+ 
+       }
+       
     }
     /**
      * Show the form for creating a new resource.

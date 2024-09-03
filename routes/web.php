@@ -5,6 +5,7 @@ use  App\Http\Controllers\UsersController;
 use  App\Http\Controllers\departmentController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\materialController;
+use App\Http\Controllers\assignmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,20 @@ Route::group(['prefix'=>'materials'],function(){
     Route::get('/destroy/{id}', [materialController::class, 'destroy'])->name('material.destroy');
 })->middleware('auth');
 // End materials Controller
+
+
+// Start assignments Controller
+Route::group(['prefix'=>'assignments'],function(){
+    Route::get('/create',[assignmentController::class,'create'])->name('assignment.create');
+    Route::get('/index', [assignmentController::class, 'index'])->name('assignment.index');
+    Route::post('/store',[assignmentController::class,'store'])->name('assignment.store');
+    Route::get('/edit/{id}',[assignmentController::class,'edit'])->name('assignment.edit');
+    Route::post('/update/{id}',[assignmentController::class,'update'])->name('assignment.update');
+    Route::get('/destroy/{id}', [assignmentController::class, 'destroy'])->name('assignment.destroy');
+})->middleware('auth');
+// End assignments Controller
+
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Route::post('/register', [RegisterController::class, 'register'])->name('register');

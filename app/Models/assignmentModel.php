@@ -22,4 +22,9 @@ class assignmentModel extends Model
         'due_date',
        
     ];
+
+
+    public function userCourses(){
+        return $this->hasMany(user_course::class);
+    }
 }
