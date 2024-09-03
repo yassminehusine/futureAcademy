@@ -11,7 +11,7 @@ class assignmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class assignmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'content' => 'required',
+            'image' => 'required',
+            'file_path' => 'required',
+            'user_id' => 'required',
+            'status' => 'required',
+            'course_id' => 'required',
+            'video_url' => 'required',
+            'year' => 'required',
+            'due_date' => 'required',
         ];
     }
 }

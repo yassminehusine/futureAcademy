@@ -23,8 +23,8 @@ return new class extends Migration
             $table->boolean('resubmitted')->default(false);
             $table->unsignedBigInteger('user_id');  // User ID of the creator of the material
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('assignments_id');
-            $table->foreign('assignments_id')->references('id')->on('assignments')->onDelete('cascade');
+            $table->unsignedBigInteger('assignment_id');
+            $table->foreign('assignment_id')->references('id')->on('assignments')->onDelete('cascade');
             $table->timestamps();
         });
     }

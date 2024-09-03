@@ -11,7 +11,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class materialController extends Controller
 {
     protected $courseRepository;
-    protected $departmentRepository;
+    protected $materialRepository;
     protected $userRepository;
     public function __construct(IcoursesRepository $courseRepository, ImaterialRepository $materialRepository){
         $this->middleware(['doctors']);
@@ -41,7 +41,7 @@ class materialController extends Controller
      */
     public function store(MaterialRequest $request){
         // dd($request);
-        $material = materialsDTO::handleInputs($request);
+        $material = materialDTO::handleInputs($request);
         // dd($material);
         $this->materialRepository->create($material);
         Alert::success('Success Toast','success');
