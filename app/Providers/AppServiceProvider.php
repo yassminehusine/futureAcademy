@@ -4,7 +4,9 @@ use App\Repository\coursesRepository;
 use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\IdepartmentRepository;
 use App\Repository\departmentRepository;
+use App\Repository\interface\Iuser_coursesRepository;
 use App\Repository\interface\IUserRepository;
+use App\Repository\user_coursesRepository;
 use App\Repository\UserRepository;
 use App\Repository\interface\ImaterialRepository;
 use App\Repository\assignmentRepository;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->singleton(IcoursesRepository::class,coursesRepository::class);
         $this->app->singleton(IassignmentRepository::class,assignmentRepository::class);
         $this->app->singleton(ImaterialRepository::class,materialRepository::class);
+        $this->app->singleton(Iuser_coursesRepository::class,user_coursesRepository::class);
 
     }
 

@@ -5,6 +5,7 @@ use App\DTO\materialDTO;
 use App\Models\materialModel;
 use App\Repository\interface\ImaterialRepository;
 use App\Repository\interface\IcoursesRepository;
+use App\Repository\interface\IUserRepository;
 use DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -13,19 +14,19 @@ class materialController extends Controller
     protected $courseRepository;
     protected $materialRepository;
     protected $userRepository;
-    public function __construct(IcoursesRepository $courseRepository, ImaterialRepository $materialRepository){
-        $this->middleware(['Doctors']);
+    public function __construct(IcoursesRepository $courseRepository, ImaterialRepository $materialRepository , IUserRepository $userRepository){
+        $this->middleware(['auth']);
         $this->courseRepository = $courseRepository;
         $this->materialRepository = $materialRepository;
+        $this->userRepository = $userRepository;
     }
     /**
      * Display a listing of the resource.
      **/
     public function index()
     {
-        $materials = $this->materialRepository->getAll();
-        // materialModel::with('course')->get();
-       return view('layouts.dashboard.materials.index',compact('materials'));
+        $materials = $materials = $this->materialRepository->getAll();
+       return view('layouts.dashboard.material.index',compact('materials'));
     }
     /**
      * Show the form for creating a new resource.
@@ -33,7 +34,8 @@ class materialController extends Controller
     public function create()
     {
         $courses = $this->courseRepository->getAll();
-        return view('layouts.dashboard.material.create', compact('courses'));
+        $users = $this->userRepository->getAllUsers();
+        return view('layouts.dashboard.material.create', compact('courses','users'));
     }
 
     /**
@@ -63,7 +65,8 @@ class materialController extends Controller
     {
         $material = $this->materialRepository->getById($id);
         $courses = $this->courseRepository->getAll();
-        return view('layouts.dashboard.material.edit', compact('courses','material'));
+          $users = $this->userRepository->getAllUsers();
+        return view('layouts.dashboard.material.edit', compact('courses','material','users'));
 
     }
 
