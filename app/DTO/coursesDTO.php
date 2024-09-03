@@ -27,4 +27,3 @@ class coursesDTO extends Data{
          return $data;
     }
 }
-?>

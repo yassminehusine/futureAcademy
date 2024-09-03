@@ -2,7 +2,7 @@
 namespace App\Repository\interface;
 use App\Enums\departmentRolse;
 use App\Enums\Rolse;
-interface IcoursesRepository
+interface IassignmentRepository
 {
     public function getAll();
     public function getById($id);
@@ -14,3 +14,4 @@ interface IcoursesRepository
 }
 
 
+?>
