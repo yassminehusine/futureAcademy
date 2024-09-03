@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();  // Description of the material
             $table->enum('material_type',['document', 'video', 'audio', 'image']);  // Type of material (e.g., 'document', 'video', 'audio', 'image')
             $table->string('file_path')->nullable();  // File path for the uploaded material
-            $table->string('thumbnail_path')->nullable();  // Thumbnail image (for videos/images)
+            //$table->string('thumbnail_path')->nullable();  // Thumbnail image (for videos/images)
             $table->string('video_duration')->nullable();  // Duration for video files
             $table->integer('file_size')->nullable();  // Size of the file in kilobytes or megabytes
             $table->string('file_format')->nullable();  // File format (e.g., 'pdf', 'mp4', 'mp3', etc.)
