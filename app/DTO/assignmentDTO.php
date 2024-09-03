@@ -26,7 +26,7 @@ class assignmentDTO extends Data{
             'user_id' => $assignmentRequest->user_id,
             'course_id' => $assignmentRequest->course_id,
             'year' => $assignmentRequest->year,
-            'video_url' => $assignmentRequest->video_url,
+            //'video_url' => $assignmentRequest->video_url,
             // 'audio_url' => $assignmentRequest->audio_url,
             'due_date' => $assignmentRequest->due_date,
             'status' => $assignmentRequest->status,
@@ -36,8 +36,8 @@ class assignmentDTO extends Data{
         if ($assignmentRequest->file_path) {
             $file = $assignmentRequest->file_path;
             $newfileName = time(). $file->getClientOriginalName();
-            $file->move('image/assignmentImages/', $newfileName);
-            $data['file_path'] = 'image/assignmentImages/'. $newfileName;
+            $file->move('image/assignmentfiles/', $newfileName);
+            $data['file_path'] = 'image/assignmentfiles/'. $newfileName;
         }
          return $data;
     }

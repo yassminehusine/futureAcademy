@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('file_path')->nullable();  // Assignment file (PDF, DOC, etc.)
             //$table->string('image')->nullable();      // Any attached images
-            $table->string('video_url')->nullable();  // Video links if any
+            //$table->string('video_url')->nullable();  // Video links if any
             // $table->string('audio_url')->nullable();  // Audio links if any
             $table->unsignedBigInteger('course_id');  // Foreign key to courses table
             $table->foreign('course_id')->references('id')->on('courses');
