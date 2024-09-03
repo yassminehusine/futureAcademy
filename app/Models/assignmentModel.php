@@ -12,7 +12,6 @@ class assignmentModel extends Model
     protected $fillable = [
         'title',
         'content',
-        'image',
         'file_path',
         'user_id',
         'status',

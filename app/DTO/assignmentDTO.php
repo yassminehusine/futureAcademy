@@ -6,7 +6,7 @@ class assignmentDTO extends Data{
     public function __construct(
     public string   $title,
     public string  $content,
-    public string  $image,
+    //public string  $image,
     public string  $video_url,
     // public string $audio_url,
     public string   $status,
@@ -21,8 +21,8 @@ class assignmentDTO extends Data{
         $data = [
             'title' => $assignmentRequest->title,
             'content' => $assignmentRequest->content,
-            'image' => $assignmentRequest->image,
-            'file_path' => $assignmentRequest->file_path,
+            //'image' => $assignmentRequest->image,
+            //'file_path' => $assignmentRequest->file_path,
             'user_id' => $assignmentRequest->user_id,
             'course_id' => $assignmentRequest->course_id,
             'year' => $assignmentRequest->year,
@@ -33,11 +33,11 @@ class assignmentDTO extends Data{
 
 
            ];
-        if ($assignmentRequest->image) {
-            $image = $assignmentRequest->image;
-            $newImageName = time(). $image->getClientOriginalName();
-            $image->move('image/assignmentImages/', $newImageName);
-            $data['image'] = 'image/assignmentImages/'. $newImageName;
+        if ($assignmentRequest->file_path) {
+            $file = $assignmentRequest->file_path;
+            $newfileName = time(). $file->getClientOriginalName();
+            $file->move('image/assignmentImages/', $newfileName);
+            $data['file_path'] = 'image/assignmentImages/'. $newfileName;
         }
          return $data;
     }

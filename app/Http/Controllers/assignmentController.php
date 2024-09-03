@@ -22,17 +22,18 @@ class assignmentController extends Controller
      * Display a listing of the resource.
      **/
     public function index()
-    {
+    {            
+         $assignments = $this->assignmentRepository->getAll();
+
         if (Auth::user()->role == "Admin"){
-             $assignments = $this->assignmentRepository->getAll();
         // assignmentModel::with('course')->get();
        return view('layouts.dashboard.assignments.index',compact('assignments'));}
        else {
-        $assignments = assignmentModel::with('user_courses')->get();
- 
+        $assignmentForCourse = assignmentModel::with('user_courses')->having('year','=',$assignments->year)->get();
+        dd($assignmentForCourse);
+        return view('layouts.dashboard.assignments.index',compact('assignmentForCourse'));};
        }
        
-    }
     /**
      * Show the form for creating a new resource.
      */
