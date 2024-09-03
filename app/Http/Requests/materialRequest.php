@@ -11,7 +11,7 @@ class materialRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class materialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'file_path' => 'nullable|file|mimes:pdf,doc,docx,txt|max:2048', 
+            'thumbnail_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_id' => 'required|exists:users,id',
+            'courses_id' => 'required|exists:courses,id',
         ];
     }
 }

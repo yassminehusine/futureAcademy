@@ -62,15 +62,22 @@ class user_coursesController extends Controller
      */
     public function edit(string $id)
     {
-        // 
+         $user_course = $this->user_coursesRepository->getById($id);
+         $users = $this->userRepository->getAllUsers();
+         $courses = $this->coursesRepository->getAll();
+         Alert::success('Success Edit',' Successfully edited');
+         return view('layouts.dashboard.user_courses.edit', compact('user_course', 'users', 'courses'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(user_coursesRequest $request, string $id)
     {
-        //
+        $user_course = user_courseDTO::handleInputs($request);
+         $this->user_coursesRepository->update($user_course, $id);
+         Alert::success('Success', 'User Course updated successfully');
+         return redirect()->route('user_course.index');
     }
 
     /**
@@ -78,6 +85,8 @@ class user_coursesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->user_coursesRepository->delete($id);
+        Alert::success('Success', 'User Course deleted successfully');
+        return redirect()->route('user_course.index');
     }
 }

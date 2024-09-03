@@ -39,12 +39,13 @@
                         <td>{{ $user_course->grade ?? 'N/A' }}</td>
                         <td>{{ $user_course->group_number ?? 'N/A' }}</td>
                         <td>
-                            <a href="{{ route('user_course.edit', $user_course->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('user_course.destroy', $user_course->id) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                            <a href="{{ route('user_course.edit', $user_course->id) }}">
+                              <i class="fa fa-edit text-success"> </i>
+                            </a>
+                            <a href="{{ route('user_course.destroy', $user_course->id)}}">
+                                <i class="fa fa-trash text-danger"> </i> </a>
+                            </a>
+                       
                         </td>
                     </tr>
                     @endforeach
