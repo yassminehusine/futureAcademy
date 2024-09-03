@@ -1,5 +1,6 @@
 <?php
 namespace App\DTO;
+use Auth;
 use Spatie\LaravelData\Data;
 use App\Http\Requests\assignmentRequest;
 class assignmentDTO extends Data{
@@ -23,13 +24,13 @@ class assignmentDTO extends Data{
             'content' => $assignmentRequest->content,
             //'image' => $assignmentRequest->image,
             //'file_path' => $assignmentRequest->file_path,
-            'user_id' => $assignmentRequest->user_id,
+            'user_id' => Auth::user()->id,
             'course_id' => $assignmentRequest->course_id,
-            'year' => $assignmentRequest->year,
+            'year' => date('Y'),
             //'video_url' => $assignmentRequest->video_url,
             // 'audio_url' => $assignmentRequest->audio_url,
             'due_date' => $assignmentRequest->due_date,
-            'status' => $assignmentRequest->status,
+            //'status' => $assignmentRequest->status,
 
 
            ];

@@ -24,12 +24,10 @@ class assignmentRequest extends FormRequest
         return [
             'title' => 'required',
             'content' => 'required',
-            'image' => 'required',
             'file_path' => 'required',
             'user_id' => 'required',
-            'status' => 'required',
+            'status' => 'nullable',
             'course_id' => 'required',
-            'video_url' => 'required',
             'year' => 'required',
             'due_date' => 'required',
         ];

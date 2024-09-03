@@ -12,7 +12,7 @@
     <form id="quickForm" novalidate="novalidate" action="{{ route('assignment.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-            <label for="title">assignment Name</label>
+            <label for="title">Title</label>
             <input type="text" name="title" class="form-control" id="title" required>
             @error('title')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -38,28 +38,12 @@
         @enderror
     </div>
        <div class="form-group">
-            <label for="due_date">Course</label>
+            <label for="due_date">Due Date</label>
             <input type="datetime" name="due_date" class="form-control" id="due_date" required>
             @error('due_date')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-            <div class="form-group">
-                    <label for="department_id">Department</label>
-                    <select name="department_id" class="form-control @error('department_id') is-invalid @enderror" id="department_id">
-                        <option disabled selected>Select Department</option>
-                        @foreach ($departments as $depa)
-                            <option value="{{ $depa->id }}">
-                                {{ $depa->department_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('department_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-            </div>
     <div class="card-footer">
     <button type="submit" class="btn btn-dark">Submit</button>
      </div>
