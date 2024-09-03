@@ -41,7 +41,4 @@ class assignmentRepository implements IassignmentRepository
         return assignmentModel::where('course_name', $role->value)->get();
     }
 }
-?>
-
-
 

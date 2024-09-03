@@ -6,12 +6,11 @@ use App\Repository\interface\IdepartmentRepository;
 use App\Repository\departmentRepository;
 use App\Repository\interface\IUserRepository;
 use App\Repository\UserRepository;
-use App\Repository\materialRepository;
 use App\Repository\interface\ImaterialRepository;
 use App\Repository\assignmentRepository;
 use App\Repository\interface\IassignmentRepository;
 use Illuminate\Support\ServiceProvider;
-
+use App\Repository\materialRepository;
 class AppServiceProvider extends ServiceProvider{
     /**
      * Register any application services.

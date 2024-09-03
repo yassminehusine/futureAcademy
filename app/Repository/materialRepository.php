@@ -1,6 +1,7 @@
 <?php
-namespace App\Repository\interface;
+namespace App\Repository;
 use App\Models\materialModel;
+use App\Repository\interface\ImaterialRepository;
 class materialRepository  implements ImaterialRepository 
 { 
     public function getAll(){
@@ -21,4 +22,3 @@ class materialRepository  implements ImaterialRepository
 }
 
 
-?>

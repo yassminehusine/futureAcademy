@@ -42,4 +42,3 @@ class assignmentDTO extends Data{
          return $data;
     }
 }
-?>
