@@ -16,14 +16,9 @@ class assignmentModel extends Model
         'user_id',
         'status',
         'course_id',
-        //'video_url',
         'year',
         'due_date',
        
     ];
 
-
-    public function userCourses(){
-        return $this->hasMany(user_course::class);
-    }
 }

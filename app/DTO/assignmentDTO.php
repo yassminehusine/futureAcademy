@@ -7,9 +7,7 @@ class assignmentDTO extends Data{
     public function __construct(
     public string   $title,
     public string  $content,
-    //public string  $image,
     public string  $video_url,
-    // public string $audio_url,
     public string   $status,
     public string  $user_id,
     public string  $course_id,
@@ -22,15 +20,11 @@ class assignmentDTO extends Data{
         $data = [
             'title' => $assignmentRequest->title,
             'content' => $assignmentRequest->content,
-            //'image' => $assignmentRequest->image,
-            //'file_path' => $assignmentRequest->file_path,
             'user_id' => Auth::user()->id,
             'course_id' => $assignmentRequest->course_id,
             'year' => date('Y'),
-            //'video_url' => $assignmentRequest->video_url,
-            // 'audio_url' => $assignmentRequest->audio_url,
             'due_date' => $assignmentRequest->due_date,
-            //'status' => $assignmentRequest->status,
+    
 
 
            ];
@@ -43,3 +37,4 @@ class assignmentDTO extends Data{
          return $data;
     }
 }
+?>

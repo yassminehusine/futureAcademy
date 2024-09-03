@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('pract_mark')->nullable();
             $table->string('total_mark')->nullable();
             $table->string('test_mark')->nullable();
+            $table->year('year'); 
             $table->enum('grade',['A+','A','B+','B','C+','C','D+','D','F'])->nullable();
             $table->string('group_number')->default(1);
             $table->foreign('user_id')->references('id')->on('users');

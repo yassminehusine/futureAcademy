@@ -15,16 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->string('file_path')->nullable();  // Assignment file (PDF, DOC, etc.)
-            //$table->string('image')->nullable();      // Any attached images
-            //$table->string('video_url')->nullable();  // Video links if any
-            // $table->string('audio_url')->nullable();  // Audio links if any
-            $table->unsignedBigInteger('course_id');  // Foreign key to courses table
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->unsignedBigInteger('year');  // Foreign key to courses table
-            $table->foreign('year')->references('year')->on('user_courses');
-            $table->unsignedBigInteger('user_id');    // Foreign key to users table (professor)
+            $table->string('file_path')->nullable(); 
+            $table->unsignedBigInteger('user_course_id'); 
+            $table->foreign('user_course_id')->references('id')->on('user_courses');
+            $table->unsignedBigInteger('user_id');  
             $table->foreign('user_id')->references('id')->on('users');
+            $table->year('year');
             $table->timestamp('due_date');
             $table->enum('status', ['overdue' , 'ongoing' ,'completed'])->default('ongoing');
             $table->timestamps();

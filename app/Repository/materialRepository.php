@@ -2,8 +2,7 @@
 namespace App\Repository;
 use App\Models\materialModel;
 use App\Repository\interface\ImaterialRepository;
-class materialRepository  implements ImaterialRepository 
-{ 
+class   materialRepository  implements ImaterialRepository{ 
     public function getAll(){
         return materialModel::all();
     }
@@ -22,3 +21,4 @@ class materialRepository  implements ImaterialRepository
 }
 
 
+?>

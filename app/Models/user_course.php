@@ -18,12 +18,11 @@ class user_course extends Model
         'grade',
         'group_number',
     ];
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo(User::class);
     }
-    public function course()
-    {
+    public function course(){
         return $this->belongsTo(coursesModel::class);
     }
+  
 }
