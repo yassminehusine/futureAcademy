@@ -4,18 +4,17 @@ use App\Repository\coursesRepository;
 use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\IdepartmentRepository;
 use App\Repository\departmentRepository;
-use App\Repository\interface\Iuser_coursesRepository;
 use App\Repository\interface\IUserRepository;
-use App\Repository\user_coursesRepository;
+use App\Repository\materialRepository;
+use App\Repository\interface\ImaterialRepository;
 use App\Repository\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider{
     /**
      * Register any application services.
      */
-    public function register():void
+    public function register(): void
     {
         if ($this->app->environment('local')) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
@@ -24,9 +23,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(IUserRepository::class,UserRepository::class);
         $this->app->singleton(IdepartmentRepository::class,departmentRepository::class);
         $this->app->singleton(IcoursesRepository::class,coursesRepository::class);
-        $this->app->singleton(Iuser_coursesRepository::class,user_coursesRepository::class);
+        $this->app->singleton(ImaterialRepository::class,materialRepository::class);
     }
-
     /**
      * Bootstrap any application services.
      */
@@ -35,3 +33,4 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 }
+

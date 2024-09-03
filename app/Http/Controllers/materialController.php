@@ -14,7 +14,7 @@ class materialController extends Controller
     protected $departmentRepository;
     protected $userRepository;
     public function __construct(IcoursesRepository $courseRepository, ImaterialRepository $materialRepository){
-        $this->middleware(['Admin','doctors']);
+        $this->middleware(['doctors']);
         $this->courseRepository = $courseRepository;
         $this->materialRepository = $materialRepository;
     }
