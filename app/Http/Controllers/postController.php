@@ -12,9 +12,6 @@ class postController extends Controller
     public function __construct(IpostRepository $postRepository)
     {
         $this->middleware(['auth', 'Admin']);
-        // $this->middleware('Admin')->only([
-        //     'create', 'store', 'edit', 'update', 'destroy'
-        // ]);
         $this->postRepository = $postRepository;
     }
 

@@ -11,18 +11,10 @@ class postModel extends Model
     protected $table = 'posts';
 
     protected $fillable = [
-        'post_name',
+        'title',
         'image',
         'description',
-        'post_number',
     ];
-    public function users()
-    {
-        return $this->hasMany(User::class);
-    }
-    public function courses()
-    {
-        return $this->hasMany(coursesModel::class);
-    }
+
 
 }
