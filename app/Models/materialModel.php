@@ -13,4 +13,7 @@ class materialModel extends Model{
     'user_id',
     'courses_id',
     ];
+    public function course(){
+        return $this->belongsTo(coursesModel::class);
+    }
 }

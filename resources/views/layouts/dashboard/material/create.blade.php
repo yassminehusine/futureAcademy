@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="thumbnail_path">Thumbnail</label>
+                    <label for="thumbnail_path">Image</label>
                     <input type="file" name="thumbnail_path" class="form-control @error('thumbnail_path') is-invalid @enderror" id="thumbnail_path">
                     @error('thumbnail_path')
                         <span class="invalid-feedback" role="alert">
