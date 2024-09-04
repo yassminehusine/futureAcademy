@@ -19,7 +19,7 @@ class UsersController extends Controller{
     public function __construct(IUserRepository $userRepository,IdepartmentRepository  $departmentRepository)
     {
         $this->middleware(['auth','Admin'])->except([
-            'main'
+            'main', 'show'
         ]);
         $this->userRepository = $userRepository;
         $this->departmentRepository = $departmentRepository;

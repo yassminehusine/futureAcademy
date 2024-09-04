@@ -13,12 +13,20 @@ class assignmentModel extends Model
         'title',
         'content',
         'file_path',
+        'img_path',
         'user_id',
         'status',
         'course_id',
-        'year',
         'due_date',
        
     ];
 
+    public function Course(){
+        return $this->belongsTo(coursesModel::class);
+    }
+
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
+  
 }

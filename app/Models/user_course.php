@@ -17,6 +17,7 @@ class user_course extends Model
         'test_mark',
         'grade',
         'group_number',
+        'year'
     ];
     public function user(){
         return $this->belongsTo(User::class);

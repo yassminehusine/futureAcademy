@@ -10,10 +10,10 @@
                 <table id="example2" class="table table-bordered table-hover text-center">
                   <thead>
                   <tr>
-                <th>Course Name</th>
-                <th>Description</th>
-                <th>Credit Hours</th>
-                <th>Department</th>
+                <th>Assignment</th>
+                <th>author</th>
+                <th>Due date</th>
+                <th>Course</th>
                 <th>Actions</th>
                 </tr>
                   </thead>
@@ -22,9 +22,9 @@
                     @foreach($assignments as $assignment)
                     <tr>
                         <td>{{$assignment->title}}</td>
-                        <td>{{$assignment->user_id}}</td>
+                        <td>{{$assignment->user->name}}</td>
                         <td>{{$assignment->due_date}}</td>
-                        <td>{{$assignment->year}}</td> 
+                        <td></td> 
                         <td>
                          <a href="{{ route('assignment.edit', ['id' => $assignment->id]) }}" class="text-success">
                             <i class="fas fa-edit"></i>

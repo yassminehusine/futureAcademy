@@ -25,10 +25,8 @@ class assignmentRequest extends FormRequest
             'title' => 'required',
             'content' => 'required',
             'file_path' => 'nullable',
-            'user_id' => 'required',
+            'img_path' => 'nullable',
             'status' => 'nullable',
-            'course_id' => 'required',
-            'year' => 'required',
             'due_date' => 'required',
         ];
     }

@@ -65,6 +65,8 @@ Route::group(['prefix'=>'user_courses'],function(){
     Route::get('/edit/{id}',[user_coursesController::class,'edit'])->name('user_course.edit');
     Route::post('/update/{id}',[user_coursesController::class,'update'])->name('user_course.update');
     Route::get('/destroy/{id}', [user_coursesController::class, 'destroy'])->name('user_course.destroy');
+    Route::get('/show/{id}', [user_coursesController::class, 'show'])->name('user.courses');
+
 })->middleware('auth');
 // Corrected routes/web.php
 // Start materials Controller
@@ -81,7 +83,7 @@ Route::group(['prefix'=>'materials'],function(){
 
 // Start assignments Controller
 Route::group(['prefix'=>'assignments'],function(){
-    Route::get('/create',[assignmentController::class,'create'])->name('assignment.create');
+    Route::get('/create/{id}',[assignmentController::class,'create'])->name('assignment.create');
     Route::get('/index', [assignmentController::class, 'index'])->name('assignment.index');
     Route::post('/store',[assignmentController::class,'store'])->name('assignment.store');
     Route::get('/edit/{id}',[assignmentController::class,'edit'])->name('assignment.edit');
