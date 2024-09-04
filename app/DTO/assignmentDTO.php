@@ -22,7 +22,7 @@ class assignmentDTO extends Data{
             'content' => $assignmentRequest->content,
             'user_id' => Auth::user()->id,
             'course_id' => $assignmentRequest->course_id,
-            'year' => date('Y'),
+            'year' => year(),
             'due_date' => $assignmentRequest->due_date,
     
 
