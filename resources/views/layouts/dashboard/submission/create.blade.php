@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
     @csrf
-    <form id="quickForm" novalidate="novalidate" action="{{ route('submission.store') }}" method="POST" enctype="multipart/form-data">
+    <form id="quickForm" novalidate="novalidate" action="{{ route('submission.store', ['id' =>$id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
             <label for="title">Title</label>

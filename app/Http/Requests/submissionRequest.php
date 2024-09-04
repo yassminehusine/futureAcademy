@@ -23,7 +23,6 @@ class submissionRequest extends FormRequest
     {
         return [
 
-            'submission_date' => 'required' ,
             'submission_file' => 'nullable',
             'comment' => 'nullable',
             'grade' => 'nullable',

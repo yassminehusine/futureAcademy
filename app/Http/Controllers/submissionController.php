@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\assignmentModel;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\submissionModel;
 use Auth;
@@ -37,8 +38,9 @@ class submissionController extends Controller
      */
     public function create($id)
     {
+        $assignment = assignmentModel::where('id',$id)->get();
 
-        return view('layouts.dashboard.submissions.create', ['id' => $id ]);
+        return view('layouts.dashboard.submissions.create', ['id' => $id , 'assignment' => $assignment ]);
     }
 
     /**

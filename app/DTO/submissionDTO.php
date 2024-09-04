@@ -6,6 +6,7 @@ use App\Models\user_course;
 use Carbon\Carbon;
 
 use Auth;
+use Carbon\Traits\Timestamp;
 use Spatie\LaravelData\Data;
 use App\Http\Requests\submissionRequest;
 class submissionDTO extends Data
@@ -31,11 +32,11 @@ class submissionDTO extends Data
         $submissions = submissionModel::where('user_id', Auth::id())->with('assignment')->where('course_id', $c_id)->get();
         dd(count($submissions));
         $due_date = Carbon::parse($submissions->assignment->due_date);
-        $submission_date = Carbon::parse($submissionRequest->submission_date);
+        $submission_date = Carbon::parse(now());
 
 
         $data = [
-            'submission_date' => $submissionRequest->submission_date,
+            'submission_date' => $submission_date,
             'submission_text' => $submissionRequest->submission_text,
             'user_id' => Auth::user()->id,
             'grade' => $submissionRequest->grade ?? "",
