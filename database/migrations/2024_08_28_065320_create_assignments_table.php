@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('content');
             $table->string('file_path')->nullable(); 
             $table->string('img_path')->nullable(); 
-            $table->unsignedBigInteger('user_course_id'); 
-            $table->foreign('user_course_id')->references('id')->on('user_courses');
+            $table->unsignedBigInteger('course_id'); 
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->unsignedBigInteger('user_id');  
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('due_date');

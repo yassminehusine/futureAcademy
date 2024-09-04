@@ -27,7 +27,7 @@ class assignmentDTO extends Data{
             'user_id' => Auth::user()->id,
             'due_date' => $assignmentRequest->due_date,
             'status' => $assignmentRequest->status ?? "ongoing",
-            'user_course_id'=> $id,
+            'course_id'=> $id,
            ];
         if ($assignmentRequest->img_path) {
             $img = $assignmentRequest->img_path;
