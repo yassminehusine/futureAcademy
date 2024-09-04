@@ -74,7 +74,7 @@ class assignmentController extends Controller
     {
         $assignment = $this->assignmentRepository->getById($id);
         $courses = $this->courseRepository->getAll();
-        return view('layouts.dashboard.assignment.edit', compact('courses','assignment'));
+        return view('layouts.dashboard.assignments.edit', compact('courses','assignment'));
 
     }
 
@@ -86,7 +86,7 @@ class assignmentController extends Controller
       // Convert the request to a DTO
       $data = assignmentDTO::handleInputs($request);
       $this->assignmentRepository->update($data, $id);
-      return redirect()->route('assignment.index')->with('success', 'Course updated successfully');
+      return redirect()->route('assignments.index')->with('success', 'Course updated successfully');
         
     }
 
