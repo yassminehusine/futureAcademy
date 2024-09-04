@@ -14,6 +14,9 @@
             <div class="card-body">
             <div class="form-group">
                  <label for="user_id">User</label>
+                 <!-- <datalist id="user_search" name="user_id" class="form-control  @error('user_id') is-invalid @enderror" onchange="checkAutofill()">
+
+                 </datalist> -->
                 <select name="user_id" class="form-control @error('user_id') is-invalid @enderror" id="user_id">
                     @foreach ($users as $user)
                     <option value="{{$user->id}}" {{ auth()->user()->id == $user->id ? 'selected' : '' }}>

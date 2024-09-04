@@ -287,6 +287,29 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-building"></i>
+          <p>
+            Posts
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+          <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{route('post.create')}}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>create post</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('post.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p> show post </p>
+            </a>
+          </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
           <!-- <i class="fa-solid fa-bookmark"></i> -->
           <i class="nav-icon fas fa-bookmark"></i>
           <p>

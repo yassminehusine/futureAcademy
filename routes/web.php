@@ -6,6 +6,7 @@ use  App\Http\Controllers\departmentController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\materialController;
 use App\Http\Controllers\assignmentController;
+use App\Http\Controllers\postController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,17 @@ Route::group(['prefix'=>'assignments'],function(){
     Route::get('/destroy/{id}', [assignmentController::class, 'destroy'])->name('assignment.destroy');
 })->middleware('auth');
 // End assignments Controller
+
+// Route posts
+Route::group(['prefix'=> 'posts'],function(){
+    Route::get('/create',[ postController::class,'create'])->name('post.create');
+    Route::get('/index', [ postController::class, 'index'])->name('post.index');
+    Route::post('/store',[ postController::class,'store'])->name('post.store');
+    Route::get('/edit/{id}',[ postController::class,'edit'])->name('post.edit');
+    Route::post('/update/{id}',[ postController::class,'update'])->name('post.update');
+    Route::get('/destroy/{id}', [postController::class, 'destroy'])->name('post.destroy');  
+})->middleware('auth');
+// End Route posts 
 
 
 Auth::routes();
