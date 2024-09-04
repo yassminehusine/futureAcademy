@@ -16,7 +16,7 @@ class assignmentModel extends Model
         'img_path',
         'user_id',
         'status',
-        'course_id',
+        'user_course_id',
         'due_date',
        
     ];
