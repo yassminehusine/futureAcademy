@@ -16,12 +16,12 @@ return new class extends Migration
             $table->timestamp('submission_date')->nullable();
             $table->string('submission_file')->nullable();
             $table->text('submission_text')->nullable();
-            $table->integer('grade')->nullable();
-            $table->text('comments')->nullable();
+            $table->string('grade')->nullable();
+            $table->text('comment')->nullable();
             $table->enum('status', ['submitted', 'graded', 'pending'])->default('pending');
             $table->boolean('is_late')->default(false);
             $table->boolean('resubmitted')->default(false);
-            $table->unsignedBigInteger('user_id');  // User ID of the creator of the material
+            $table->unsignedBigInteger('user_id');  
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('assignment_id');
             $table->foreign('assignment_id')->references('id')->on('assignments')->onDelete('cascade');

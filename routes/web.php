@@ -6,6 +6,7 @@ use  App\Http\Controllers\departmentController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\materialController;
 use App\Http\Controllers\assignmentController;
+use App\Http\Controllers\submissionController;
 use App\Http\Controllers\postController;
 
 /*
@@ -103,6 +104,19 @@ Route::group(['prefix'=> 'posts'],function(){
     Route::get('/destroy/{id}', [postController::class, 'destroy'])->name('post.destroy');  
 })->middleware('auth');
 // End Route posts 
+
+
+// Start submissions Controller
+Route::group(['prefix'=>'submissions'],function(){
+    Route::get('/create/{id}',[submissionController::class,'create'])->name('submission.create');
+    Route::get('/index', [submissionController::class, 'index'])->name('submission.index');
+    Route::post('/store',[submissionController::class,'store'])->name('submission.store');
+    Route::get('/edit/{id}',[submissionController::class,'edit'])->name('submission.edit');
+    Route::post('/update/{id}',[submissionController::class,'update'])->name('submission.update');
+    Route::get('/destroy/{id}', [submissionController::class, 'destroy'])->name('submission.destroy');
+})->middleware('auth');
+// End submissions Controller
+
 
 
 Auth::routes();

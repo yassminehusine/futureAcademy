@@ -8,13 +8,13 @@ class assignmentDTO extends Data{
     public function __construct(
     public string   $title,
     public string  $content,
-    public string  $video_url,
     public string   $status,
     public string  $user_id,
     public string  $course_id,
-    public string  $year,
     public string $due_date,
     public string $file_path,
+    public string $img_path,
+
 
     ){}
     public static function handleInputs(assignmentRequest $assignmentRequest){
