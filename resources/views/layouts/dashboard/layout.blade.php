@@ -313,6 +313,30 @@
               </ul>
             </li>
             <li class="nav-item">
+              <a href="#" class="nav-link">
+                <!-- <i class="fa-solid fa-bookmark"></i> -->
+                <i class="fa-solid fa-id-card"></i>
+                <p>
+                   Materials
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('material.create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>create material</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('material.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> show material </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>
@@ -325,6 +349,18 @@
             </form>
             </li>
             @endif
+            @if(auth()->user()->role === 'sudents')
+            <li class="nav-item">
+              <a  href="{{route('user.profile',['id' => Auth::user()->id])}}" class="nav-link">
+              <i class="fa-solid fa-address-card"></i>
+                <p>
+                  My Courses
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+            </li>
+            @endif
+
             <ul class="nav nav-treeview">
             <li class="nav-item">
               <a  href="{{route('user.profile',['id' => Auth::user()->id])}}" class="nav-link">

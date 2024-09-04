@@ -24,7 +24,7 @@ class assignmentRequest extends FormRequest
         return [
             'title' => 'required',
             'content' => 'required',
-            'file_path' => 'required',
+            'file_path' => 'nullable',
             'user_id' => 'required',
             'status' => 'nullable',
             'course_id' => 'required',
