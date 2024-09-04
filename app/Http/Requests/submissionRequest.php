@@ -25,7 +25,6 @@ class submissionRequest extends FormRequest
 
             'submission_file' => 'nullable',
             'comment' => 'nullable',
-            'grade' => 'nullable',
             'assignment_id' => 'required',
             'user_id' => 'required',
             'submission_text' => 'nullable',

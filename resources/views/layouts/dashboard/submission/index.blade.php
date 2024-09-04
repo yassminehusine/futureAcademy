@@ -4,7 +4,7 @@
 <div class="card card-dark">
     <div class="card">
     <div class="card-header">
-                <h3 class="card-title">DataTable Course </h3>
+                <h3 class="card-title">DataTable Submissions </h3>
               </div>
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover text-center">
@@ -12,8 +12,9 @@
                   <tr>
                 <th>Assignment</th>
                 <th>author</th>
-                <th>Due date</th>
-                <th>Course</th>
+                <th>grade</th>
+                <th>status</th>
+                <th>submission date</th>
                 <th>Actions</th>
                 </tr>
                   </thead>

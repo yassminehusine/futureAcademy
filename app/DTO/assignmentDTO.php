@@ -4,6 +4,7 @@ use App\Models\user_course;
 use Auth;
 use Spatie\LaravelData\Data;
 use App\Http\Requests\assignmentRequest;
+use Carbon\Carbon;
 class assignmentDTO extends Data{
     public function __construct(
     public string   $title,
@@ -20,13 +21,21 @@ class assignmentDTO extends Data{
     public static function handleInputs(assignmentRequest $assignmentRequest){
 
         $id = user_course::where('user_id', Auth::id())->where('year' , date('Y'))->first()->course_id;
+        $status = "";
+        $due_date = Carbon::parse($assignmentRequest->due_date);
+        $today = Carbon::parse(now());
 
+        if ($today->greaterThan($due_date)) {
+            $status = "overdue";
+        }else {
+            $status = "ongoing";
+        }
         $data = [
             'title' => $assignmentRequest->title,
             'content' => $assignmentRequest->content,
             'user_id' => Auth::user()->id,
             'due_date' => $assignmentRequest->due_date,
-            'status' => $assignmentRequest->status ?? "ongoing",
+            'status' => $status,
             'course_id'=> $id,
            ];
         if ($assignmentRequest->img_path) {
@@ -42,6 +51,7 @@ class assignmentDTO extends Data{
             $filePath = $file->storeAs('public/materials', $newfileName);
             $data['file_path'] = $filePath; 
         }
+   
          return $data;
     }
 }

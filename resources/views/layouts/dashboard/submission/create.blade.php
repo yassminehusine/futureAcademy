@@ -19,31 +19,32 @@
             @enderror
     </div>
     <div class="form-group">
-              <textarea id="summernote"  name="content">
+              <textarea id="summernote"  name="submission_text">
             
               </textarea>
-              @error('content')
+              @error('submission_text')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
       </div>
     <div class="form-group">
-        <label for="file_path">File
+        <label for="submission_file">File
          <img src="https://cdn-icons-png.flaticon.com/512/8191/8191607.png" alt="upload" width="100px">
-         <input type="file" name="file_path" hidden  class="form-control @error('file_path') is-invalid @enderror" id="file_path">
+         <input type="file" name="submission_file" hidden  class="form-control @error('submission_file') is-invalid @enderror" id="submission_file">
         </label>
-         @error('file_path')
+         @error('submission_file')
             <span class="invalid-feedback" role="alert">
              <strong>{{ $message }}</strong>
              </span>
         @enderror
     </div>
-       <div class="form-group">
-            <label for="due_date">Due Date</label>
-            <input type="date" name="due_date" class="form-control" id="due_date" required>
-            @error('due_date')
+    <div class="form-group">
+              <textarea id="summernote"  name="comment" placeholder="Comment...">
+            
+              </textarea>
+              @error('comment')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-        </div>
+      </div>
     <div class="card-footer">
     <button type="submit" class="btn btn-dark">Submit</button>
      </div>
