@@ -25,16 +25,15 @@ class assignmentController extends Controller
      **/
     public function index()
     {            
-         $assignments = assignmentModel::with(['course' ,'user'])->get();
 
         if (Auth::user()->role == "Admin"){
-        // assignmentModel::with('course')->get();
-       return view('layouts.dashboard.assignments.index',compact('assignments'));}
-       else {
-        // $assignmentForCourse = assignmentModel::with('user_courses')->having('year','=',$assignments->year)->get();
-        // dd($assignmentForCourse);
-        // return view('layouts.dashboard.assignments.index',compact('assignmentForCourse'));};
-       return view('layouts.dashboard.layout');}
+            $assignments = assignmentModel::with(['course' ,'user'])->get();
+            return view('layouts.dashboard.assignments.index',compact('assignments'));}
+       else if(Auth::user()->role == "doctors"){
+        $assignments = assignmentModel::with(['course' ,'user'])->where('user_id',Auth::id())->get();
+        //dd($assignments);
+        return view('layouts.dashboard.assignments.index',compact('assignments'));};
+       
        }
        
     /**

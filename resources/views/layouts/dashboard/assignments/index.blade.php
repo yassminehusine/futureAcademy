@@ -18,7 +18,6 @@
                 </tr>
                   </thead>
                   <tbody>
-                    @if(Auth::user()->role === "Admin")
                     @foreach($assignments as $assignment)
                     <tr>
                         <td>{{$assignment->title}}</td>
@@ -35,7 +34,7 @@
                         </td>
                     </tr>
                     @endforeach
-                    @endif
+                    
                     </tbody>
                 </table>
 
