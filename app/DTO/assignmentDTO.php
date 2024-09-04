@@ -24,6 +24,9 @@ class assignmentDTO extends Data{
             'course_id' => $assignmentRequest->course_id,
             'year' => year(),
             'due_date' => $assignmentRequest->due_date,
+            'status' => $assignmentRequest->status ?? "",
+            'video_url' => $assignmentRequest->video_url ?? "",
+            
     
 
 
