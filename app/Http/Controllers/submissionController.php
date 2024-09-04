@@ -62,6 +62,27 @@ class submissionController extends Controller
        //$submission = $this->submissionRepository->getById($id);
        //return view('layouts.dashboard.submission.show', compact('submission'));
     }
+
+    public function edit(string $id)
+    {
+        $assignment_id = $id;
+        $submission = $this->submissionRepository->getById($id);
+        return view('layouts.dashboard.submissions.edit', compact($assignment_id,'submission'));
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(submissionRequest $request, string $id ,$c_id)
+    {
+      // Convert the request to a DTO
+      $data = submissionDTO::handleInputs($request, $c_id);
+      $this->submissionRepository->update($data, $id);
+      return redirect()->route('submission.index')->with('success', ' updated successfully');
+        
+    }
+
     /**
      * Remove the specified resource from storage.
      */

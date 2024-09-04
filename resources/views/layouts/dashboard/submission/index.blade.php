@@ -11,7 +11,7 @@
                   <thead>
                   <tr>
                 <th>Assignment</th>
-                <th>author</th>
+                <th>Course</th>
                 <th>grade</th>
                 <th>status</th>
                 <th>submission date</th>
@@ -19,17 +19,19 @@
                 </tr>
                   </thead>
                   <tbody>
-                    @foreach($assignments as $assignment)
+                    @foreach($submissions as $submission)
                     <tr>
-                        <td>{{$assignment->title}}</td>
-                        <td>{{$assignment->user->name}}</td>
-                        <td>{{$assignment->due_date}}</td>
-                        <td></td> 
+                        <td>{{$submission->assignment->title}}</td>
+                        <td>{{$submission->assignment->course->name}}</td>
+                        <td>{{$submission->grade}}</td>
+                        <td>{{$submission->status}}</td> 
+                        <td>{{$submission->submission_date}}</td> 
+
                         <td>
-                         <a href="{{ route('assignment.edit', ['id' => $assignment->id]) }}" class="text-success">
+                         <a href="{{ route('submission.edit', ['id' => $submission->id]) }}" class="text-success">
                             <i class="fas fa-edit"></i>
                          </a>
-                         <a href="{{ route('assignment.destroy', ['id' => $assignment->id]) }}" onclick="return confirm('Are you sure you want to delete this item?')" class="text-danger">
+                         <a href="{{ route('submission.destroy', ['id' => $submission->id]) }}" onclick="return confirm('Are you sure you want to delete this item?')" class="text-danger">
                             <i class="fas fa-trash"></i>
                          </a>
                         </td>
