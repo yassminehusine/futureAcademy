@@ -23,7 +23,9 @@
                         <td>{{$assignment->title}}</td>
                         <td>{{$assignment->user->name}}</td>
                         <td>{{$assignment->due_date}}</td>
-                        <td></td> 
+                        <td>{{$assignment->course->course_name}}</td> 
+                        <td>{{$assignment->status}}</td> 
+
                         <td>
                          <a href="{{ route('assignment.edit', ['id' => $assignment->id]) }}" class="text-success">
                             <i class="fas fa-edit"></i>

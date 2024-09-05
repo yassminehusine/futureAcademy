@@ -5,21 +5,15 @@
     <!-- jquery validation -->
      <div class="card card-dark">
         <div class="card-header">
-            <h3 class="card-title">Table-submissions</h3>
+            <h3 class="card-title">Submission for {{$assignment->title}}</h3>
         </div>
         <div class="card-body">
     @csrf
     <form id="quickForm" novalidate="novalidate" action="{{ route('submission.store', ['id' =>$id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
+
     <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" id="title" required>
-            @error('title')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-    </div>
-    <div class="form-group">
-              <textarea id="summernote"  name="submission_text">
+              <textarea id="summernote"  name="submission_text" rows="5">
             
               </textarea>
               @error('submission_text')
@@ -38,7 +32,7 @@
         @enderror
     </div>
     <div class="form-group">
-              <textarea id="summernote"  name="comment" placeholder="Comment...">
+              <textarea id="summernote"  name="comment" placeholder="Comment..." class="form-control" style="resize:none;" rows="5">
             
               </textarea>
               @error('comment')

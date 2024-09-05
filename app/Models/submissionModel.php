@@ -9,7 +9,7 @@ class submissionModel extends Model
 {
     use HasFactory;
 
-    protected $table = "submmissions";
+    protected $table = "submissions";
 
     protected $fillable = [
         'submission_date',
@@ -27,5 +27,9 @@ class submissionModel extends Model
 
     public function assignment(){
         return $this->belongsTo(assignmentModel::class);
+    }
+
+    public function course(){
+        return $this->belongsTo(coursesModel::class);
     }
 }

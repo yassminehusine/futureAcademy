@@ -110,7 +110,7 @@ Route::group(['prefix'=> 'posts'],function(){
 Route::group(['prefix'=>'submissions'],function(){
     Route::get('/create/{id}',[submissionController::class,'create'])->name('submission.create');
     Route::get('/index', [submissionController::class, 'index'])->name('submission.index');
-    Route::post('/store',[submissionController::class,'store'])->name('submission.store');
+    Route::post('/store/{id}',[submissionController::class,'store'])->name('submission.store');
     Route::get('/edit/{id}',[submissionController::class,'edit'])->name('submission.edit');
     Route::post('/update/{id}',[submissionController::class,'update'])->name('submission.update');
     Route::get('/destroy/{id}', [submissionController::class, 'destroy'])->name('submission.destroy');

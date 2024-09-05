@@ -38,7 +38,7 @@ class submissionController extends Controller
      */
     public function create($id)
     {
-        $assignment = assignmentModel::where('id',$id)->get();
+        $assignment = assignmentModel::where('id',$id)->first();
 
         return view('layouts.dashboard.submissions.create', ['id' => $id , 'assignment' => $assignment ]);
     }
@@ -47,9 +47,7 @@ class submissionController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(submissionRequest $request , $id){
-        // dd($request);
         $submission = submissionDTO::handleInputs($request , $id);
-        // dd($submission);
         $this->submissionRepository->create($submission);
         Alert::success('Success Toast','success');
         return redirect()->route('submission.index');   
@@ -74,10 +72,10 @@ class submissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(submissionRequest $request, string $id ,$c_id)
+    public function update(submissionRequest $request, string $id ,$assign_id)
     {
       // Convert the request to a DTO
-      $data = submissionDTO::handleInputs($request, $c_id);
+      $data = submissionDTO::handleInputs($request, $assign_id);
       $this->submissionRepository->update($data, $id);
       return redirect()->route('submission.index')->with('success', ' updated successfully');
         

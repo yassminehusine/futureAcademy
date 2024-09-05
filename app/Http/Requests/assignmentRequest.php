@@ -28,6 +28,8 @@ class assignmentRequest extends FormRequest
             'img_path' => 'nullable',
             'status' => 'nullable',
             'due_date' => 'required',
+            'assignment_points' => 'required',
+
         ];
     }
 }

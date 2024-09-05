@@ -22,7 +22,7 @@
                     @foreach($submissions as $submission)
                     <tr>
                         <td>{{$submission->assignment->title}}</td>
-                        <td>{{$submission->assignment->course->name}}</td>
+                        <td>{{$submission->assignment->course->course_name}}</td>
                         <td>{{$submission->grade}}</td>
                         <td>{{$submission->status}}</td> 
                         <td>{{$submission->submission_date}}</td> 

@@ -18,6 +18,7 @@ class assignmentModel extends Model
         'status',
         'course_id',
         'due_date',
+        'assignment_points'
        
     ];
 

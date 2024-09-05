@@ -27,11 +27,9 @@ class submissionDTO extends Data
     }
     public static function handleInputs(submissionRequest $submissionRequest ,$id)
     {
-
-        $c_id = user_course::where('user_id', Auth::id())->where('year', date('Y'))->first()->course_id;
-        $submissions = submissionModel::where('user_id', Auth::id())->with('assignment')->where('course_id', $c_id)->get();
-        dd(count($submissions));
-        $due_date = Carbon::parse($submissions->assignment->due_date);
+        $assignment = assignmentModel::where('id',$id)->first();
+        $submissions = submissionModel::where('user_id', Auth::id())->with(['assignment','course'])->get();
+        $due_date = Carbon::parse($assignment->due_date);
         $submission_date = Carbon::parse(now());
 
 
@@ -42,13 +40,14 @@ class submissionDTO extends Data
             'grade' => $submissionRequest->grade ?? "",
             'status' => $submissionRequest->status ?? "pending",
             'comment' => $submissionRequest->comment ?? "",
+            'assignment_id'=> $id
 
         ];
 
         if (count($submissions) > 1) {
             $data['resubmitted'] = true;
         } else {
-            $data['resubmitted'] = true;
+            $data['resubmitted'] = false;
         }
         if ($submission_date->greaterThan($due_date)) {
             $data['is_late'] = true;

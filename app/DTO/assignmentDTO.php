@@ -15,6 +15,7 @@ class assignmentDTO extends Data{
     public string $due_date,
     public string $file_path,
     public string $img_path,
+    public string $assignment_points,
 
 
     ){}
@@ -37,6 +38,7 @@ class assignmentDTO extends Data{
             'due_date' => $assignmentRequest->due_date,
             'status' => $status,
             'course_id'=> $id,
+            'assignment_points'=>$assignmentRequest->assignment_points,
            ];
         if ($assignmentRequest->img_path) {
             $img = $assignmentRequest->img_path;
