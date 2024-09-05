@@ -47,7 +47,7 @@ class user_coursesController extends Controller
         // dd($user_courses);
         $this->user_coursesRepository->create($user_courses);
         Alert::success('Success', 'User Course created successfully');
-        return redirect()->route('user_course.index');
+        return redirect()->route('user_course.create');
     }
 
     /**

@@ -46,7 +46,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                     <label for="pract_mark">Practical Mark</label>
                     <input type="text" name="pract_mark" class="form-control @error('pract_mark') is-invalid @enderror" id="pract_mark" placeholder="Enter Practical Mark" value="{{ old('pract_mark') }}">
                     @error('pract_mark')
@@ -55,7 +55,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                     <label for="total_mark">Total Mark</label>
                     <input type="text" name="total_mark" class="form-control @error('total_mark') is-invalid @enderror" id="total_mark" placeholder="Enter Total Mark" value="{{ old('total_mark') }}">
                     @error('total_mark')
@@ -64,7 +64,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                     <label for="test_mark">Test Mark</label>
                     <input type="text" name="test_mark" class="form-control @error('test_mark') is-invalid @enderror" id="test_mark" placeholder="Enter Test Mark" value="{{ old('test_mark') }}">
                     @error('test_mark')
@@ -73,7 +73,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                     <label for="grade">Grade</label>
                     <select name="grade" class="form-control @error('grade') is-invalid @enderror" id="grade">
                         <option disabled selected>Select Grade</option>
@@ -89,7 +89,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                     <label for="group_number">Group Number</label>
                     <input type="text" name="group_number" class="form-control @error('group_number') is-invalid @enderror" id="group_number" placeholder="Enter Group Number" value="{{ old('group_number') }}">
                     @error('group_number')

@@ -10,7 +10,7 @@ class postDTO extends Data{
    ){}
    public static function handleInputs(postRequest $postRequest){
       $data =  [
-         'title' => $postRequest->post_name,
+         'title' => $postRequest->title,
          'description' => $postRequest->description,
       ];
       if ($postRequest->image) {

@@ -25,7 +25,8 @@ class materialController extends Controller
      **/
     public function index()
     {
-        $materials = $materials = $this->materialRepository->getAll();
+        $materials = $this->materialRepository->getAll();
+        
        return view('layouts.dashboard.material.index',compact('materials'));
     }
     /**
