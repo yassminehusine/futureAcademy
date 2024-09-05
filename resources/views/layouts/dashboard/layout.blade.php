@@ -390,6 +390,15 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{route('assignment.show', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+            My Assignments
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route('logout') }}" class="nav-link"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -410,6 +419,15 @@
           <i class="fa-solid fa-address-card"></i>
           <p>
             My Courses
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('assignment.show', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+            My Assignments
             <i class="fas fa-angle-left right"></i>
           </p>
           </a>
@@ -438,29 +456,6 @@
         </li>
 
       @endif
-
-              <li class="nav-item">
-                <a href="{{route('user.profile', ['id' => Auth::user()->id])}}" class="nav-link">
-                  <i class="fa-solid fa-address-card"></i>
-                  <p>
-                    Profile
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('logout') }}" class="nav-link"
-                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                  <i class="nav-icon fas fa-sign-out-alt"></i>
-                  <p>
-                    Logout
-                  </p>
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                  @csrf
-                </form>
-              </li>
-
         </nav>
         <!-- /.sidebar-menu -->
       </div>
