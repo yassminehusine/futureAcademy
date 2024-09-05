@@ -37,9 +37,16 @@
              </span>
         @enderror
     </div>
+    <div class="form-group">
+            <label for="assignment_points">Points for assignment</label>
+            <input type="number" name="assignment_points" class="form-control" id="assignment_points" required max="3">
+            @error('assignment_points')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
        <div class="form-group">
-            <label for="due_date">Due Date</label>
-            <input type="date" name="due_date" class="form-control" id="due_date" required value="{{$assignment->due_date}}">
+            <label for="due_date">Due Date -- {{$assignment->due_date}}</label>
+            <input type="datetime-local" name="due_date" class="form-control" id="due_date" required>
             @error('due_date')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

@@ -14,6 +14,8 @@
                 <th>author</th>
                 <th>Due date</th>
                 <th>Course</th>
+                <th>Points</th>
+                <th>Status</th>
                 <th>Actions</th>
                 </tr>
                   </thead>
@@ -24,6 +26,7 @@
                         <td>{{$assignment->user->name}}</td>
                         <td>{{$assignment->due_date}}</td>
                         <td>{{$assignment->course->course_name}}</td> 
+                        <td>{{$assignment->assignment_points}}</td> 
                         <td>{{$assignment->status}}</td> 
 
                         <td>

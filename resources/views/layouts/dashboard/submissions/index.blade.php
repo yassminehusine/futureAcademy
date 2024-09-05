@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{$submission->assignment->title}}</td>
                         <td>{{$submission->assignment->course->course_name}}</td>
-                        <td>{{$submission->grade}}</td>
+                        <td>{{$submission->grade}}/ {{$submission->assignment->assignment_points}}</td>
                         <td>{{$submission->status}}</td> 
                         <td>{{$submission->submission_date}}</td> 
 
