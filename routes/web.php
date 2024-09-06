@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\user_coursesController;
+use App\Models\Notification;
 use  Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\UsersController;
 use  App\Http\Controllers\departmentController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\materialController;
 use App\Http\Controllers\assignmentController;
 use App\Http\Controllers\submissionController;
 use App\Http\Controllers\postController;
+use App\Notifications\AdminNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,6 +119,23 @@ Route::group(['prefix'=>'submissions'],function(){
     Route::get('/destroy/{id}', [submissionController::class, 'destroy'])->name('submission.destroy');
 })->middleware('auth');
 // End submissions Controller
+
+
+Route::get('/notifications/{id}', function () {
+
+    $notifications = auth()->user()->notifications;
+
+       // dd($notifications);
+    foreach ($notifications as $notification) {
+
+        $notificationData = $notification->toDatabase($notification->notifiable);
+
+        $title = $notificationData['title'];
+        $body = $notificationData['body'];
+    }
+
+    return view('admin.notifications.show',compact(['notifications','title','body']));
+    })->name('admin.notifications.show');
 
 
 

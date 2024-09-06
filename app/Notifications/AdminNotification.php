@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use Auth;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -26,7 +27,7 @@ class AdminNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database', 'mail', 'broadcast']; // Choose the desired channels
+        return ['database', 'mail']; // Choose the desired channels
     }
 
     /**
@@ -55,16 +56,16 @@ class AdminNotification extends Notification
     public function toDatabase($notifiable)
 {
     return [
-        'title' => 'New Admin Notification',
-        'body' => 'This is a sample notification for the admin.',
+        'title' => 'New Department has been created',
+        'body' => 'New Department has been created by User '. Auth::id(),
     ];
 }
 
-public function toBroadcast($notifiable)
-{
-    return [
-        'title' => 'New Admin Notification',
-        'body' => 'This is a sample notification for the admin.',
-    ];
-}
+// public function toBroadcast($notifiable)
+// {
+//     return [
+//         'title' => 'New Admin Notification',
+//         'body' => 'This is a sample notification for the admin.',
+//     ];
+// }
 }
