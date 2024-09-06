@@ -21,10 +21,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
+        departmentModel::factory(10)->create();
         User::factory(30)->create();
         coursesModel::factory(30)->create();
-        departmentModel::factory(10)->create();
 
 
     }

@@ -52,16 +52,16 @@
                 
                 <!-- Academic Years -->
                 <div class="form-group">
-                    <label for="academic_years">Academic Years</label>
-                    <select name="academic_years" class="form-control @error('academic_years') is-invalid @enderror" id="academic_years">
+                    <label for="academic_level">Academic Years</label>
+                    <select name="academic_level" class="form-control @error('academic_level') is-invalid @enderror" id="academic_level">
                         <option disabled selected>Select Year</option>
-                        <option value="1" {{ old('academic_years', $user->academic_years) == '1' ? 'selected' : '' }}>First Year</option>
-                        <option value="2" {{ old('academic_years', $user->academic_years) == '2' ? 'selected' : '' }}>Second Year</option>
-                        <option value="3" {{ old('academic_years', $user->academic_years) == '3' ? 'selected' : '' }}>Third Year</option>
-                        <option value="4" {{ old('academic_years', $user->academic_years) == '4' ? 'selected' : '' }}>Fourth Year</option>
-                        <option value="graduated" {{ old('academic_years', $user->academic_years) == 'graduated' ? 'selected' : '' }}>Graduated</option>
+                        <option value="1" {{ old('academic_level', $user->academic_level) == '1' ? 'selected' : '' }}>First Year</option>
+                        <option value="2" {{ old('academic_level', $user->academic_level) == '2' ? 'selected' : '' }}>Second Year</option>
+                        <option value="3" {{ old('academic_level', $user->academic_level) == '3' ? 'selected' : '' }}>Third Year</option>
+                        <option value="4" {{ old('academic_level', $user->academic_level) == '4' ? 'selected' : '' }}>Fourth Year</option>
+                        <option value="graduated" {{ old('academic_level', $user->academic_level) == 'graduated' ? 'selected' : '' }}>Graduated</option>
                     </select>
-                    @error('academic_years')
+                    @error('academic_level')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

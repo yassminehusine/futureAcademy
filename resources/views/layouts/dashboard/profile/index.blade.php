@@ -17,15 +17,15 @@
                 <li class="list-group-item">
                  <b>Academic Year</b> 
                   <a class="float-right text-success">
-                      @if($user->academic_years == 1)
+                      @if($user->academic_level == 1)
                           First Year
-                      @elseif($user->academic_years == 2)
+                      @elseif($user->academic_level == 2)
                         Second Year
-                      @elseif($user->academic_years == 3)
+                      @elseif($user->academic_level == 3)
                       Third Year
-                    @elseif($user->academic_years == 4)
+                    @elseif($user->academic_level == 4)
                       Fourth Year
-                    @elseif($user->academic_years == 'graduated')
+                    @elseif($user->academic_level == 'graduated')
                         Is Graduated
                       @else
                       Undefined

@@ -16,7 +16,7 @@
                             <th>Image</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Academic Year</th>
+                            <th>Academic Level</th>
                             <th>GPA</th>
                             <th>Phone</th>
                             <th>Address</th>
@@ -40,7 +40,7 @@
                             </td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->role }}</td>
-                            <td>{{ $user->academic_years }}</td>
+                            <td>{{ $user->academic_level }}</td>
                             <td>{{ $user->GPA }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->address }}</td>
@@ -92,7 +92,7 @@
                             <th>Image</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Academic Year</th>
+                            <th>Academic Level</th>
                             <th>GPA</th>
                             <th>Phone</th>
                             <th>Address</th>
