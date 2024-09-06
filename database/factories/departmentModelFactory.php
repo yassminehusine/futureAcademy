@@ -18,7 +18,7 @@ class departmentModelFactory extends Factory
     public function definition(): array
     {
         return [
-            'department_name' => departmentRolse::getRandomKey(),
+            'department_name' => fake()->name(),
             'department_number' => "C" . fake()->numberBetween(1,999),
             'description' => fake()->sentence(6),
             'image' => "image\courseImages\1725471267motherboard-circuit-technology-background-vector-gradient-blue_53876-126034.avif",

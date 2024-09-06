@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\departmentModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +22,7 @@ class coursesModelFactory extends Factory
             'credit_hours' => fake()->numberBetween(1,3),
             'description' => fake()->sentence(4),
             'image' => "image\courseImages\1725471267motherboard-circuit-technology-background-vector-gradient-blue_53876-126034.avif",
-            'department_id' => '1',
+            'department_id' => "2",
 
         ];
     }

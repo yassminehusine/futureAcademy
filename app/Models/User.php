@@ -51,7 +51,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'academic_level' => Year::class,
 
+
     ];
+
 
     public function department()
     {

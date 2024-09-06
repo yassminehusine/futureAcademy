@@ -4,6 +4,9 @@ use App\DTO\departmentDTO;
 use App\Http\Requests\departmentRequest;
 use App\Repository\interface\IdepartmentRepository;
 use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
+use App\Models\User;
+use App\Notifications\AdminNotification;
 
 class departmentController extends Controller
 {
@@ -33,6 +36,8 @@ class departmentController extends Controller
         $data = departmentDTO::handleInputs($request);
         $this->departmentRepository->create($data);
         Alert::success('Success Toast','success');
+        $user = User::findOrFail(Auth::id());
+        $user->notify(new AdminNotification());
         return redirect()->route('department.index');
       
 

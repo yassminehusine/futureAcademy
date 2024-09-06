@@ -5,12 +5,12 @@ namespace App\Enums;
 
 enum Year: string
 {
-    case YEAR_1 = 'First';
-    case YEAR_2 = 'Second';
-    case YEAR_3 = 'Third';
-    case YEAR_4 = 'Fourth';
-    case GRADUATED = 'Graduate';
-    case NONE = '--';
+    case First = 'First';
+    case Second = 'Second';
+    case Third = 'Third';
+    case Fourth = 'Fourth';
+    case Graduate = 'Graduate';
+    // case none = '--';
 
 
 public static function getRandomKey(): string
