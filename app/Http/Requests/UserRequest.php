@@ -23,7 +23,7 @@ class UserRequest extends FormRequest
             'image' => 'nullable',
             'role' => 'required',
             'academic_level' => 'nullable',
-            'GPA' => 'required',
+            'GPA' => 'nullable',
             'phone' => 'required',
             'address' => 'required',
             'email' => 'required',
