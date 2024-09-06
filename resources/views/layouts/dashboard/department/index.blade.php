@@ -12,10 +12,10 @@
                   <thead>
                   <tr>
                     <th>id</th>
-                    <th>department_name</th>
+                    <th>department name</th>
                     <th>image</th>
                     <th>description</th>
-                    <th>department_number</th>
+                    <th>department number</th>
                     <th>Action </th>
                   </tr>
                   </thead>

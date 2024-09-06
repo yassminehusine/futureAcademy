@@ -12,9 +12,7 @@ class departmentController extends Controller
     public function __construct(IdepartmentRepository $departmentRepository)
     {
         $this->middleware(['auth', 'Admin']);
-        // $this->middleware('Admin')->only([
-        //     'create', 'store', 'edit', 'update', 'destroy'
-        // ]);
+
         $this->departmentRepository = $departmentRepository;
     }
 

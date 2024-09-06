@@ -13,12 +13,7 @@
                 <!-- Department Name -->
                 <div class="form-group">
                     <label for="department_name">Department Name</label>
-                    <select name="department_name" class="form-control @error('department_name') is-invalid @enderror" id="department_name">
-                        <option disabled selected>Select Department</option>
-                        <option value="computer science">Computer Science</option>
-                        <option value="management information system">Management Information System</option>
-                        <option value="information Technology">Information Technology</option>
-                    </select>
+                    <input type="text" name="department_name" class="form-control @error('department_name') is-invalid @enderror" id="department_name">
                     @error('department_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

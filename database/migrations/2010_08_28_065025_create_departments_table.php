@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->enum('department_name', ['computer science', 'management information system', 'information Technology']);
+            $table->string('department_name');
             $table->string('image')->nullable(); 
             $table->text('description')->nullable(); 
             $table->string('department_number')->unique();
