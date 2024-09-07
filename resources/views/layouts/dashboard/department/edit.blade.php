@@ -14,7 +14,7 @@
                 <!-- Department Name -->
                 <div class="form-group">
                     <label for="department_name">Department Name</label>
-                    <input type="text" name="department_name" class="form-control @error('department_name') is-invalid @enderror" id="department_name">
+                    <input type="text" name="department_name" class="form-control @error('department_name') is-invalid @enderror" id="department_name" value="{{$department->department_name}}">
                     @error('department_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

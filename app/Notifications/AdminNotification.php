@@ -5,6 +5,7 @@ namespace App\Notifications;
 use Auth;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -27,9 +28,9 @@ class AdminNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database', 'mail']; // Choose the desired channels
-    }
 
+        return ['database']; // Choose the desired channels
+    }
     /**
      * Get the mail representation of the notification.
      */

@@ -38,7 +38,7 @@ class departmentController extends Controller
         $this->departmentRepository->create($data);
         Alert::success('Success Toast','success');
         $user = User::findOrFail(Auth::id());
-        $user->notify(new DatabaseNotification());
+        $user->notify(new AdminNotification());
         return redirect()->route('department.index');
       
 
