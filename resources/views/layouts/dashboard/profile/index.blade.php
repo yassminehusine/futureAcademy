@@ -17,19 +17,7 @@
                 <li class="list-group-item">
                  <b>Academic Year</b> 
                   <a class="float-right text-success">
-                      @if($user->academic_level == "First")
-                          First Year
-                      @elseif($user->academic_level == "Second")
-                        Second Year
-                      @elseif($user->academic_level == "Third")
-                      Third Year
-                    @elseif($user->academic_level == "Fourth")
-                      Fourth Year
-                    @elseif($user->academic_level == 'Graduate')
-                         Graduate
-                      @else
-                      Undefined
-                  @endif
+                  {{auth()->user()->academic_level}}
                   </a> 
                   <li class="list-group-item ">
                     <b>Address</b> <a class="float-right text-success">{{$user->address}}</a>

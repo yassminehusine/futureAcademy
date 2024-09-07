@@ -162,31 +162,26 @@
         </li>
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">15 Notifications</span>
+            @if($notifications->count() > 0)
+                <span class="badge badge-warning navbar-badge">{{ $notifications->count() }}</span>
+            @endif
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">{{ $notifications->count() }} Notifications</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> 4 new messages
-              <span class="float-right text-muted text-sm">3 mins</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> 8 friend requests
-              <span class="float-right text-muted text-sm">12 hours</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> 3 new reports
-              <span class="float-right text-muted text-sm">2 days</span>
-            </a>
-            <div class="dropdown-divider"></div>
+            @foreach($notifications as $notification)
+                <a href="{{ $notification->data['url'] ?? '#' }}" class="dropdown-item">
+                    <i class="{{ $notification->data['icon'] ?? 'fas fa-info-circle' }} mr-2"></i> 
+                    {{ $notification->data['title'] ?? 'Notification' }}
+                    <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                </a>
+                <div class="dropdown-divider"></div>
+            @endforeach
             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-          </div>
-        </li>
+        </div>
+    </li>
         <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
             <i class="fas fa-expand-arrows-alt"></i>
@@ -209,7 +204,6 @@
           class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Future Academyed</span>
       </a>
-
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
@@ -221,7 +215,6 @@
             <a href="{{route('user.profile', ['id' => Auth::user()->id])}}" class="d-block">{{auth()->user()->name}}</a>
           </div>
         </div>
-
         <!-- SidebarSearch Form -->
         <div class="form-inline">
           <div class="input-group" data-widget="sidebar-search">

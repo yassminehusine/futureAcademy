@@ -38,15 +38,23 @@ class UsersController extends Controller{
         $students = $this->userRepository->getCount(Rolse::STUDENTS);
         $admin = $this->userRepository->getCount(Rolse::ADMIN);
         $totalDepartments = 0;
-        foreach (departmentRolse::cases() as $role) {
-         $totalDepartments += $this->departmentRepository->getCountByRole($role);
-        }
-        return view('layouts.dashboard.layout2',[
-            'doctors' => $doctors,
-           'students' => $students,
-           'admin' => $admin,
-           'totalDepartments' => $totalDepartments,
-        ]);
+        $totalDepartments = 0;
+         foreach (departmentRolse::cases() as $role) {
+             $totalDepartments += $this->departmentRepository->getCountByRole($role);
+          }
+            if (Auth::check()) {
+                $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+            } else {
+                $notifications = collect();
+            }
+            return view('layouts.dashboard.layout2', [
+                'doctors' => $doctors,
+                'students' => $students,
+                'admin' => $admin,
+                'totalDepartments' => $totalDepartments,
+                'notifications' => $notifications,
+            ]);
+
     }
     /**
      * Show the form for creating a new resource.

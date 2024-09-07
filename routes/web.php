@@ -92,7 +92,7 @@ Route::group(['prefix'=>'assignments'],function(){
     Route::post('/store',[assignmentController::class,'store'])->name('assignment.store');
     Route::get('/edit/{id}',[assignmentController::class,'edit'])->name('assignment.edit');
     Route::post('/update/{id}',[assignmentController::class,'update'])->name('assignment.update');
-    Route::post('/show/{id}',[assignmentController::class,'show'])->name('assignment.show');
+    Route::get('/show/{id}',[assignmentController::class,'show'])->name('assignment.show');
     Route::get('/destroy/{id}', [assignmentController::class, 'destroy'])->name('assignment.destroy');
 })->middleware('auth');
 // End assignments Controller
@@ -132,6 +132,7 @@ Route::get('/notifications/{id}', function () {
 
         $title = $notificationData['title'];
         $body = $notificationData['body'];
+
     }
 
     return view('admin.notifications.show',compact(['notifications','title','body']));

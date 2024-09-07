@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 use App\DTO\departmentDTO;
 use App\Http\Requests\departmentRequest;
 use App\Repository\interface\IdepartmentRepository;
-use Illuminate\Notifications\DatabaseNotification;
 use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
 use App\Models\User;
