@@ -12,6 +12,8 @@ class user_courseDTO extends Data{
         public string $test_mark,
         public string $grade,
         public string $group_number,
+        public string $year,
+
       
     ){}
     public static function handleInputs(user_coursesRequest $user_coursesRequest){
@@ -31,6 +33,8 @@ class user_courseDTO extends Data{
             'test_mark' => $user_coursesRequest->test_mark ?? "",
             'grade' => $user_coursesRequest->grade,
             'group_number' =>$group_number,
+            'year' => date('Y'),
+
         ];
         return $data;
     }

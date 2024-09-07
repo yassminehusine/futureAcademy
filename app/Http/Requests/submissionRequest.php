@@ -11,7 +11,7 @@ class submissionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class submissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+            'submission_file' => 'nullable',
+            'comment' => 'nullable',
+            'submission_text' => 'nullable',
         ];
     }
 }

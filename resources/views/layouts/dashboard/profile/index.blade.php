@@ -9,21 +9,24 @@
                        alt="User profile picture">
                 </div>
                 <h3 class="profile-username text-center text-success">{{$user->name}}</h3>
-                <p class="text-muted text-center text-success">{{$department->department_name}}</p>
+                @if(auth()->user()->role === "students"||auth()->user()->role === "doctors")
+                <p class="text-muted text-center text-success">
+                {{$department->department_name}}</p>
+                @endif
                 <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
                  <b>Academic Year</b> 
                   <a class="float-right text-success">
-                      @if($user->academic_years == 1)
+                      @if($user->academic_level == "First")
                           First Year
-                      @elseif($user->academic_years == 2)
+                      @elseif($user->academic_level == "Second")
                         Second Year
-                      @elseif($user->academic_years == 3)
+                      @elseif($user->academic_level == "Third")
                       Third Year
-                    @elseif($user->academic_years == 4)
+                    @elseif($user->academic_level == "Fourth")
                       Fourth Year
-                    @elseif($user->academic_years == 'graduated')
-                        Is Graduated
+                    @elseif($user->academic_level == 'Graduate')
+                         Graduate
                       @else
                       Undefined
                   @endif

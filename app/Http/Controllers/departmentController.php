@@ -3,7 +3,11 @@ namespace App\Http\Controllers;
 use App\DTO\departmentDTO;
 use App\Http\Requests\departmentRequest;
 use App\Repository\interface\IdepartmentRepository;
+use Illuminate\Notifications\DatabaseNotification;
 use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
+use App\Models\User;
+use App\Notifications\AdminNotification;
 
 class departmentController extends Controller
 {
@@ -12,9 +16,7 @@ class departmentController extends Controller
     public function __construct(IdepartmentRepository $departmentRepository)
     {
         $this->middleware(['auth', 'Admin']);
-        // $this->middleware('Admin')->only([
-        //     'create', 'store', 'edit', 'update', 'destroy'
-        // ]);
+
         $this->departmentRepository = $departmentRepository;
     }
 
@@ -35,6 +37,8 @@ class departmentController extends Controller
         $data = departmentDTO::handleInputs($request);
         $this->departmentRepository->create($data);
         Alert::success('Success Toast','success');
+        $user = User::findOrFail(Auth::id());
+        $user->notify(new AdminNotification());
         return redirect()->route('department.index');
       
 

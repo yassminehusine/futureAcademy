@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Year;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,4 +25,8 @@ class coursesModel extends Model
     public function userCourses(){
         return $this->hasMany(user_course::class);
     }
+
+    protected $casts = [
+        'academic_level' => Year::class,
+    ];
 }

@@ -1,11 +1,15 @@
 <?php
 use App\Http\Controllers\user_coursesController;
+use App\Models\Notification;
 use  Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\UsersController;
 use  App\Http\Controllers\departmentController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\materialController;
 use App\Http\Controllers\assignmentController;
+use App\Http\Controllers\submissionController;
+use App\Http\Controllers\postController;
+use App\Notifications\AdminNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +69,8 @@ Route::group(['prefix'=>'user_courses'],function(){
     Route::get('/edit/{id}',[user_coursesController::class,'edit'])->name('user_course.edit');
     Route::post('/update/{id}',[user_coursesController::class,'update'])->name('user_course.update');
     Route::get('/destroy/{id}', [user_coursesController::class, 'destroy'])->name('user_course.destroy');
+    Route::get('/show/{id}', [user_coursesController::class, 'show'])->name('user.courses');
+
 })->middleware('auth');
 // Corrected routes/web.php
 // Start materials Controller
@@ -81,14 +87,56 @@ Route::group(['prefix'=>'materials'],function(){
 
 // Start assignments Controller
 Route::group(['prefix'=>'assignments'],function(){
-    Route::get('/create',[assignmentController::class,'create'])->name('assignment.create');
+    Route::get('/create/{id}',[assignmentController::class,'create'])->name('assignment.create');
     Route::get('/index', [assignmentController::class, 'index'])->name('assignment.index');
     Route::post('/store',[assignmentController::class,'store'])->name('assignment.store');
     Route::get('/edit/{id}',[assignmentController::class,'edit'])->name('assignment.edit');
     Route::post('/update/{id}',[assignmentController::class,'update'])->name('assignment.update');
+    Route::post('/show/{id}',[assignmentController::class,'show'])->name('assignment.show');
     Route::get('/destroy/{id}', [assignmentController::class, 'destroy'])->name('assignment.destroy');
 })->middleware('auth');
 // End assignments Controller
+
+// Route posts
+Route::group(['prefix'=> 'posts'],function(){
+    Route::get('/create',[ postController::class,'create'])->name('post.create');
+    Route::get('/index', [ postController::class, 'index'])->name('post.index');
+    Route::post('/store',[ postController::class,'store'])->name('post.store');
+    Route::get('/edit/{id}',[ postController::class,'edit'])->name('post.edit');
+    Route::post('/update/{id}',[ postController::class,'update'])->name('post.update');
+    Route::get('/destroy/{id}', [postController::class, 'destroy'])->name('post.destroy');  
+})->middleware('auth');
+// End Route posts 
+
+
+// Start submissions Controller
+Route::group(['prefix'=>'submissions'],function(){
+    Route::get('/create/{id}',[submissionController::class,'create'])->name('submission.create');
+    Route::get('/index', [submissionController::class, 'index'])->name('submission.index');
+    Route::post('/store/{id}',[submissionController::class,'store'])->name('submission.store');
+    Route::get('/edit/{id}',[submissionController::class,'edit'])->name('submission.edit');
+    Route::post('/update/{id}',[submissionController::class,'update'])->name('submission.update');
+    Route::get('/destroy/{id}', [submissionController::class, 'destroy'])->name('submission.destroy');
+})->middleware('auth');
+// End submissions Controller
+
+
+Route::get('/notifications/{id}', function () {
+
+    $notifications = auth()->user()->notifications;
+
+       // dd($notifications);
+    foreach ($notifications as $notification) {
+
+        $notificationData = $notification->toDatabase($notification->notifiable);
+
+        $title = $notificationData['title'];
+        $body = $notificationData['body'];
+    }
+
+    return view('admin.notifications.show',compact(['notifications','title','body']));
+    })->name('admin.notifications.show');
+
 
 
 Auth::routes();

@@ -7,6 +7,7 @@ use App\Repository\interface\Iuser_coursesRepository;
 use App\Repository\interface\IUserRepository;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
+use Auth;
 use App\Models\user_course;
 class user_coursesController extends Controller
 {
@@ -18,7 +19,7 @@ class user_coursesController extends Controller
      protected    $userRepository;
      protected    $coursesRepository;
      public function __construct(Iuser_coursesRepository $user_coursesRepository,IUserRepository $userRepository,IcoursesRepository  $coursesRepository) {
-         $this->middleware(['auth', 'Admin']);
+         $this->middleware(['Admin'])->except('show');
          $this->user_coursesRepository = $user_coursesRepository;
          $this->userRepository = $userRepository;
          $this->coursesRepository = $coursesRepository;
@@ -46,7 +47,7 @@ class user_coursesController extends Controller
         // dd($user_courses);
         $this->user_coursesRepository->create($user_courses);
         Alert::success('Success', 'User Course created successfully');
-        return redirect()->route('user_course.index');
+        return redirect()->route('user_course.create');
     }
 
     /**
@@ -54,7 +55,10 @@ class user_coursesController extends Controller
      */
     public function show(string $id)
     {
-        // 
+      $user_courses = user_course::where('user_id', $id)->with(['user', 'course'])->get();
+      //dd($user_courses);
+      return view('layouts.dashboard.user_courses.show', compact('user_courses'));
+
     }
 
     /**

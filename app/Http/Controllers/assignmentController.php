@@ -3,8 +3,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\assignmentRequest;
 use App\DTO\assignmentDTO;
 use App\Models\assignmentModel;
+use App\Models\user_course;
 use App\Repository\interface\IassignmentRepository;
 use App\Repository\interface\IcoursesRepository;
+use App\Models\coursesModel;
 use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -23,24 +25,26 @@ class assignmentController extends Controller
      **/
     public function index()
     {            
-         $assignments = $this->assignmentRepository->getAll();
 
         if (Auth::user()->role == "Admin"){
-        // assignmentModel::with('course')->get();
-       return view('layouts.dashboard.assignments.index',compact('assignments'));}
-       else {
-        $assignmentForCourse = assignmentModel::with('user_courses')->having('year','=',$assignments->year)->get();
-        dd($assignmentForCourse);
-        return view('layouts.dashboard.assignments.index',compact('assignmentForCourse'));};
+            $assignments = assignmentModel::with(['course' ,'user'])->get();
+            return view('layouts.dashboard.assignments.index',compact('assignments'));}
+       else if(Auth::user()->role == "doctors"){
+        $assignments = assignmentModel::with(['course' ,'user'])->where('user_id',Auth::id())->get();
+        //dd($assignments);
+        return view('layouts.dashboard.assignments.index',compact('assignments'));};
+       
        }
        
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        $courses = $this->courseRepository->getAll();
-        return view('layouts.dashboard.assignment.create', compact('courses'));
+      $course = user_course::where('user_id', $id)->with(['user', 'course'])->get();
+
+
+        return view('layouts.dashboard.assignments.create', compact('course'));
     }
 
     /**
@@ -70,7 +74,7 @@ class assignmentController extends Controller
     {
         $assignment = $this->assignmentRepository->getById($id);
         $courses = $this->courseRepository->getAll();
-        return view('layouts.dashboard.assignment.edit', compact('courses','assignment'));
+        return view('layouts.dashboard.assignments.edit', compact('courses','assignment'));
 
     }
 

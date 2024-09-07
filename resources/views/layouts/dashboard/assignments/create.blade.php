@@ -27,7 +27,7 @@
             @enderror
       </div>
     <div class="form-group">
-        <label for="image">File
+        <label for="file_path">File
          <img src="https://cdn-icons-png.flaticon.com/512/8191/8191607.png" alt="upload" width="100px">
          <input type="file" name="file_path" hidden  class="form-control @error('file_path') is-invalid @enderror" id="file_path">
         </label>
@@ -37,9 +37,16 @@
              </span>
         @enderror
     </div>
+    <div class="form-group">
+            <label for="assignment_points">Points for assignment</label>
+            <input type="number" name="assignment_points" class="form-control" id="assignment_points" required max="3">
+            @error('assignment_points')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
        <div class="form-group">
             <label for="due_date">Due Date</label>
-            <input type="datetime" name="due_date" class="form-control" id="due_date" required>
+            <input type="datetime-local" name="due_date" class="form-control" id="due_date" required>
             @error('due_date')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

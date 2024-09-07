@@ -14,12 +14,7 @@
                 <!-- Department Name -->
                 <div class="form-group">
                     <label for="department_name">Department Name</label>
-                    <select name="department_name" class="form-control @error('department_name') is-invalid @enderror" id="department_name">
-                        <option disabled>Select Department</option>
-                        <option value="computer science" {{ $department->department_name == 'computer science' ? 'selected' : '' }}>Computer Science</option>
-                        <option value="management information system" {{ $department->department_name == 'management information system' ? 'selected' : '' }}>Management Information System</option>
-                        <option value="information technology" {{ $department->department_name == 'information technology' ? 'selected' : '' }}>Information Technology</option>
-                    </select>
+                    <input type="text" name="department_name" class="form-control @error('department_name') is-invalid @enderror" id="department_name" value="{{$department->department_name}}">
                     @error('department_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

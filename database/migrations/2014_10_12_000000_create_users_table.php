@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('image')->nullable()->default('https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png');
             $table->enum('role', ['Admin', 'doctors', 'students']);
-            $table->enum('academic_years', ['1', '2', '3', '4', 'graduated'])->nullable();
+            $table->enum('academic_level', ['First', 'Second', 'Third', 'Fourth', 'Graduate','--'])->nullable();
             $table->decimal('GPA',4,2)->nullable(); 
             $table->string('phone')->unique();
             $table->string('address');

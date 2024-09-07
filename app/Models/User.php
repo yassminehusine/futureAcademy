@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Enums\Rolse;
+use App\Enums\Year;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,16 +19,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'image', 
+        'image',
         'role',
-        'academic_years',
+        'academic_level',
         'GPA',
         'phone',
         'address',
         'email',
-        'department_id', 
+        'department_id',
         'password',
     ];
+
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -46,7 +49,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'academic_level' => Year::class,
+
+
     ];
+
 
     public function department()
     {
@@ -67,7 +74,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(user_course::class);
     }
-   
+
 }
 
 

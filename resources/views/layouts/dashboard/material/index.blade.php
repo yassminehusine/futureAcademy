@@ -56,7 +56,7 @@
                                 @endif
                             </td>
                             <td>{{ $material->user->name }}</td>
-                            <td>{{ $material->course->course_name }}</td>
+                            <td>{{ $material->courses_id}}</td>
                             <td>
                                 <a href="{{ route('material.edit', $material->id) }}">
                                      <i class="fas fa-edit text-info"></i> 

@@ -26,7 +26,7 @@ class UserDTO extends Data
         $data = [
             'name' => $userRequest->name,
             'role' => $userRequest->role,
-            'academic_years' => $userRequest->academic_years,
+            'academic_level' => $userRequest->academic_years ?? "",
             'GPA' => $userRequest->GPA,
             'phone' => $userRequest->phone,
             'address' => $userRequest->address,

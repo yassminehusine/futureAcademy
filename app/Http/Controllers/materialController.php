@@ -4,7 +4,6 @@ use App\Http\Requests\MaterialRequest;
 use App\DTO\materialDTO;
 use App\Repository\interface\ImaterialRepository;
 use App\Repository\interface\IcoursesRepository;
-use App\Repository\interface\IUserRepository;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class materialController extends Controller
@@ -12,19 +11,23 @@ class materialController extends Controller
     protected $courseRepository;
     protected $materialRepository;
     protected $userRepository;
-    public function __construct(IcoursesRepository $courseRepository, ImaterialRepository $materialRepository , IUserRepository $userRepository){
+    public function __construct(IcoursesRepository $courseRepository, ImaterialRepository $materialRepository, IUserRepository $userRepository)
+    {
         $this->middleware(['auth']);
         $this->courseRepository = $courseRepository;
         $this->materialRepository = $materialRepository;
         $this->userRepository = $userRepository;
+       
+        // Replace 1 with the actual admin ID
     }
     /**
      * Display a listing of the resource.
      **/
     public function index()
     {
-        $materials = $materials = $this->materialRepository->getAll();
-       return view('layouts.dashboard.material.index',compact('materials'));
+        $materials = $this->materialRepository->getAll();
+
+        return view('layouts.dashboard.material.index', compact('materials'));
     }
     /**
      * Show the form for creating a new resource.
@@ -33,27 +36,29 @@ class materialController extends Controller
     {
         $courses = $this->courseRepository->getAll();
         $users = $this->userRepository->getAllUsers();
-        return view('layouts.dashboard.material.create', compact('courses','users'));
+        return view('layouts.dashboard.material.create', compact('courses', 'users'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(MaterialRequest $request){
+    public function store(MaterialRequest $request)
+    {
         // dd($request);
         $material = materialDTO::handleInputs($request);
         // dd($material);
         $this->materialRepository->create($material);
-        Alert::success('Success Toast','success');
-        return redirect()->route('material.index');   
+        Alert::success('Success Toast', 'success');
+        
+        return redirect()->route('material.index');
     }
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-       //$material = $this->materialRepository->getById($id);
-       //return view('layouts.dashboard.material.show', compact('material'));
+        //$material = $this->materialRepository->getById($id);
+        //return view('layouts.dashboard.material.show', compact('material'));
     }
 
     /**
@@ -63,8 +68,8 @@ class materialController extends Controller
     {
         $material = $this->materialRepository->getById($id);
         $courses = $this->courseRepository->getAll();
-          $users = $this->userRepository->getAllUsers();
-        return view('layouts.dashboard.material.edit', compact('courses','material','users'));
+        $users = $this->userRepository->getAllUsers();
+        return view('layouts.dashboard.material.edit', compact('courses', 'material', 'users'));
 
     }
 
@@ -73,11 +78,11 @@ class materialController extends Controller
      */
     public function update(MaterialRequest $request, string $id)
     {
-      // Convert the request to a DTO
-      $data = materialDTO::handleInputs($request);
-      $this->materialRepository->update($data, $id);
-      return redirect()->route('material.index')->with('success', 'Course updated successfully');
-        
+        // Convert the request to a DTO
+        $data = materialDTO::handleInputs($request);
+        $this->materialRepository->update($data, $id);
+        return redirect()->route('material.index')->with('success', 'Course updated successfully');
+
     }
 
     /**

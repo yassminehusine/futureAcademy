@@ -13,6 +13,12 @@ use App\Repository\assignmentRepository;
 use App\Repository\interface\IassignmentRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\materialRepository;
+use App\Repository\interface\IpostRepository;
+use App\Repository\postRepository;
+use App\Repository\interface\IsubmissionRepository;
+use App\Repository\submissionRepository;
+
+
 class AppServiceProvider extends ServiceProvider{
     /**
      * Register any application services.
@@ -29,6 +35,10 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->singleton(IassignmentRepository::class,assignmentRepository::class);
         $this->app->singleton(ImaterialRepository::class,materialRepository::class);
         $this->app->singleton(Iuser_coursesRepository::class,user_coursesRepository::class);
+        $this->app->singleton(IsubmissionRepository::class,submissionRepository::class);
+
+        $this->app->singleton(IpostRepository::class,postRepository::class);
+
 
     }
 

@@ -4,7 +4,7 @@ use App\Models\materialModel;
 use App\Repository\interface\ImaterialRepository;
 class   materialRepository  implements ImaterialRepository{ 
     public function getAll(){
-        return materialModel::all();
+        return materialModel::with(['user','course'])->get();
     }
     public function getById($id){
         return materialModel::findOrFail($id);
