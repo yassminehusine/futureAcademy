@@ -1,7 +1,15 @@
 <?php
 namespace App\Http\Controllers;
+use App\Enums\Rolse;
 use Illuminate\Http\Request;
+use App\Models\Slider;
+use App\Models\Navbar;
+use App\Models\Header;
+use App\Models\Footer;
+use App\Models\User;
+
 class HomeController extends Controller
+
 {
     /**
      * Create a new controller instance.
@@ -10,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
     /**
      * Show the application dashboard.
@@ -19,6 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $sliders = Slider::all();
+        $navbarItems= Navbar::all();
+        $instructors = User::where('role','doctors')->with('department')->limit(3)->get();
+        return view('welcome', compact(['sliders','instructors']));
     }
 }

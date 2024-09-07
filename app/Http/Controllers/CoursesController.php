@@ -5,7 +5,9 @@ use App\DTO\coursesDTO;
 use App\Models\coursesModel;
 use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\IdepartmentRepository;
-use DB;
+use App\Notifications\AdminNotification;
+use App\Enums\Rolse;
+use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CoursesController extends Controller
@@ -45,6 +47,8 @@ class CoursesController extends Controller
         // dd($course);
         $this->courseRepository->create($courses);
         Alert::success('Success Toast','success');
+        $user = User::where('role','Admin');
+        $user->notify(new AdminNotification());
         return redirect()->route('course.index');   
     }
     /**

@@ -39,6 +39,8 @@ class UsersController extends Controller{
         $admin = $this->userRepository->getCount(Rolse::ADMIN);
         $totalDepartments = 0;
         $totalDepartments = 0;
+        $user=$this->userRepository->getUserById(\Auth::id());
+
          foreach (departmentRolse::cases() as $role) {
              $totalDepartments += $this->departmentRepository->getCountByRole($role);
           }
@@ -47,13 +49,20 @@ class UsersController extends Controller{
             } else {
                 $notifications = collect();
             }
+
+            if(Auth::user()->role == "Admin"){
             return view('layouts.dashboard.layout2', [
+                'user' => $user,
                 'doctors' => $doctors,
                 'students' => $students,
                 'admin' => $admin,
                 'totalDepartments' => $totalDepartments,
                 'notifications' => $notifications,
-            ]);
+            ]);}
+            else{ return view('layouts.dashboard.layout', [
+                'user' => $user,
+                'notifications' => $notifications,
+            ]);}
 
     }
     /**

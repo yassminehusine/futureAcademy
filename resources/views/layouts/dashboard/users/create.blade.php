@@ -52,7 +52,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="academic_level">Academic Years</label>
+                    <label for="academic_level">Academic Level</label>
                     <select name="academic_level" class="form-control @error('academic_level') is-invalid @enderror"
                         id="academic_level">
                         <option disabled selected>Select Year</option>
@@ -141,6 +141,19 @@
                         </span>
                     @enderror
                 </div>
+                <!-- <div class="form-group">
+                    <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
+                    <input type="text" id="password" name="password"
+                        class="form-control readonly @error('password') is-invalid @enderror" name="password"
+                        placeholder="Enter Your Password">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror -->
+                    <!-- <button onclick="generatePassword()" type="button" class="btn btn-dark mt-3">Generate
+                        Password</button> -->
+                <!-- </div> -->
                 <div class="form-group">
                     <label for="password-confirm"
                         class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
@@ -180,5 +193,22 @@
             gpaField.style.display = 'none';
         }
     });
+    function generatePassword() {
+        const passwordLength = 12; // Adjust the desired password length
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+        let password = "";
+        for (let i = 0; i
+            < passwordLength; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset.charAt(randomIndex);
+        }
+
+        document.getElementById("password").value
+            = password;
+        document.getElementById("confirm-password").value
+            = password;
+
+    }
 </script>
 @endsection

@@ -17,6 +17,8 @@ use App\Repository\interface\IpostRepository;
 use App\Repository\postRepository;
 use App\Repository\interface\IsubmissionRepository;
 use App\Repository\submissionRepository;
+use App\Repository\frontRepository;
+use App\Repository\interface\IfrontRepository;
 
 
 class AppServiceProvider extends ServiceProvider{
@@ -36,6 +38,8 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->singleton(ImaterialRepository::class,materialRepository::class);
         $this->app->singleton(Iuser_coursesRepository::class,user_coursesRepository::class);
         $this->app->singleton(IsubmissionRepository::class,submissionRepository::class);
+        $this->app->singleton(IfrontRepository::class,frontRepository::class);
+
 
         $this->app->singleton(IpostRepository::class,postRepository::class);
 

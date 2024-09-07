@@ -20,7 +20,7 @@ class AdminMiddleware
         }
 
         // إذا لم يكن المستخدم مشرفًا، يمكن إعادة توجيهه إلى الصفحة الرئيسية
-        return redirect('/')->with('error', 'You do not have admin access.');
+        return redirect('/welcome')->with('error', 'You do not have admin access.');
     }
 }
 

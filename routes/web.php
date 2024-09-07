@@ -1,6 +1,5 @@
 <?php
 use App\Http\Controllers\user_coursesController;
-use App\Models\Notification;
 use  Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\UsersController;
 use  App\Http\Controllers\departmentController;
@@ -9,7 +8,10 @@ use App\Http\Controllers\materialController;
 use App\Http\Controllers\assignmentController;
 use App\Http\Controllers\submissionController;
 use App\Http\Controllers\postController;
-use App\Notifications\AdminNotification;
+use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\HeaderController;
+use App\Http\Controllers\FooterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +123,66 @@ Route::group(['prefix'=>'submissions'],function(){
 // End submissions Controller
 
 
+
+
+
+
+
+
+
+
+
+//front routes 
+
+
+
+// Start navbar Controller
+Route::group(['prefix'=>'navbar'],function(){
+    Route::get('/create',[navbarController::class,'create'])->name('navbar.create');
+    Route::get('/index', [navbarController::class, 'index'])->name('navbar.index');
+    Route::get('/edit/{id}',[navbarController::class,'edit'])->name('navbar.edit');
+    Route::post('/update/{id}',[navbarController::class,'update'])->name('navbar.update');
+    Route::get('/destroy/{id}', [navbarController::class, 'destroy'])->name('navbar.destroy');
+})->middleware('auth');
+// End navbar Controller
+
+
+// Start slider Controller
+Route::group(['prefix'=>'slider'],function(){
+    Route::get('/create',[sliderController::class,'create'])->name('slider.create');
+    Route::get('/index', [sliderController::class, 'index'])->name('slider.index');
+    Route::get('/edit/{id}',[sliderController::class,'edit'])->name('slider.edit');
+    Route::post('/update/{id}',[sliderController::class,'update'])->name('slider.update');
+    Route::get('/destroy/{id}', [sliderController::class, 'destroy'])->name('slider.destroy');
+})->middleware('auth');
+// End slider Controller
+
+
+// Start header Controller
+Route::group(['prefix'=>'header'],function(){
+    Route::get('/create',[headerController::class,'create'])->name('header.create');
+    Route::get('/index', [headerController::class, 'index'])->name('header.index');
+    Route::get('/edit/{id}',[headerController::class,'edit'])->name('header.edit');
+    Route::post('/update/{id}',[headerController::class,'update'])->name('header.update');
+    Route::get('/destroy/{id}', [headerController::class, 'destroy'])->name('header.destroy');
+})->middleware('auth');
+// End header Controller
+
+
+
+// Start footer Controller
+Route::group(['prefix'=>'footer'],function(){
+    Route::get('/create',[footerController::class,'create'])->name('footer.create');
+    Route::get('/index', [footerController::class, 'index'])->name('footer.index');
+    Route::get('/edit/{id}',[footerController::class,'edit'])->name('footer.edit');
+    Route::post('/update/{id}',[footerController::class,'update'])->name('footer.update');
+    Route::get('/destroy/{id}', [footerController::class, 'destroy'])->name('footer.destroy');
+})->middleware('auth');
+// End footer Controller
+
+
+
+
 Route::get('/notifications/{id}', function () {
 
     $notifications = auth()->user()->notifications;
@@ -142,13 +204,3 @@ Route::get('/notifications/{id}', function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::post('/register', [RegisterController::class, 'register'])->name('register');
-// Route::post('/register', [RegisterController::class, 'register']);
-// Route::middleware(['auth', 'admin'])->group(function () {
-//     Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-//     Route::get('admin/register', [AdminRegisterController::class, 'showRegistrationForm'])->name('admin.register');
-//     Route::post('register', [AdminRegisterController::class, 'register']);
-// });
-// Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-// Route::post('login', [LoginController::class, 'login']);
-// Route::post('logout', [LoginController::class, 'logout'])->name('logout');
