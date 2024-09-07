@@ -19,7 +19,7 @@ class user_courseDTO extends Data{
     public static function handleInputs(user_coursesRequest $user_coursesRequest){
         $course_id = $user_coursesRequest->course_id;
         $group_number = $user_coursesRequest->group_number ?? '1';
-        $maxStudentsPerGroup = 30;
+        $maxStudentsPerGroup = 10;
         $studentCountInCurrentGroup = user_course::where('course_id', $course_id)->where('group_number', $group_number)->count();
         $totalStudentCount = user_course::where('course_id', $course_id)->count();
         if ($studentCountInCurrentGroup >= $maxStudentsPerGroup && $totalStudentCount > $maxStudentsPerGroup) {

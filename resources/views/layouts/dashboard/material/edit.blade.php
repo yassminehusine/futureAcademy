@@ -57,10 +57,10 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="thumbnail_path">Thumbnail</label>
+                    <label for="thumbnail_path">Photo</label>
                     <input type="file" name="thumbnail_path" class="form-control @error('thumbnail_path') is-invalid @enderror" id="thumbnail_path">
                     @if ($material->thumbnail_path)
-                        <img src="{{ asset('storage/materials/' . basename($material->thumbnail_path)) }}" alt="Current Thumbnail" style="width: 100px; height: auto;">
+                        <img src="{{ asset($material->thumbnail_path) }}" alt="Current Thumbnail" style="width: 100px; height: auto;">
                     @endif
                     @error('thumbnail_path')
                         <span class="invalid-feedback" role="alert">

@@ -17,7 +17,6 @@ class materialDTO extends Data{
               'title' =>$materialRequest->title,
               'description' => $materialRequest->description,
               'file_path' => $materialRequest->file_path,
-              'thumbnail_path' => $materialRequest->thumbnail_path,
               'user_id' => $materialRequest->user_id,
               'courses_id' => $materialRequest->courses_id,
         ];
