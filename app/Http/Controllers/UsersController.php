@@ -72,6 +72,7 @@ class UsersController extends Controller{
      */
     public function show(string $id){
         $user = User::findOrFail(Auth::id());
+        
         // $department = DB::table('departments')->join('users','users.department_id','=','department_id')->select('department_name')->where('department_id',"=",$user->department_id)->first();
          $department = DB::table('departments')->join('users', 'users.department_id', '=', 'departments.id')->select('departments.department_name')->where('users.department_id', $user->department_id)->first();
         // dd($department);

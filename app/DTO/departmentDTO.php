@@ -12,7 +12,6 @@ class departmentDTO extends Data{
    public static function handleInputs(departmentRequest $departmentRequest){
       $data =  [
          'department_name' => $departmentRequest->department_name,
-         'image' => $departmentRequest->image,
          'description' => $departmentRequest->description,
          'department_number' => $departmentRequest->department_number,
       ];

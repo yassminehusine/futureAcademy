@@ -15,21 +15,9 @@
                 @endif
                 <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
-                 <b>Academic Year</b> 
+                 <b>Academic Level</b> 
                   <a class="float-right text-success">
-                      @if($user->academic_level == "First")
-                          First Year
-                      @elseif($user->academic_level == "Second")
-                        Second Year
-                      @elseif($user->academic_level == "Third")
-                      Third Year
-                    @elseif($user->academic_level == "Fourth")
-                      Fourth Year
-                    @elseif($user->academic_level == 'Graduate')
-                         Graduate
-                      @else
-                      Undefined
-                  @endif
+                  {{auth()->user()->academic_level}} Year
                   </a> 
                   <li class="list-group-item ">
                     <b>Address</b> <a class="float-right text-success">{{$user->address}}</a>
