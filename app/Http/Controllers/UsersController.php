@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 // use App\Enums\Role;
 use App\Enums\departmentRolse;
 use App\Enums\Rolse;
-use App\Http\Requests\ChangePasswordRequest;
+use Request;
 use App\Http\Requests\UserRequest;
 use App\DTO\UserDTO;
 use App\Repository\interface\IUserRepository;
@@ -147,7 +147,20 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
+    public function search(Request $request)
+{
+    // Get the search term from the request
+    $searchTerm = $request->input('search');
 
+    // Query the User model based on the search term
+    $users = User::where('name', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('id', $searchTerm)
+                  ->get();
+
+    // Return the results as JSON
+    dd($users);
+    return response()->json($users);
+}
     // public function changePassword(string $id){
 
     //     $user = $this->userRepository->getUserById($id);       

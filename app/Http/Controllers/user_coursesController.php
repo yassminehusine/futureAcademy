@@ -7,7 +7,8 @@ use App\Repository\interface\Iuser_coursesRepository;
 use App\Repository\interface\IUserRepository;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
-use Auth;
+use App\Models\User;
+use Validator;
 use App\Models\user_course;
 class user_coursesController extends Controller
 {
@@ -43,6 +44,14 @@ class user_coursesController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(user_coursesRequest $request){
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required', // Ensure user ID is present
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $user_courses = user_courseDTO::handleInputs($request);
         // dd($user_courses);
         $this->user_coursesRepository->create($user_courses);
@@ -69,7 +78,6 @@ class user_coursesController extends Controller
          $user_course = $this->user_coursesRepository->getById($id);
          $users = $this->userRepository->getAllUsers();
          $courses = $this->coursesRepository->getAll();
-         Alert::success('Success Edit',' Successfully edited');
          return view('layouts.dashboard.user_courses.edit', compact('user_course', 'users', 'courses'));
     }
 
@@ -80,7 +88,7 @@ class user_coursesController extends Controller
     {
         $user_course = user_courseDTO::handleInputs($request);
          $this->user_coursesRepository->update($user_course, $id);
-         Alert::success('Success', 'User Course updated successfully');
+         Alert::success('Success', 'User Registered a course successfully');
          return redirect()->route('user_course.index');
     }
 
@@ -93,4 +101,6 @@ class user_coursesController extends Controller
         Alert::success('Success', 'User Course deleted successfully');
         return redirect()->route('user_course.index');
     }
+
+
 }

@@ -51,6 +51,8 @@ Route::group(['prefix'=>'users'],function(){
     Route::get('/destroy/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
     Route::get('/profile/{id}',[UsersController::class,'show'])->name('user.profile'); 
     Route::get('/settings/{id}',[UsersController::class,'settings'])->name('user.settings'); 
+    Route::get('/search', [UsersController::class, 'search'])->name('users.search');
+
 
 })->middleware('auth');
 // End Rout Usres

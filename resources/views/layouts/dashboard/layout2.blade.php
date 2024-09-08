@@ -642,6 +642,9 @@
   <!-- ./wrapper -->
 </body>
 <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{asset('assets')}}/dist/js/nny.js"></script>
+
 <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('assets')}}/plugins/jquery-ui/jquery-ui.min.js"></script>

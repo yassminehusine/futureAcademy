@@ -15,3 +15,22 @@ function generatePassword() {
         = password;
 
 }
+// $(document).ready(function() {
+//   $('#user_search').keyup(function() {
+//     var searchTerm = $(this).val();
+
+//     $.ajax({
+//       url: "{{ route('users.search') }}", // Ensure correct route
+//       data: { search: searchTerm },
+//       method: 'GET', // Adjust method if needed
+//       success: function(response) {
+//         // Handle successful response
+//         console.log('Response:', response);
+//         // ... update UI with results
+//       },
+//       error: function(error) {
+//         console.error('Error sending AJAX request:', error);
+//       }
+//     });
+//   });
+// });

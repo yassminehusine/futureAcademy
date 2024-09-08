@@ -578,6 +578,7 @@
   </div>
   <!-- ./wrapper -->
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{asset('assets')}}/dist/js/nny.js"></script>
 
 <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
