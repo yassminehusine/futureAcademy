@@ -22,7 +22,7 @@
                     <label for="course_code">Couse Code</label>
                     <input type="text" name="course_code"
                         class="form-control @error('course_code') is-invalid @enderror" id="course_code"
-                        placeholder="Enter Department Number">
+                        placeholder="" value="{{$course->course_code}}">
                     @error('course_code')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <label for="image">
-                        <img src="{{asset($course->image) }}" alt="upload" width="100px">
+                        <img src="https://cdn-icons-png.flaticon.com/512/8191/8191607.png" alt="upload" width="100px">
                         <input type="file" name="image" hidden class="form-control @error('image') is-invalid @enderror"
                             id="image" value="{{$course->image}}">
                     </label>

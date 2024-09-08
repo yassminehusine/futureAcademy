@@ -24,7 +24,7 @@
                     <label for="course_code">Couse Code</label>
                     <input type="text" name="course_code"
                         class="form-control @error('course_code') is-invalid @enderror" id="course_code"
-                        placeholder="Enter Department Number">
+                        placeholder="">
                     @error('course_code')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

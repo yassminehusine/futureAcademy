@@ -16,7 +16,6 @@ class coursesDTO extends Data{
             'course_name' => $courseRequest->course_name,
             'course_code' => $courseRequest->course_code,
             'description' => $courseRequest->description,
-            'image' => $courseRequest->image,
             'credit_hours' => $courseRequest->credit_hours,
             'department_id' => $courseRequest->department_id,
         ];
