@@ -29,7 +29,7 @@
                         <img src="{{ $user->image ? asset($user->image) : 'https://cdn-icons-png.flaticon.com/512/8191/8191607.png' }}"
                             alt="upload" width="100px">
                         <input type="file" name="image" hidden class="form-control @error('image') is-invalid @enderror"
-                            id="image">
+                            id="image" value="{{$user->image}}">
                     </label>
                     @error('image')
                         <span class="invalid-feedback" role="alert">
@@ -58,10 +58,10 @@
 
                 <!-- Academic Years -->
                 <div class="form-group">
-                    <label for="academic_level">Academic Years</label>
+                    <label for="academic_level">Academic Level</label>
                     <select name="academic_level" class="form-control @error('academic_level') is-invalid @enderror"
                         id="academic_level">
-                        <option disabled selected>Select Year</option>
+                        <option disabled selected value="{{ old('academic_level',  $user->academic_level)}}">Select Year</option>
                         <option value="--" {{ old('academic_level') == '--' ? 'selected' : '' }}>--</option>
                         <option value="First" {{ old('academic_level') == 'First' ? 'selected' : '' }}>First Year</option>
                         <option value="Second" {{ old('academic_level') == 'Second' ? 'selected' : '' }}>Second Year
@@ -80,7 +80,7 @@
                 </div>
 
                 <!-- GPA -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="GPA">GPA</label>
                     <select name="GPA" class="form-control @error('GPA') is-invalid @enderror" id="GPA">
                         <option disabled selected>Select GPA</option>
@@ -94,7 +94,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                </div>
+                </div> -->
 
                 <!-- Phone -->
                 <div class="form-group">
@@ -153,7 +153,7 @@
 
                 <!-- Password (optional for editing) -->
                 <div class="form-group">
-                    <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                    <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                         name="password" placeholder="Enter New Password (optional)">
                     @error('password')

@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
 
 
 
-        // departmentModel::factory(10)->create();
-        // User::factory(30)->create();
-       coursesModel::factory(10)->create();
+        departmentModel::factory(10)->create();
+        User::factory(30)->create();
+    //    coursesModel::factory(10)->create();
 
 
     }

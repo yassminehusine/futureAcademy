@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // use App\Enums\Role;
 use App\Enums\departmentRolse;
 use App\Enums\Rolse;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserRequest;
 use App\DTO\UserDTO;
 use App\Repository\interface\IUserRepository;
@@ -19,7 +20,7 @@ class UsersController extends Controller{
     public function __construct(IUserRepository $userRepository,IdepartmentRepository  $departmentRepository)
     {
         $this->middleware(['auth','Admin'])->except([
-            'main', 'show'
+            'main', 'show','update','edit'
         ]);
         $this->userRepository = $userRepository;
         $this->departmentRepository = $departmentRepository;
@@ -125,6 +126,36 @@ class UsersController extends Controller{
         Alert::success('Success', 'User deleted successfully');
         return redirect()->back();
     } 
+
+
+    // public function changePassword(string $id){
+
+    //     $user = $this->userRepository->getUserById($id);       
+    //      return view('layouts.dashboard.users.changepass', compact('user'));
+
+
+    // }
+
+
+    // public function updatePassword(){
+
+        
+    // }
+
+    // public function changeProfile(ChangePasswordRequest $request, string $id, string $current){
+
+    //     $userDTO = UserDTO::changePass($request,$current);
+    //     $this->userRepository->update($userDTO, $id);
+    //     Alert::success('Success', 'Password updated successfully');
+    //     return redirect()->back();
+
+        
+    // }
+
+    // public function updateProfile(){
+
+        
+    // }
 }
 
 ?>

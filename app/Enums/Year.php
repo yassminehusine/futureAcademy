@@ -10,7 +10,7 @@ enum Year: string
     case Third = 'Third';
     case Fourth = 'Fourth';
     case Graduate = 'Graduate';
-    // case none = '--';
+    case None = 'None';
 
 
 public static function getRandomKey(): string

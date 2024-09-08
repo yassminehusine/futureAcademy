@@ -1,7 +1,10 @@
 <?php
 namespace App\DTO;
 
+use App\Http\Requests\ChangePasswordRequest;
+use Auth;
 use Spatie\LaravelData\Data;
+use App\Models\User;
 use App\Http\Requests\UserRequest;
 
 class UserDTO extends Data
@@ -17,12 +20,16 @@ class UserDTO extends Data
         public string $email,
         public string $department_id,
         public string $password,
+        public string $current,
+        public string $newpassword,
     ) {
         // إزالة التشفير من هنا
     }
 
     public static function handleInputs(UserRequest $userRequest)
     {
+                $user = User::where('id', Auth::id());
+
         $data = [
             'name' => $userRequest->name,
             'role' => $userRequest->role,
@@ -33,7 +40,7 @@ class UserDTO extends Data
             'email' => $userRequest->email,
             'department_id' => $userRequest->department_id,
         ];
-        
+
         if ($userRequest->image) {
             $image = $userRequest->image;
             $newImageName = time() . $image->getClientOriginalName();
@@ -43,8 +50,28 @@ class UserDTO extends Data
         if ($userRequest->password) {
             $data['password'] = bcrypt($userRequest->password);
         }
+
+        if ($userRequest->newpassword && $userRequest->current == decrypt($user->password)) {
+
+
+            $data['password'] = bcrypt($userRequest->newpassword);
+        }
         return $data;
     }
+
+
+    // public static function changepass(ChangePasswordRequest $request, $current)
+    // {
+
+    //     $user = User::where('id', Auth::id());
+
+    //     if ($request->current == $user->password) {
+    //         $data = ['password' => $request->newpassword];
+
+    //         return $data;
+    //     }
+
+    // }
 }
 
 

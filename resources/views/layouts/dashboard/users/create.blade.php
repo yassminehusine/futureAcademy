@@ -6,7 +6,7 @@
     <!-- jquery validation -->
     <div class="card card-dark">
         <div class="card-header">
-            <h3 class="card-title">Table-User</h3>
+            <h3 class="card-title">Add-User</h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -56,7 +56,7 @@
                     <select name="academic_level" class="form-control @error('academic_level') is-invalid @enderror"
                         id="academic_level">
                         <option disabled selected>Select Year</option>
-                        <option value="--" {{ old('academic_level') == '--' ? 'selected' : '' }}>--</option>
+                        <option value="None" {{ old('academic_level') == '--' ? 'selected' : '' }}>--</option>
                         <option value="First" {{ old('academic_level') == 'First' ? 'selected' : '' }}>First Year</option>
                         <option value="Second" {{ old('academic_level') == 'Second' ? 'selected' : '' }}>Second Year
                         </option>
@@ -131,7 +131,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                         name="password" placeholder="Enter Your Password" required autocomplete="new-password">
@@ -140,8 +140,8 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                </div>
-                <!-- <div class="form-group">
+                </div> -->
+                <div class="form-group">
                     <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
                     <input type="text" id="password" name="password"
                         class="form-control readonly @error('password') is-invalid @enderror" name="password"
@@ -150,11 +150,11 @@
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                    @enderror -->
-                    <!-- <button onclick="generatePassword()" type="button" class="btn btn-dark mt-3">Generate
-                        Password</button> -->
-                <!-- </div> -->
-                <div class="form-group">
+                    @enderror 
+                    <button onclick="generatePassword()" type="button" class="btn btn-dark mt-3">Generate
+                        Password</button>
+                 </div> 
+                <div class="form-group" style="display:none;">
                     <label for="password-confirm"
                         class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
