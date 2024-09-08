@@ -19,6 +19,7 @@ class coursesModelFactory extends Factory
     {
         return [
            'course_name' => fake()->name(),
+           'department_number' => "C" . fake()->unique()->numberBetween(1,999),
             'credit_hours' => fake()->numberBetween(1,3),
             'description' => fake()->sentence(4),
             'image' => "image\courseImages\1725471267motherboard-circuit-technology-background-vector-gradient-blue_53876-126034.avif",

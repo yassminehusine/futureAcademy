@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             'address' => 'required',
             'email' => 'required',
             'department_id' => 'required',
-            'password' => 'required',
+            'password' => 'nullable',
             // 'newpassword' => 'nullable',
             // 'current' => 'nullable',
         ];
