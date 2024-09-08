@@ -60,7 +60,7 @@ class AdminNotification extends Notification
         'title' => 'New Department Created',
         'body' => 'New department has been created by User ' . Auth::id(),
         'icon' => 'fas fa-building',
-        'url' => route('departments.index'),
+        'url' => route('department.index'),
     ];
 }
 

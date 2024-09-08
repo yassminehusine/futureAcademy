@@ -28,8 +28,8 @@ class HomeController extends Controller
     public function index()
     {
         $sliders = Slider::all();
-        $navbarItems= Navbar::all();
+        $navbar= Navbar::all();
         $instructors = User::where('role','doctors')->with('department')->limit(3)->get();
-        return view('welcome', compact(['sliders','instructors']));
+        return view('welcome', compact(['sliders','instructors','navbar']));
     }
 }

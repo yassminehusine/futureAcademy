@@ -345,6 +345,7 @@
             <p> show user_course </p>
             </a>
           </li>
+          
           <li class="nav-item">
           <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
@@ -376,6 +377,66 @@
             <a href="{{ route('material.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p> show material </p>
+            </a>
+          </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+          <!-- <i class="fa-solid fa-bookmark"></i> -->
+          <i class="nav-icon fas fa-bookmark"></i>
+          <p>
+            Front Elements
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+          <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{route('navbar.create')}}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>create navbar</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('navbar.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p> show navbars </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('slider.create')}}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>create Slider</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('slider.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p> show sliders </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('header.create')}}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>create header</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('header.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p> show headers </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('footer.create')}}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>create footer</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('footer.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p> show footers </p>
             </a>
           </li>
           </ul>
