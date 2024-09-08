@@ -1,10 +1,10 @@
 @extends('layouts.dashboard.layout')
 @section('content2')
 @foreach($user_courses as $course)
-<di class="col-lg-4">
+<div class="col-lg-3">
 <div class="card">
 <div class="image">
-    <img src="{{asset($course->course->image)}}"  class="img" alt="">
+    <img src="{{asset($course->course->image)}}"  class="img w-100" alt="">
 </div>
 <div class="card-body">
     <h5 class="card-title">{{$course->course->course_name}}</h5>
