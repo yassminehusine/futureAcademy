@@ -38,18 +38,10 @@
                         </span>
                     @enderror
                 </div>
-
                 <!-- Role -->
                 <div class="form-group">
                     <label for="role">Role</label>
-                    <select name="role" class="form-control @error('role') is-invalid @enderror" id="role">
-                        <option disabled selected>Select Role</option>
-                        <option value="Admin" {{ old('role', $user->role) == 'Admin' ? 'selected' : '' }}>Admin</option>
-                        <option value="doctors" {{ old('role', $user->role) == 'doctors' ? 'selected' : '' }}>Doctors
-                        </option>
-                        <option value="students" {{ old('role', $user->role) == 'students' ? 'selected' : '' }}>Students
-                        </option>
-                    </select>
+                    <input type="text" name="role" value="{{$user->role}}" readonly class="form-control @error('role') is-invalid @enderror" id="role" read>
                     @error('role')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -57,27 +49,19 @@
                     @enderror
                 </div>
 
-                @if (auth()->user()->role ==  "Admin")
+              
                     <!-- Academic Years -->
                 <div class="form-group">
                     <label for="academic_level">Academic Level</label>
-                    <select name="academic_level" class="form-control @error('academic_level') is-invalid @enderror"
+                    <input type="text" readonly name="academic_level" class="form-control @error('academic_level') is-invalid @enderror" value="{{$user->academic_level}}"
                         id="academic_level">
-                        <option disabled selected>Select Year</option>
-                        <option value="--" {{ old('academic_level') == '--' || $user->academic_level == 'None' ? 'selected' : '' }}>--</option>
-                        <option value="First" {{ old('academic_level') == 'First' || $user->academic_level == 'First' ? 'selected' : '' }}>First Year</option>
-                        <option value="Second" {{ old('academic_level') == 'Second' || $user->academic_level == 'Second' ? 'selected' : '' }}>Second Year</option>
-                        <option value="Third" {{ old('academic_level') == 'Third' || $user->academic_level == 'Third' ? 'selected' : '' }}>Third Year</option>
-                        <option value="Fourth" {{ old('academic_level') == 'Fourth' || $user->academic_level == 'Fourth' ? 'selected' : '' }}>Fourth Year</option>
-                        <option value="Graduate" {{ old('academic_level') == 'Graduate' || $user->academic_level == 'Graduate' ? 'selected' : '' }}>Graduate</option>
-                    </select>
+                       
                     @error('academic_level')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-                @endif
 
             
 
@@ -136,22 +120,20 @@
 
                 <!-- Department -->
                 <div class="form-group">
-                    <label for="department_id">Department</label>
-                    <select name="department_id" class="form-control @error('department_id') is-invalid @enderror"
-                        id="department_id">
-                        <option disabled selected>Select Department</option>
-                        @foreach ($departments as $depa)
-                            <option value="{{ $depa->id }}" {{ old('department_id', $user->department_id) == $depa->id ? 'selected' : '' }}>
-                                {{ $depa->department_name }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <label for="department_name">Department</label>
+                    <input type="text" readonly value="{{$user->department->department_name}}" name="department_name" class="form-control @error('department_name') is-invalid @enderror"
+                    id="department_name" >
+
+                    <input type="text" readonly value="{{$user->department_id}}" name="department_id" class="form-control @error('department_id') is-invalid @enderror"
+                        id="department_id" style="display:none;">
+                  
                     @error('department_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
+
 
                 <!-- Password (optional for editing) -->
                 <div class="form-group">

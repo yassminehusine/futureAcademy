@@ -134,7 +134,7 @@ class UsersController extends Controller
         if (Auth::user()->role == "Admin") {
             return redirect()->route('user.index');
         } else
-            return redirect()->route('user.show');
+            return redirect()->route('user.profile',['id' => Auth::id()]);
     }
 
     /**
