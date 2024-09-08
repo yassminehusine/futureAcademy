@@ -23,7 +23,7 @@
                     <b>Address</b> <a class="float-right text-success">{{$user->address}}</a>
                   </li>
                   <li class="list-group-item">
-                   <b>Job Type</b> 
+                   <b>Role</b> 
                     <a class="float-right text-success">
                         @if($user->role == 'Admin')
                             Administrator

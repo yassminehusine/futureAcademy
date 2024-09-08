@@ -41,7 +41,8 @@
                 <!-- Role -->
                 <div class="form-group">
                     <label for="role">Role</label>
-                    <input type="text" name="role" value="{{$user->role}}" readonly class="form-control @error('role') is-invalid @enderror" id="role" read>
+                    <input type="text" name="role" value="{{$user->role}}" readonly
+                        class="form-control @error('role') is-invalid @enderror" id="role" read>
                     @error('role')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -49,13 +50,14 @@
                     @enderror
                 </div>
 
-              
-                    <!-- Academic Years -->
+
+                <!-- Academic Years -->
                 <div class="form-group">
                     <label for="academic_level">Academic Level</label>
-                    <input type="text" readonly name="academic_level" class="form-control @error('academic_level') is-invalid @enderror" value="{{$user->academic_level}}"
-                        id="academic_level">
-                       
+                    <input type="text" readonly name="academic_level"
+                        class="form-control @error('academic_level') is-invalid @enderror"
+                        value="{{$user->academic_level}}" id="academic_level">
+
                     @error('academic_level')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -63,7 +65,7 @@
                     @enderror
                 </div>
 
-            
+
 
                 <!-- GPA -->
                 <!-- <div class="form-group">
@@ -117,22 +119,25 @@
                         </span>
                     @enderror
                 </div>
+                @if (auth()->user()->role !== "Admin")
 
-                <!-- Department -->
-                <div class="form-group">
-                    <label for="department_name">Department</label>
-                    <input type="text" readonly value="{{$user->department->department_name}}" name="department_name" class="form-control @error('department_name') is-invalid @enderror"
-                    id="department_name" >
+                    <!-- Department -->
+                    <div class="form-group">
+                        <label for="department_name">Department</label>
+                        <input type="text" readonly value="{{$user->department->department_name}}" name="department_name"
+                            class="form-control @error('department_name') is-invalid @enderror" id="department_name">
 
-                    <input type="text" readonly value="{{$user->department_id}}" name="department_id" class="form-control @error('department_id') is-invalid @enderror"
-                        id="department_id" style="display:none;">
-                  
-                    @error('department_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+                        <input type="text" readonly value="{{$user->department_id}}" name="department_id"
+                            class="form-control @error('department_id') is-invalid @enderror" id="department_id"
+                            style="display:none;">
+
+                        @error('department_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                @endif
 
 
                 <!-- Password (optional for editing) -->

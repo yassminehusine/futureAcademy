@@ -12,8 +12,8 @@
             @csrf 
             <div class="card-body">
                 <div class="form-group">
-                    <label for="title">post Name</label>
-                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title">
+                    <label for="title">Post title</label>
+                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{$post->title}}">
                     @error('title')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

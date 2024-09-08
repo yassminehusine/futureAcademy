@@ -246,13 +246,13 @@
           <li class="nav-item">
             <a href="{{route('user.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>create user</p>
+            <p>Register new user</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('user.index')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>show user</p>
+            <p>Users Index</p>
             </a>
           </li>
           </ul>
@@ -261,7 +261,7 @@
           <a href="#" class="nav-link">
           <i class="nav-icon fas fa-building"></i>
           <p>
-            Department
+            Departments
             <i class="fas fa-angle-left right"></i>
           </p>
           </a>
@@ -269,13 +269,13 @@
           <li class="nav-item">
             <a href="{{route('department.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>create department</p>
+            <p>Create new department</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('department.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p> show department </p>
+            <p> Departments Index </p>
             </a>
           </li>
           </ul>
@@ -292,13 +292,13 @@
           <li class="nav-item">
             <a href="{{route('post.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>create post</p>
+            <p>Create new post</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('post.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p> show post </p>
+            <p>Posts Index</p>
             </a>
           </li>
           </ul>
@@ -316,13 +316,13 @@
           <li class="nav-item">
             <a href="{{route('course.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>create course</p>
+            <p>Create new course</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('course.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p> show course </p>
+            <p> Courses Index</p>
             </a>
           </li>
           </ul>
@@ -332,7 +332,7 @@
           <!-- <i class="fa-solid fa-bookmark"></i> -->
           <i class="fa-solid fa-id-card"></i>
           <p>
-            user_courses
+            Registered in course
             <i class="fas fa-angle-left right"></i>
           </p>
           </a>
@@ -340,13 +340,13 @@
           <li class="nav-item">
             <a href="{{route('user_course.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>create user_course</p>
+            <p>Register</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('user_course.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p> show user_course </p>
+            <p> Index </p>
             </a>
           </li>
           
@@ -374,18 +374,49 @@
           <li class="nav-item">
             <a href="{{route('material.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>create material</p>
+            <p>Create new material</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('material.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p> show material </p>
+            <p>Materials Index </p>
             </a>
           </li>
           </ul>
         </li>
         <li class="nav-item">
+          <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+            My Courses
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('assignment.show', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+            My Assignments
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+            Account Settings
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+        </li>
+      
+
+      @endif
+@if (auth()->user()->role == "Ademin")
+<li class="nav-item">
           <a href="#" class="nav-link">
           <!-- <i class="fa-solid fa-bookmark"></i> -->
           <i class="nav-icon fas fa-bookmark"></i>
@@ -445,48 +476,8 @@
           </li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
-          <i class="fa-solid fa-address-card"></i>
-          <p>
-            My Courses
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{route('assignment.show', ['id' => Auth::user()->id])}}" class="nav-link">
-          <i class="fa-solid fa-address-card"></i>
-          <p>
-            My Assignments
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
-          <i class="fa-solid fa-address-card"></i>
-          <p>
-            Account Settings
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('logout') }}" class="nav-link"
-          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          <i class="nav-icon fas fa-sign-out-alt"></i>
-          <p>
-            Logout
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-          @csrf
-          </form>
-        </li>
+@endif
 
-      @endif
       @if(auth()->user()->role === 'students')
         <li class="nav-item">
           <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
@@ -507,7 +498,8 @@
           </a>
         </li>
         <!-- <ul class="nav nav-treeview"> -->
-        <li class="nav-item">
+      @if (auth()->user()->role !== "Admin")
+      <li class="nav-item">
           <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
           <p>
@@ -516,7 +508,8 @@
           </p>
           </a>
         </li>
-        <li class="nav-item">
+      @endif
+        <!-- <li class="nav-item">
           <a href="{{ route('logout') }}" class="nav-link"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -527,9 +520,22 @@
           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
           @csrf
           </form>
-        </li>
+        </li> -->
 
       @endif
+      <li class="nav-item">
+          <a href="{{ route('logout') }}" class="nav-link"
+          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          <i class="nav-icon fas fa-sign-out-alt"></i>
+          <p>
+            Logout
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+          @csrf
+          </form>
+        </li>
         </nav>
         <!-- /.sidebar-menu -->
       </div>

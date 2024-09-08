@@ -23,7 +23,7 @@
                   <tr>
                     <td>{{$post->id}}</td>
                     <td>{{$post->title}}</td>
-                    <td><img src="{{asset($post->image)}}"  class="post" alt="post Image"></td>
+                    <td><img src="{{asset($post->image)}}"  class="post" alt="post Image" width="100px"></td>
                     <td><p class="para">{{$post->description}}</p></td>
                     <td>
                      <a href="{{ route('post.edit', ['id' => $post->id]) }}"  class="text-success">

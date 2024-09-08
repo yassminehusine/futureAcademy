@@ -11,7 +11,7 @@
             @csrf
             <div class="card-body">
             <div class="form-group">
-                    <label for="title">post Name</label>
+                    <label for="title">Post title</label>
                     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title">
                     @error('title')
                         <span class="invalid-feedback" role="alert">
