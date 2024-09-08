@@ -52,14 +52,7 @@
                 </div>
                 <div class="form-group">
                 <label for="user_id">User</label>
-                <select name="user_id" class="form-control @error('user_id') is-invalid @enderror" id="user_id" {{ auth()->user()->role == 'student' ? 'disabled' : '' }}>
-                    <option disabled selected>Select User</option>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}" {{ auth()->user()->id == $user->id ? 'selected' : '' }}>
-                            {{ $user->name }}
-                        </option>
-                    @endforeach
-                </select>
+                <input type="text" readonly value="{{auth()->user()->name}}" name="user_id" class="form-control @error('user_id') is-invalid @enderror" id="user_id" {{ auth()->user()->role == 'student' ? 'disabled' : '' }}>
                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                 @error('user_id')
                     <span class="invalid-feedback" role="alert">

@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="file_path">File</label>
-                    <input type="file" name="file_path" class="form-control @error('file_path') is-invalid @enderror" id="file_path" value="{{old($material->file_path)}}">
+                    <input type="file" name="file_path" class="form-control @error('file_path') is-invalid @enderror" id="file_path" value="{{$material->file_path}}">
                     @if ($material->file_path)
                         @php
                             $fileExtension = pathinfo($material->file_path, PATHINFO_EXTENSION);

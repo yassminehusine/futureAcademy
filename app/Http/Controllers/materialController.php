@@ -4,6 +4,7 @@ use App\Http\Requests\MaterialRequest;
 use App\DTO\materialDTO;
 use App\Repository\interface\ImaterialRepository;
 use App\Repository\interface\IcoursesRepository;
+use App\Repository\interface\IUserRepository;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class materialController extends Controller
