@@ -504,15 +504,6 @@
         </li>
         <!-- <ul class="nav nav-treeview"> -->
         <li class="nav-item">
-          <a href="{{route('user.profile', ['id' => Auth::user()->id])}}" class="nav-link">
-          <i class="fa-solid fa-address-card"></i>
-          <p>
-            Profile
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-        </li>
-        <li class="nav-item">
           <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
           <p>

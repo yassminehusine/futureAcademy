@@ -204,6 +204,7 @@
           class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Future Academyed</span>
       </a>
+
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
@@ -215,6 +216,7 @@
             <a href="{{route('user.profile', ['id' => Auth::user()->id])}}" class="d-block">{{auth()->user()->name}}</a>
           </div>
         </div>
+
         <!-- SidebarSearch Form -->
         <div class="form-inline">
           <div class="input-group" data-widget="sidebar-search">
@@ -347,7 +349,43 @@
             <p> show user_course </p>
             </a>
           </li>
+          
           <li class="nav-item">
+          <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+            My Courses
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+        </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+          <!-- <i class="fa-solid fa-bookmark"></i> -->
+          <i class="fa-solid fa-id-card"></i>
+          <p>
+            Materials
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+          <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{route('material.create')}}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>create material</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('material.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p> show material </p>
+            </a>
+          </li>
+          </ul>
+        </li>
+        <li class="nav-item">
           <a href="#" class="nav-link">
           <!-- <i class="fa-solid fa-bookmark"></i> -->
           <i class="nav-icon fas fa-bookmark"></i>
@@ -407,7 +445,7 @@
           </li>
           </ul>
         </li>
-          <li class="nav-item">
+        <li class="nav-item">
           <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
           <p>
@@ -416,34 +454,6 @@
           </p>
           </a>
         </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-          <!-- <i class="fa-solid fa-bookmark"></i> -->
-          <i class="fa-solid fa-id-card"></i>
-          <p>
-            Materials
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-          <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="{{route('material.create')}}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>create material</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('material.index') }}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p> show material </p>
-            </a>
-          </li>
-          </ul>
-        </li>
-      
         <li class="nav-item">
           <a href="{{route('assignment.show', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
@@ -453,20 +463,31 @@
           </p>
           </a>
         </li>
-        <a href="{{ route('logout') }}" class="nav-link"
+        <li class="nav-item">
+          <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+            Account Settings
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('logout') }}" class="nav-link"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <i class="nav-icon fas fa-sign-out-alt"></i>
           <p>
-          Logout
-          <i class="fas fa-angle-left right"></i>
+            Logout
+            <i class="fas fa-angle-left right"></i>
           </p>
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
           @csrf
-        </form>
+          </form>
         </li>
+
       @endif
-            @if(auth()->user()->role === 'students')
+      @if(auth()->user()->role === 'students')
         <li class="nav-item">
           <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
@@ -487,10 +508,10 @@
         </li>
         <!-- <ul class="nav nav-treeview"> -->
         <li class="nav-item">
-          <a href="{{route('user.profile', ['id' => Auth::user()->id])}}" class="nav-link">
+          <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
           <p>
-            Profile
+            Account Settings
             <i class="fas fa-angle-left right"></i>
           </p>
           </a>
