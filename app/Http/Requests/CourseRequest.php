@@ -27,6 +27,7 @@ class CourseRequest extends FormRequest
             'image' => 'nullable', 
             'credit_hours' => 'required',
             'department_id' => 'required',
+            'course_code' =>'required',
         ];
     }
 }

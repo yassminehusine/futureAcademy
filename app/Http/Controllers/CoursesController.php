@@ -47,8 +47,8 @@ class CoursesController extends Controller
         // dd($course);
         $this->courseRepository->create($courses);
         Alert::success('Success Toast','success');
-        $user = User::where('role','Admin');
-        $user->notify(new AdminNotification());
+        // $user = User::where('role','Admin');
+        // $user->notify(new AdminNotification());
         return redirect()->route('course.index');   
     }
     /**

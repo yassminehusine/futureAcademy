@@ -28,7 +28,7 @@
       </div>
     <div class="form-group">
         <label for="file_path">File
-         <img src="https://cdn-icons-png.flaticon.com/512/8191/8191607.png" alt="upload" width="100px">
+         <img src="{{asset($assignment->image ?? "https://cdn-icons-png.flaticon.com/512/8191/8191607.png")}}" alt="upload" width="100px">
          <input type="file" name="file_path" hidden  class="form-control @error('file_path') is-invalid @enderror" id="file_path">
         </label>
          @error('file_path')

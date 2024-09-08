@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label for="image">
                         <img src="{{ asset($post->image) }}" alt="Current Image" width="100px">
-                        <input type="file" name="image"  hidden  class="form-control @error('image') is-invalid @enderror" id="image">
+                        <input type="file" name="image"  hidden  class="form-control @error('image') is-invalid @enderror" id="image" value="{{$post->image}}">
                     </label>
                     @error('image')
                         <span class="invalid-feedback" role="alert">

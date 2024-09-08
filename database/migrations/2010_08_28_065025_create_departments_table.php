@@ -14,7 +14,6 @@ return new class extends Migration
             $table->string('department_name');
             $table->string('image')->nullable(); 
             $table->text('description')->nullable(); 
-            $table->string('department_number')->unique();
             $table->timestamps();
         });
     }

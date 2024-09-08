@@ -46,15 +46,6 @@
                 </div>
 
                 <!-- Department Number -->
-                <div class="form-group">
-                    <label for="department_number">Department Number</label>
-                    <input type="text" name="department_number" class="form-control @error('department_number') is-invalid @enderror" id="department_number" placeholder="Enter Department Number">
-                    @error('department_number')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
                 
             </div>
             <!-- /.card-body -->

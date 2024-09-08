@@ -15,7 +15,7 @@ class departmentModel extends Model
         'department_name',
         'image',
         'description',
-        'department_number',
+        // 'department_number',
     ];
 
     protected $casts = [

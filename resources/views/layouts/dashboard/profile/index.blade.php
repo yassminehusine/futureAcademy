@@ -17,7 +17,7 @@
                 <li class="list-group-item">
                  <b>Academic Level</b> 
                   <a class="float-right text-success">
-                  {{auth()->user()->academic_level}} Year
+                  {{auth()->user()->academic_level}} 
                   </a> 
                   <li class="list-group-item ">
                     <b>Address</b> <a class="float-right text-success">{{$user->address}}</a>

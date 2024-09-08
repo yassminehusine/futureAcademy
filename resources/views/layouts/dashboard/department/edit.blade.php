@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label for="image">
                         <img src="{{ asset($department->image) }}" alt="Current Image" width="100px">
-                        <input type="file" name="image"  hidden  class="form-control @error('image') is-invalid @enderror" id="image">
+                        <input type="file" name="image"  hidden  class="form-control @error('image') is-invalid @enderror" id="image" value="{{$department->image}}">
                     </label>
                     @error('image')
                         <span class="invalid-feedback" role="alert">
@@ -47,15 +47,7 @@
                 </div>
 
                 <!-- Department Number -->
-                <div class="form-group">
-                    <label for="department_number">Department Number</label>
-                    <input type="text" name="department_number" class="form-control @error('department_number') is-invalid @enderror" id="department_number" value="{{ $department->department_number }}" placeholder="Enter Department Number">
-                    @error('department_number')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+            
                 
             </div>
             <!-- /.card-body -->

@@ -25,7 +25,7 @@ class departmentRequest extends FormRequest
         'department_name' => 'required|string|max:255',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'description' => 'required|string|max:1000',
-        'department_number' => 'required',
+        // 'department_number' => 'required',
         ];
     }
 }

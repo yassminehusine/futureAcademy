@@ -7,13 +7,13 @@ class departmentDTO extends Data{
         public string $department_name,
         public string  $image,
         public string  $description,
-        public string $department_number,
+      //   public string $department_number,
    ){}
    public static function handleInputs(departmentRequest $departmentRequest){
       $data =  [
          'department_name' => $departmentRequest->department_name,
          'description' => $departmentRequest->description,
-         'department_number' => $departmentRequest->department_number,
+         // 'department_number' => $departmentRequest->department_number,
       ];
       if ($departmentRequest->image) {
           $image = $departmentRequest->image;

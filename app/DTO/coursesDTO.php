@@ -9,10 +9,12 @@ class coursesDTO extends Data{
     public string  $image,
     public string  $credit_hours,
     public string $department_id,
+    public string $course_code,
     ){}
     public static function handleInputs(CourseRequest $courseRequest){
         $data = [
             'course_name' => $courseRequest->course_name,
+            'course_code' => $courseRequest->course_code,
             'description' => $courseRequest->description,
             'image' => $courseRequest->image,
             'credit_hours' => $courseRequest->credit_hours,

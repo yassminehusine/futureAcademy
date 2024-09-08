@@ -13,7 +13,7 @@ class UserDTO extends Data
         public string $name,
         public string $image,
         public string $role,
-        public string $academic_years,
+        public string $academic_level,
         public float $GPA,
         public string $phone,
         public string $address,
@@ -33,7 +33,7 @@ class UserDTO extends Data
         $data = [
             'name' => $userRequest->name,
             'role' => $userRequest->role,
-            'academic_level' => $userRequest->academic_years ?? "None",
+            'academic_level' => $userRequest->academic_level ?? "None",
             'GPA' => $userRequest->GPA,
             'phone' => $userRequest->phone,
             'address' => $userRequest->address,
@@ -51,11 +51,15 @@ class UserDTO extends Data
             $data['password'] = bcrypt($userRequest->password);
         }
 
-        if ($userRequest->newpassword && $userRequest->current == decrypt($user->password)) {
+        if($userRequest->academic_level){
+            $data['academic_level'] = $userRequest->academic_level ;
 
-
-            $data['password'] = bcrypt($userRequest->newpassword);
         }
+        // if ($userRequest->newpassword && $userRequest->current == decrypt($user->password)) {
+
+
+        //     $data['password'] = bcrypt($userRequest->newpassword);
+        // }
         return $data;
     }
 

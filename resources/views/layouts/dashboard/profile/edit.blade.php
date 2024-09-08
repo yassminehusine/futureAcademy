@@ -28,7 +28,7 @@
                     <label for="image">Image
                         <img src="{{ $user->image ? asset($user->image) : 'https://cdn-icons-png.flaticon.com/512/8191/8191607.png' }}"
                             alt="upload" width="100px" style="cursor:pointer;">
-                            <span>Click to change</span>
+                        <span>Click to change</span>
                         <input type="file" name="image" hidden class="form-control @error('image') is-invalid @enderror"
                             id="image" value="{{$user->image}}">
                     </label>
@@ -57,21 +57,19 @@
                     @enderror
                 </div>
 
-                <!-- Academic Years -->
+                @if (auth()->user()->role ==  "Admin")
+                    <!-- Academic Years -->
                 <div class="form-group">
                     <label for="academic_level">Academic Level</label>
                     <select name="academic_level" class="form-control @error('academic_level') is-invalid @enderror"
-                        id="academic_level" value="{{ old('academic_level',  $user->academic_level)}}">
-                        <option disabled selected >Select Year</option>
-                        <option value="--" {{ old('academic_level') == '--' ? 'selected' : '' }}>--</option>
-                        <option value="First" {{ old('academic_level') == 'First' ? 'selected' : '' }}>First Year</option>
-                        <option value="Second" {{ old('academic_level') == 'Second' ? 'selected' : '' }}>Second Year
-                        </option>
-                        <option value="Third" {{ old('academic_level') == 'Third' ? 'selected' : '' }}>Third Year</option>
-                        <option value="Fourth" {{ old('academic_level') == 'Fourth' ? 'selected' : '' }}>Fourth Year
-                        </option>
-                        <option value="Graduate" {{ old('academic_level') == 'Graduate' ? 'selected' : '' }}>Graduate
-                        </option>
+                        id="academic_level">
+                        <option disabled selected>Select Year</option>
+                        <option value="--" {{ old('academic_level') == '--' || $user->academic_level == 'None' ? 'selected' : '' }}>--</option>
+                        <option value="First" {{ old('academic_level') == 'First' || $user->academic_level == 'First' ? 'selected' : '' }}>First Year</option>
+                        <option value="Second" {{ old('academic_level') == 'Second' || $user->academic_level == 'Second' ? 'selected' : '' }}>Second Year</option>
+                        <option value="Third" {{ old('academic_level') == 'Third' || $user->academic_level == 'Third' ? 'selected' : '' }}>Third Year</option>
+                        <option value="Fourth" {{ old('academic_level') == 'Fourth' || $user->academic_level == 'Fourth' ? 'selected' : '' }}>Fourth Year</option>
+                        <option value="Graduate" {{ old('academic_level') == 'Graduate' || $user->academic_level == 'Graduate' ? 'selected' : '' }}>Graduate</option>
                     </select>
                     @error('academic_level')
                         <span class="invalid-feedback" role="alert">
@@ -79,6 +77,9 @@
                         </span>
                     @enderror
                 </div>
+                @endif
+
+            
 
                 <!-- GPA -->
                 <!-- <div class="form-group">
