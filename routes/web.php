@@ -50,6 +50,8 @@ Route::group(['prefix'=>'users'],function(){
     Route::post('/update/{id}',[UsersController::class,'update'])->name('user.update');
     Route::get('/destroy/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
     Route::get('/profile/{id}',[UsersController::class,'show'])->name('user.profile'); 
+    Route::get('/settings/{id}',[UsersController::class,'settings'])->name('user.settings'); 
+
 })->middleware('auth');
 // End Rout Usres
 // Start Courses Controller

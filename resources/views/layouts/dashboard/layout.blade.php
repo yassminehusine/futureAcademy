@@ -460,6 +460,15 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+            Account Settings
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route('logout') }}" class="nav-link"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -499,6 +508,15 @@
           <i class="fa-solid fa-address-card"></i>
           <p>
             Profile
+            <i class="fas fa-angle-left right"></i>
+          </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+            Account Settings
             <i class="fas fa-angle-left right"></i>
           </p>
           </a>

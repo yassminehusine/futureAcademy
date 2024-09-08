@@ -20,7 +20,7 @@ class UsersController extends Controller{
     public function __construct(IUserRepository $userRepository,IdepartmentRepository  $departmentRepository)
     {
         $this->middleware(['auth','Admin'])->except([
-            'main', 'show','update','edit'
+            'main', 'show','update','edit','settings'
         ]);
         $this->userRepository = $userRepository;
         $this->departmentRepository = $departmentRepository;
@@ -104,6 +104,13 @@ class UsersController extends Controller{
         $user = $this->userRepository->getUserById($id);
         $departments = $this->departmentRepository->getAll();
         return view('layouts.dashboard.users.edit', compact('user', 'departments'));
+    }
+
+    public function settings(string $id)
+    {
+        $user = $this->userRepository->getUserById($id);
+        $departments = $this->departmentRepository->getAll();
+        return view('layouts.dashboard.profile.edit', compact('user', 'departments'));
     }
 
     /**
