@@ -24,7 +24,8 @@ class materialRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'file_path' => 'nullable|file|mimes:pdf,doc,docx,txt|max:2048', 
+            // 'file_path' => 'nullable|file|mimes:pdf,doc,docx,txt|max:2048', 
+            'file_path' => 'nullable|file|mimes:pdf,doc,docx,txt', 
             'thumbnail_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'user_id' => 'required|exists:users,id',
             'courses_id' => 'required|exists:courses,id',

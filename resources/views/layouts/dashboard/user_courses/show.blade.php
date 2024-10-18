@@ -9,7 +9,7 @@
 <div class="card-body">
     <h5 class="card-title">{{$course->course->course_name}}</h5>
     <p class="card-text">{{$course->course->description}}</p>
-    <a href="#" class="btn btn-primary">View Course</a>
+    <a href="{{route('material.show', ['id' => $course->course->id])}}" class="btn btn-primary">View Course</a>
 @if (auth()->user()->role === "doctors")
 <a href="{{route('assignment.create', ['id' => $course->course->id])}}" class="btn btn-primary">Add Assignment</a>
 @endif

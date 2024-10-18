@@ -87,8 +87,14 @@ Route::group(['prefix'=>'materials'],function(){
     Route::get('/edit/{id}',[materialController::class,'edit'])->name('material.edit');
     Route::post('/update/{id}',[materialController::class,'update'])->name('material.update');
     Route::get('/destroy/{id}', [materialController::class, 'destroy'])->name('material.destroy');
+    Route::get('/show/{id}', [materialController::class, 'show'])->name('material.show');
+    Route::get('/download/{filename}', [materialController::class, 'download'])->name('download');
+
+
 })->middleware('auth');
 // End materials Controller
+
+
 
 
 // Start assignments Controller

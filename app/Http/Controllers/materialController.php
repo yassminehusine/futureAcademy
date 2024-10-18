@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\MaterialRequest;
 use App\DTO\materialDTO;
+use App\Models\materialModel;
 use App\Repository\interface\ImaterialRepository;
 use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\IUserRepository;
@@ -58,8 +59,8 @@ class materialController extends Controller
      */
     public function show(string $id)
     {
-        //$material = $this->materialRepository->getById($id);
-        //return view('layouts.dashboard.material.show', compact('material'));
+        $materials = materialModel::where('courses_id','=',$id)->get();
+        return view('layouts.dashboard.material.show', compact('materials'));
     }
 
     /**
@@ -95,4 +96,19 @@ class materialController extends Controller
         return redirect()->back();
 
     }
+
+    public function download($filename)
+{
+    // Ensure the file path is valid and exists
+    $filePath = storage_path('app/public/materials/' . $filename);
+    if (!file_exists($filePath)) {
+        return response()->json(['error' => 'File not found'], 404);
+    }
+
+    // Generate a download response with appropriate headers
+    return response()->download($filePath, $filename, [
+        'Content-Type' => 'application/octet-stream',
+        'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+    ]);
+}
 }
