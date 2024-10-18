@@ -12,8 +12,12 @@
   <link rel="stylesheet" href="{{asset('assets')}}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">
+  
+  <link rel="stylesheet" href="{{asset('assets')}}/dist/css/back.css">
+
+
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page bg-academy">
 <div class="login-box">
   @yield('content')
 </div>

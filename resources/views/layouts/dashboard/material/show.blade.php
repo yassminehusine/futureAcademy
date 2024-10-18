@@ -4,7 +4,7 @@
     <!-- Materials Index -->
     <div class="card card-dark">
         <div class="card-header">
-            <h3 class="card-title">Materials List</h3>
+            <h3 class="card-title">Materials List For This Course</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">

@@ -2,7 +2,7 @@
 @section('content')
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Admin</b>LTE</a>
+    <a href="#" class="text-white"><b>Future Academy</b></a>
   </div>
   <div class="card">
     <div class="card-body login-card-body">
