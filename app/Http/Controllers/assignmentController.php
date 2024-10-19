@@ -32,8 +32,8 @@ class assignmentController extends Controller
             return view('layouts.dashboard.assignments.index',compact('assignments'));}
        else if(Auth::user()->role == "doctors"){
         $assignments = assignmentModel::with(['course' ,'user'])->where('user_id',Auth::id())->get();
-        //dd($assignments);
-        return view('layouts.dashboard.assignments.index',compact('assignments'));};
+        $notifications = auth()->user()->unreadNotifications();
+        return view('layouts.dashboard.assignments.index',compact(['assignments','notifications']));};
        
        }
        
@@ -43,9 +43,9 @@ class assignmentController extends Controller
     public function create($id)
     {
       $course = user_course::where('user_id', $id)->with(['user', 'course'])->get();
+      $notifications = auth()->user()->unreadNotifications();
 
-
-        return view('layouts.dashboard.assignments.create', compact('course'));
+        return view('layouts.dashboard.assignments.create', compact(['course','notifications']));
     }
 
     /**
@@ -77,9 +77,10 @@ class assignmentController extends Controller
     {
         $assignment = $this->assignmentRepository->getById($id);
         $courses = $this->courseRepository->getAll();
-        return view('layouts.dashboard.assignments.edit', compact('courses','assignment'));
+        $notifications = auth()->user()->unreadNotifications();
+        return view('layouts.dashboard.assignments.edit', compact(['courses','assignment' ,'notifications']));
 
-    }
+    }       
 
     /**
      * Update the specified resource in storage.

@@ -30,6 +30,8 @@ class submissionController extends Controller
     {            
 
         $submissions = submissionModel::with(['assignment'])->where('user_id',Auth::id())->get();
+        $notifications = auth()->user()->unreadNotifications();
+
         //dd($submissions);
         return view('layouts.dashboard.submissions.index',compact('submissions'));
        
@@ -41,6 +43,8 @@ class submissionController extends Controller
     public function create($id)
     {
         $assignment = assignmentModel::where('id',$id)->first();
+        $notifications = auth()->user()->unreadNotifications();
+
 
         return view('layouts.dashboard.submissions.create', ['id' => $id , 'assignment' => $assignment ]);
     }
@@ -62,6 +66,8 @@ class submissionController extends Controller
     public function show(string $id)
     {
        $submissions = submissionModel::where('user_id',"=",$id)->get();
+       $notifications = auth()->user()->unreadNotifications();
+
        return view('layouts.dashboard.submissions.show', compact('submissions'));
     }
 
@@ -69,6 +75,8 @@ class submissionController extends Controller
     {
         $assignment_id = $id;
         $submission = $this->submissionRepository->getById($id);
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.submissions.edit', compact($assignment_id,'submission'));
 
     }

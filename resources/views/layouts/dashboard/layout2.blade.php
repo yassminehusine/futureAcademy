@@ -160,6 +160,8 @@
             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
           </div>
         </li>
+        @include('notifications')
+
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">

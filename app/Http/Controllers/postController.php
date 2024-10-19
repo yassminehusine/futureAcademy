@@ -20,11 +20,15 @@ class postController extends Controller
     public function index()
     {
         $posts = $this->postRepository->getAll();
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.posts.index', compact('posts'));
     }
 
     public function create()
     {
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.posts.create');
     }
 
@@ -43,11 +47,15 @@ class postController extends Controller
     public function show(string $id)
     {
         $post = $this->postRepository->getById($id);
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.posts.show', compact('post'));
     }
     public function edit($id)
     {
         $post = $this->postRepository->getById($id);
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.posts.edit', compact('post'));
     }
     public function update(postRequest $request, string $id)

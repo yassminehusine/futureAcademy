@@ -35,6 +35,8 @@ class UsersController extends Controller
     public function index()
     {
         $users = $this->userRepository->getAllUsers();
+        $notifications = auth()->user()->unreadNotifications();
+
         User::with('department')->get()->pluck('department');
         // dd($users);
         return view('layouts.dashboard.users.index', compact('users'));
@@ -47,6 +49,8 @@ class UsersController extends Controller
         $totalDepartments = 0;
         $totalDepartments = 0;
         $user = $this->userRepository->getUserById(\Auth::id());
+        // $notifications = auth()->user()->unreadNotifications();
+
 
         foreach (departmentRolse::cases() as $role) {
             $totalDepartments += $this->departmentRepository->getCountByRole($role);
@@ -80,6 +84,8 @@ class UsersController extends Controller
     public function create()
     {
         $departments = $this->departmentRepository->getAll();
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.users.create', compact('departments'));
     }
     /**
@@ -105,6 +111,8 @@ class UsersController extends Controller
         // $department = DB::table('departments')->join('users','users.department_id','=','department_id')->select('department_name')->where('department_id',"=",$user->department_id)->first();
         $department = DB::table('departments')->join('users', 'users.department_id', '=', 'departments.id')->select('departments.department_name')->where('users.department_id', $user->department_id)->first();
         // dd($department);
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.profile.index', compact('user', 'department'));
     }
     /**
@@ -114,6 +122,8 @@ class UsersController extends Controller
     {
         $user = $this->userRepository->getUserById($id);
         $departments = $this->departmentRepository->getAll();
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.users.edit', compact('user', 'departments'));
     }
 
@@ -121,6 +131,8 @@ class UsersController extends Controller
     {
         $user = $this->userRepository->getUserById($id);
         $departments = $this->departmentRepository->getAll();
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.profile.edit', compact('user', 'departments'));
     }
 

@@ -32,6 +32,8 @@ class materialController extends Controller
     {
         $materials = $this->materialRepository->getAll();
 
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.material.index', compact('materials'));
     }
     /**
@@ -41,6 +43,8 @@ class materialController extends Controller
     {
         $courses = $this->courseRepository->getAll();
         $users = $this->userRepository->getAllUsers();
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.material.create', compact('courses', 'users'));
     }
 
@@ -66,6 +70,8 @@ class materialController extends Controller
         
         $materials = materialModel::where('courses_id','=',$id)->get();
         $assignments = assignmentModel::where('course_id','=',$id)->get();
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.material.show', compact('materials','assignments'));
     }
 
@@ -77,6 +83,8 @@ class materialController extends Controller
         $material = $this->materialRepository->getById($id);
         $courses = $this->courseRepository->getAll();
         $users = $this->userRepository->getAllUsers();
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.material.edit', compact('courses', 'material', 'users'));
 
     }

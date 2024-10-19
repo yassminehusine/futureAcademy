@@ -1,4 +1,4 @@
-<script>function generatePassword() {
+function generatePassword() {
     const passwordLength = 12; // Adjust the desired password length
     const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
 
@@ -14,17 +14,14 @@
     document.getElementById("confirm-password").value
         = password;
 
-}</script>
-<script>
+}
   var searchUrl = "{{ route('users.search') }}";
-</script>
 
-<script>
   $(document).ready(async function() {
-    await $('#user_search').keyup(function() {
+    $('#user_search').keyup(function() {
       var searchTerm = $(this).val();
 
-       await $.ajax({
+        $.ajax({
         url: searchUrl, // Use the searchUrl variable
         data: { search: searchTerm },
         method: 'GET',
@@ -39,4 +36,23 @@
       });
     });
   });
-</script>
+
+  $(document).ready(function() {
+    // Update notification count when new notifications are received
+    function updateNotificationCount(count) {
+      $('#notificationCount').text(count);
+    }
+  
+    // Example: Fetch notifications and update count
+    $.ajax({
+      url: '/notifications', // Replace with your endpoint
+      method: 'GET',
+      success: function(response) {
+        updateNotificationCount(response.unreadCount);
+        // Update notification dropdown content with response data
+      },
+      error: function(error) {
+        console.error('Error fetching notifications:', error);
+      }
+    });
+  });

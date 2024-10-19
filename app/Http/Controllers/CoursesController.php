@@ -26,6 +26,8 @@ class CoursesController extends Controller
     {
         $courses = $this->courseRepository->getAll();
         coursesModel::with('department')->get();
+        $notifications = auth()->user()->unreadNotifications();
+
        return view('layouts.dashboard.courses.index',compact('courses'));
     }
     /**
@@ -34,6 +36,7 @@ class CoursesController extends Controller
     public function create()
     {
         $departments = $this->departmentRepository->getAll();
+        $notifications = auth()->user()->unreadNotifications();
         return view('layouts.dashboard.courses.create', compact('departments'));
     }
 
@@ -68,6 +71,7 @@ class CoursesController extends Controller
     {
         $course = $this->courseRepository->getById($id);
         $departments = $this->departmentRepository->getAll();
+        $notifications = auth()->user()->unreadNotifications();
         return view('layouts.dashboard.courses.edit', compact('course','departments'));
 
     }

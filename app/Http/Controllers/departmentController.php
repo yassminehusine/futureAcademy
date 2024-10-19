@@ -21,11 +21,14 @@ class departmentController extends Controller
     public function index()
     {
         $departments = $this->departmentRepository->getAll();
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.department.index', compact('departments'));
     }
 
     public function create()
-    {
+    {    $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.department.create');
     }
 
@@ -43,12 +46,17 @@ class departmentController extends Controller
     }
     public function show(string $id)
     {
+
         $department = $this->departmentRepository->getById($id);
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.department.show', compact('department'));
     }
     public function edit($id)
     {
         $department = $this->departmentRepository->getById($id);
+        $notifications = auth()->user()->unreadNotifications();
+
         return view('layouts.dashboard.department.edit', compact('department'));
     }
     public function update(departmentRequest $request, string $id)
