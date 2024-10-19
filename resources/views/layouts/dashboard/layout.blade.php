@@ -152,432 +152,422 @@
           </div>
         </li>
 
-        @include('notifications')
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge" id="notificationCount">15</span>
+            <span class="badge badge-warning navbar-badge" id="notificationCount">{{ $notifications->count() }}</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="notificationDropdown">
-            <span class="dropdown-item dropdown-header">15 Notifications</span>
+            <span class="dropdown-item dropdown-header">{{ $notifications->count() }} Notifications</span>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> 4 new messages
-              <span class="float-right text-muted text-sm">3 mins</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> 8 friend requests
-              <span class="float-right text-muted text-sm">12 hours</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> 3 new reports
-              <span class="float-right text-muted text-sm">2 days</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-            <i class="fas fa-th-large"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <!-- /.navbar -->
+              @foreach ($notifications as $notification)
+        <li>{{ $notification->data['activity'] }}</li>
+        <div class="dropdown-divider"></div>
+      @endforeach
 
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <a href="{{route('home')}}" class="brand-link">
-        <img src="https://futureacademyedu.com/wp-content/uploads/2023/02/Logo-2048x1491.png" alt="AdminLTE Logo"
-          class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Future Academyed</span>
-      </a>
+        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+  </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+      <i class="fas fa-expand-arrows-alt"></i>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+      <i class="fas fa-th-large"></i>
+    </a>
+  </li>
+  </ul>
+  </nav>
+  <!-- /.navbar -->
 
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="{{asset(auth()->user()->image)}}" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <a href="{{route('user.profile', ['id' => Auth::user()->id])}}" class="d-block">{{auth()->user()->name}}</a>
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{{route('home')}}" class="brand-link">
+      <img src="https://futureacademyedu.com/wp-content/uploads/2023/02/Logo-2048x1491.png" alt="AdminLTE Logo"
+        class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Future Academyed</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{asset(auth()->user()->image)}}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="{{route('user.profile', ['id' => Auth::user()->id])}}" class="d-block">{{auth()->user()->name}}</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
           </div>
         </div>
-
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-          <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-sidebar">
-                <i class="fas fa-search fa-fw"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
+      </div>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-            @if(auth()->user()->role === 'Admin' || auth()->user()->role === 'doctors')
+          @if(auth()->user()->role === 'Admin' || auth()->user()->role === 'doctors')
         <li class="nav-item">
-          <a href="#" class="nav-link">
+        <a href="#" class="nav-link">
           <i class="nav-icon fas fa-user"></i>
           <p>
-            USERS
-            <i class="fas fa-angle-left right"></i>
+          USERS
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
-          <ul class="nav nav-treeview">
+        </a>
+        <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('user.create')}}" class="nav-link">
+          <a href="{{route('user.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Register new user</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('user.index')}}" class="nav-link">
+          <a href="{{route('user.index')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Users Index</p>
-            </a>
+          </a>
           </li>
-          </ul>
+        </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+        <a href="#" class="nav-link">
           <i class="nav-icon fas fa-building"></i>
           <p>
-            Departments
-            <i class="fas fa-angle-left right"></i>
+          Departments
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
-          <ul class="nav nav-treeview">
+        </a>
+        <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('department.create')}}" class="nav-link">
+          <a href="{{route('department.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Create new department</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('department.index') }}" class="nav-link">
+          <a href="{{ route('department.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p> Departments Index </p>
-            </a>
+          </a>
           </li>
-          </ul>
+        </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+        <a href="#" class="nav-link">
           <i class="nav-icon fas fa-building"></i>
           <p>
-            Posts
-            <i class="fas fa-angle-left right"></i>
+          Posts
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
-          <ul class="nav nav-treeview">
+        </a>
+        <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('post.create')}}" class="nav-link">
+          <a href="{{route('post.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Create new post</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('post.index') }}" class="nav-link">
+          <a href="{{ route('post.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Posts Index</p>
-            </a>
+          </a>
           </li>
-          </ul>
+        </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+        <a href="#" class="nav-link">
           <!-- <i class="fa-solid fa-bookmark"></i> -->
           <i class="nav-icon fas fa-bookmark"></i>
           <p>
-            Courses
-            <i class="fas fa-angle-left right"></i>
+          Courses
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
-          <ul class="nav nav-treeview">
+        </a>
+        <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('course.create')}}" class="nav-link">
+          <a href="{{route('course.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Create new course</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('course.index') }}" class="nav-link">
+          <a href="{{ route('course.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p> Courses Index</p>
-            </a>
+          </a>
           </li>
-          </ul>
+        </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+        <a href="#" class="nav-link">
           <!-- <i class="fa-solid fa-bookmark"></i> -->
           <i class="fa-solid fa-id-card"></i>
           <p>
-            Registered in course
-            <i class="fas fa-angle-left right"></i>
+          Registered in course
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
-          <ul class="nav nav-treeview">
+        </a>
+        <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('user_course.regindex')}}" class="nav-link">
+          <a href="{{route('user_course.regindex')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Register</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('user_course.index') }}" class="nav-link">
+          <a href="{{ route('user_course.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p> Index </p>
-            </a>
+          </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
+          <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
             <i class="fa-solid fa-address-card"></i>
             <p>
-              My Courses
-              <i class="fas fa-angle-left right"></i>
+            My Courses
+            <i class="fas fa-angle-left right"></i>
             </p>
-            </a>
+          </a>
           </li>
-          </ul>
+        </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+        <a href="#" class="nav-link">
           <!-- <i class="fa-solid fa-bookmark"></i> -->
           <i class="fa-solid fa-id-card"></i>
           <p>
-            Materials
-            <i class="fas fa-angle-left right"></i>
+          Materials
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
-          <ul class="nav nav-treeview">
+        </a>
+        <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('material.create')}}" class="nav-link">
+          <a href="{{route('material.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Create new material</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('material.index') }}" class="nav-link">
+          <a href="{{ route('material.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Materials Index </p>
-            </a>
+          </a>
           </li>
-          </ul>
+        </ul>
         </li>
         <li class="nav-item">
-          <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
+        <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
           <p>
-            My Courses
-            <i class="fas fa-angle-left right"></i>
+          My Courses
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
+        </a>
         </li>
         <li class="nav-item">
-          <a href="{{route('submission.show', ['id' => Auth::user()->id])}}" class="nav-link">
+        <a href="{{route('submission.show', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
           <p>
-            My Assignments
-            <i class="fas fa-angle-left right"></i>
+          My Assignments
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
+        </a>
         </li>
         <li class="nav-item">
-          <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
+        <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
           <p>
-            Account Settings
-            <i class="fas fa-angle-left right"></i>
+          Account Settings
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
+        </a>
         </li>
 
 
       @endif
-            @if (auth()->user()->role == "Admin")
+          @if (auth()->user()->role == "Admin")
         <li class="nav-item">
-          <a href="#" class="nav-link">
+        <a href="#" class="nav-link">
           <!-- <i class="fa-solid fa-bookmark"></i> -->
           <i class="nav-icon fas fa-bookmark"></i>
           <p>
-            Front Elements
-            <i class="fas fa-angle-left right"></i>
+          Front Elements
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
-          <ul class="nav nav-treeview">
+        </a>
+        <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('navbar.create')}}" class="nav-link">
+          <a href="{{route('navbar.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>create navbar</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('navbar.index') }}" class="nav-link">
+          <a href="{{ route('navbar.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p> show navbars </p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('slider.create')}}" class="nav-link">
+          <a href="{{route('slider.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>create Slider</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('slider.index') }}" class="nav-link">
+          <a href="{{ route('slider.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p> show sliders </p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('header.create')}}" class="nav-link">
+          <a href="{{route('header.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>create header</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('header.index') }}" class="nav-link">
+          <a href="{{ route('header.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p> show headers </p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('footer.create')}}" class="nav-link">
+          <a href="{{route('footer.create')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>create footer</p>
-            </a>
+          </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('footer.index') }}" class="nav-link">
+          <a href="{{ route('footer.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p> show footers </p>
-            </a>
+          </a>
           </li>
-          </ul>
+        </ul>
         </li>
       @endif
 
-            @if(auth()->user()->role === 'students')
-          <li class="nav-item">
-            <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
-            <i class="fa-solid fa-address-card"></i>
-            <p>
-              My Courses
-              <i class="fas fa-angle-left right"></i>
-            </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('submission.show', ['id' => Auth::user()->id])}}" class="nav-link">
-            <i class="fa-solid fa-address-card"></i>
-            <p>
-              My Assignments
-              <i class="fas fa-angle-left right"></i>
-            </p>
-            </a>
-          </li>
-          <!-- <ul class="nav nav-treeview"> -->
-          @if (auth()->user()->role !== "Admin")
+          @if(auth()->user()->role === 'students')
         <li class="nav-item">
-        <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
-        <i class="fa-solid fa-address-card"></i>
-        <p>
-          Account Settings
+        <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
+          <p>
+          My Courses
           <i class="fas fa-angle-left right"></i>
-        </p>
+          </p>
         </a>
         </li>
-      @endif
-          <!-- <li class="nav-item">
-          <a href="{{ route('logout') }}" class="nav-link"
-          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          <i class="nav-icon fas fa-sign-out-alt"></i>
+        <li class="nav-item">
+        <a href="{{route('submission.show', ['id' => Auth::user()->id])}}" class="nav-link">
+          <i class="fa-solid fa-address-card"></i>
           <p>
-          Logout
+          My Assignments
+          <i class="fas fa-angle-left right"></i>
           </p>
-          </a>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-          @csrf
-          </form>
-        </li> -->
+        </a>
+        </li>
+        <!-- <ul class="nav nav-treeview"> -->
+        @if (auth()->user()->role !== "Admin")
+      <li class="nav-item">
+      <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
+        <i class="fa-solid fa-address-card"></i>
+        <p>
+        Account Settings
+        <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      </li>
+    @endif
+        <!-- <li class="nav-item">
+      <a href="{{ route('logout') }}" class="nav-link"
+      onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+      <i class="nav-icon fas fa-sign-out-alt"></i>
+      <p>
+      Logout
+      </p>
+      </a>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+      @csrf
+      </form>
+      </li> -->
 
       @endif
-            <li class="nav-item">
-              <a href="{{ route('logout') }}" class="nav-link"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p>
-                  Logout
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-              </form>
-            </li>
-        </nav>
-        <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
-    </aside>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0">Dashboard</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-      <!-- دي بتاعن الفرعي -->
-      <!-- Main content -->
-      <section class="content">
-        <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <!-- ./col -->
-            @yield('content2')
-          </div>
-          <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
+          <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link"
+              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p>
+                Logout
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+            </form>
+          </li>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- دي بتاعن الفرعي -->
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <!-- ./col -->
+          @yield('content2')
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
 </body>
