@@ -21,14 +21,20 @@ class departmentController extends Controller
     public function index()
     {
         $departments = $this->departmentRepository->getAll();
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.department.index', compact(['departments','notifications']));
     }
 
-    public function create()
-    {    $notifications = auth()->user()->unreadNotifications();
-
+    public function create(){
+    if (Auth::check()) {
+        $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+    } else {
+        $notifications = collect();
+    }
         return view('layouts.dashboard.department.create', compact('notifications'));
     }
 
@@ -51,15 +57,21 @@ class departmentController extends Controller
     {
 
         $department = $this->departmentRepository->getById($id);
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.department.show', compact(['department','notifications']));
     }
     public function edit($id)
     {
         $department = $this->departmentRepository->getById($id);
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.department.edit', compact(['department','notifications']));
     }
     public function update(departmentRequest $request, string $id)

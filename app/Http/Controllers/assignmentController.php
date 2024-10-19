@@ -32,8 +32,11 @@ class assignmentController extends Controller
             return view('layouts.dashboard.assignments.index',compact('assignments'));}
        else if(Auth::user()->role == "doctors"){
         $assignments = assignmentModel::with(['course' ,'user'])->where('user_id',Auth::id())->get();
-        $notifications = auth()->user()->unreadNotifications();
-        return view('layouts.dashboard.assignments.index',compact(['assignments','notifications']));};
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }        return view('layouts.dashboard.assignments.index',compact(['assignments','notifications']));};
        
        }
        
@@ -43,8 +46,11 @@ class assignmentController extends Controller
     public function create($id)
     {
       $course = user_course::where('user_id', $id)->with(['user', 'course'])->get();
-      $notifications = auth()->user()->unreadNotifications();
-
+      if (Auth::check()) {
+        $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+    } else {
+        $notifications = collect();
+    }
         return view('layouts.dashboard.assignments.create', compact(['course','notifications']));
     }
 
@@ -80,8 +86,11 @@ class assignmentController extends Controller
     {
         $assignment = $this->assignmentRepository->getById($id);
         $courses = $this->courseRepository->getAll();
-        $notifications = auth()->user()->unreadNotifications();
-        return view('layouts.dashboard.assignments.edit', compact(['courses','assignment' ,'notifications']));
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }        return view('layouts.dashboard.assignments.edit', compact(['courses','assignment' ,'notifications']));
 
     }       
 

@@ -5,6 +5,7 @@ use App\Http\Requests\postRequest;
 use App\Repository\interface\IpostRepository;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\User;
+use Auth;
 use App\Notifications\UserActivityNotification;
 
 class postController extends Controller
@@ -20,15 +21,21 @@ class postController extends Controller
     public function index()
     {
         $posts = $this->postRepository->getAll();
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.posts.index', compact(['posts','notifications']));
     }
 
     public function create()
     {
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.posts.create',compact('notifications'));
     }
 
@@ -50,15 +57,21 @@ class postController extends Controller
     public function show(string $id)
     {
         $post = $this->postRepository->getById($id);
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.posts.show', compact(['post','notifications']));
     }
     public function edit($id)
     {
         $post = $this->postRepository->getById($id);
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.posts.edit', compact(['post','notifications']));
     }
     public function update(postRequest $request, string $id)

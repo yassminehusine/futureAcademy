@@ -155,22 +155,26 @@
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span class="badge badge-danger navbar-badge" id="notificationCount">{{ $notifications->count() }}</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="notificationDropdown">
+            @if($notifications->count() > 0)
+                <span class="badge badge-danger navbar-badge">{{ $notifications->count() }}</span>
+            @endif
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <span class="dropdown-item dropdown-header">{{ $notifications->count() }} Notifications</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              @foreach ($notifications as $notification)
-        <li>{{ $notification->data['activity'] }}</li>
-        <div class="dropdown-divider"></div>
-      @endforeach
-
-        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-  </div>
-  </li>
+            @foreach($notifications as $notification)
+                <a href="{{ $notification->data['url'] ?? '#' }}" class="dropdown-item">
+                    <i class="{{ $notification->data['icon'] ?? 'fas fa-info-circle' }} mr-2"></i> 
+                    {{ $notification->data['title'] ?? 'Notification' }}
+                    <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                </a>
+                <div class="dropdown-divider"></div>
+            @endforeach
+            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+    </li>
   <li class="nav-item">
     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
       <i class="fas fa-expand-arrows-alt"></i>

@@ -35,11 +35,14 @@ class UsersController extends Controller
     public function index()
     {
         $users = $this->userRepository->getAllUsers();
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         User::with('department')->get()->pluck('department');
         // dd($users);
-        return view('layouts.dashboard.users.index', compact(['users','notifications']));
+        return view('layouts.dashboard.users.index', compact(['users', 'notifications']));
     }
     public function main()
     {
@@ -84,9 +87,12 @@ class UsersController extends Controller
     public function create()
     {
         $departments = $this->departmentRepository->getAll();
-        $notifications = auth()->user()->unreadNotifications();
-
-        return view('layouts.dashboard.users.create', compact(['departments','notifications']));
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
+        return view('layouts.dashboard.users.create', compact(['departments', 'notifications']));
     }
     /**
      * Store a newly created resource in storage.
@@ -97,7 +103,7 @@ class UsersController extends Controller
         $userDTO = UserDTO::handleInputs($request);
         $this->userRepository->create($userDTO);
         Alert::success('Success', 'User created successfully');
-        $users = User::where('role','Admin')->get();
+        $users = User::where('role', 'Admin')->get();
         $notification = new UserActivityNotification();
         foreach ($users as $admin) {
             $admin->notify($notification);
@@ -114,9 +120,12 @@ class UsersController extends Controller
         // $department = DB::table('departments')->join('users','users.department_id','=','department_id')->select('department_name')->where('department_id',"=",$user->department_id)->first();
         $department = DB::table('departments')->join('users', 'users.department_id', '=', 'departments.id')->select('departments.department_name')->where('users.department_id', $user->department_id)->first();
         // dd($department);
-        $notifications = auth()->user()->unreadNotifications();
-
-        return view('layouts.dashboard.profile.index', compact(['user', 'department','notifications']));
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
+        return view('layouts.dashboard.profile.index', compact(['user', 'department', 'notifications']));
     }
     /**
      * Show the form for editing the specified resource.
@@ -125,18 +134,24 @@ class UsersController extends Controller
     {
         $user = $this->userRepository->getUserById($id);
         $departments = $this->departmentRepository->getAll();
-        $notifications = auth()->user()->unreadNotifications();
-
-        return view('layouts.dashboard.users.edit', compact(['user', 'departments','notifications']));
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
+        return view('layouts.dashboard.users.edit', compact(['user', 'departments', 'notifications']));
     }
 
     public function settings(string $id)
     {
         $user = $this->userRepository->getUserById($id);
         $departments = $this->departmentRepository->getAll();
-        $notifications = auth()->user()->unreadNotifications();
-
-        return view('layouts.dashboard.profile.edit', compact(['user', 'departments','notifications']));
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
+        return view('layouts.dashboard.profile.edit', compact(['user', 'departments', 'notifications']));
     }
 
     /**
@@ -147,7 +162,7 @@ class UsersController extends Controller
         $userDTO = UserDTO::handleInputs($request);
         $this->userRepository->update($userDTO, $id);
         Alert::success('Success', 'User updated successfully');
-        $users = User::where('role','Admin')->get();
+        $users = User::where('role', 'Admin')->get();
         $notification = new UserActivityNotification();
         foreach ($users as $admin) {
             $admin->notify($notification);
@@ -165,7 +180,7 @@ class UsersController extends Controller
     {
         $this->userRepository->delete($id);
         Alert::success('Success', 'User deleted successfully');
-        $users = User::where('role','Admin')->get();
+        $users = User::where('role', 'Admin')->get();
         $notification = new UserActivityNotification();
         foreach ($users as $admin) {
             $admin->notify($notification);

@@ -30,8 +30,11 @@ class submissionController extends Controller
     {            
 
         $submissions = submissionModel::with(['assignment'])->where('user_id',Auth::id())->get();
-        $notifications = auth()->user()->unreadNotifications();
-
+  if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         //dd($submissions);
         return view('layouts.dashboard.submissions.index',compact(['submissions','notifications']));
        
@@ -43,8 +46,11 @@ class submissionController extends Controller
     public function create($id)
     {
         $assignment = assignmentModel::where('id',$id)->first();
-        $notifications = auth()->user()->unreadNotifications();
-
+  if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
 
         return view('layouts.dashboard.submissions.create', ['id' => $id , 'assignment' => $assignment , 'notifications' => $notifications ]);
     }
@@ -78,8 +84,11 @@ class submissionController extends Controller
     {
         $assignment_id = $id;
         $submission = $this->submissionRepository->getById($id);
-        $notifications = auth()->user()->unreadNotifications();
-
+  if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.submissions.edit', compact([$assignment_id,'submission','notifications']));
 
     }

@@ -6,7 +6,7 @@ use App\Models\coursesModel;
 use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\IdepartmentRepository;
 use App\Models\User;
-use App\Notifications\AdminNotification;
+use Auth;
 use App\Notifications\UserActivityNotification;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -27,8 +27,11 @@ class CoursesController extends Controller
     {
         $courses = $this->courseRepository->getAll();
         coursesModel::with('department')->get();
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
        return view('layouts.dashboard.courses.index',compact(['courses','notifications']));
     }
     /**
@@ -38,8 +41,11 @@ class CoursesController extends Controller
     {
         $departments = $this->departmentRepository->getAll();
         // $notifications = auth()->user()->notifications()->get();
-        $notifications = auth()->user()->unreadNotifications();
-        return view('layouts.dashboard.courses.create', compact(['departments','notifications']));
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }        return view('layouts.dashboard.courses.create', compact(['departments','notifications']));
     }
 
     /**
@@ -76,8 +82,11 @@ class CoursesController extends Controller
     {
         $course = $this->courseRepository->getById($id);
         $departments = $this->departmentRepository->getAll();
-        $notifications = auth()->user()->unreadNotifications();
-        return view('layouts.dashboard.courses.edit', compact(['course','departments','notifications']));
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }        return view('layouts.dashboard.courses.edit', compact(['course','departments','notifications']));
 
     }
 

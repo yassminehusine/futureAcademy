@@ -8,6 +8,7 @@ use App\Repository\interface\IUserRepository;
 use RealRashid\SweetAlert\Facades\Alert;
 use Validator;
 use App\Models\User;
+use Auth;
 use App\Notifications\UserActivityNotification;
 use App\Models\user_course;
 class user_coursesController extends Controller
@@ -29,7 +30,12 @@ class user_coursesController extends Controller
     public function index()
     {
         $user_courses = user_course::with(['user', 'course'])->get();
-        $notifications = auth()->user()->unreadNotifications();
+        // $notifications = auth()->user()->unreadNotifications();
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
 
         return view('layouts.dashboard.user_courses.index', compact(['user_courses','notifications']));
     }
@@ -42,8 +48,11 @@ class user_coursesController extends Controller
         $user = $this->userRepository->getUserById($id);
         // dd($user);
         $courses = $this->coursesRepository->getAll();
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.user_courses.create', compact(['user', 'courses','notifications']));
     }
 
@@ -79,8 +88,11 @@ class user_coursesController extends Controller
     public function show(string $id)
     {
         $user_courses = user_course::where('user_id', $id)->with(['user', 'course'])->get();
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         //dd($user_courses);
         return view('layouts.dashboard.user_courses.show', compact(['user_courses','notifications']));
 
@@ -94,8 +106,11 @@ class user_coursesController extends Controller
         $user_course = $this->user_coursesRepository->getById($id);
         $users = $this->userRepository->getAllUsers();
         $courses = $this->coursesRepository->getAll();
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.user_courses.edit', compact(['user_course', 'users', 'courses','notifications']));
     }
 
@@ -135,8 +150,11 @@ class user_coursesController extends Controller
     public function registry()
     {
         $users = $this->userRepository->getAllUsers();
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.user_courses.regindex', compact(['users','notifications']));
 
     }
