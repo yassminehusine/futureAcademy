@@ -31,7 +31,7 @@ class user_coursesController extends Controller
         $user_courses = user_course::with(['user', 'course'])->get();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.user_courses.index', compact('user_courses'));
+        return view('layouts.dashboard.user_courses.index', compact(['user_courses','notifications']));
     }
     /**
      * Show the form for creating a new resource.
@@ -44,7 +44,7 @@ class user_coursesController extends Controller
         $courses = $this->coursesRepository->getAll();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.user_courses.create', compact('user', 'courses'));
+        return view('layouts.dashboard.user_courses.create', compact(['user', 'courses','notifications']));
     }
 
     /**
@@ -79,7 +79,7 @@ class user_coursesController extends Controller
         $notifications = auth()->user()->unreadNotifications();
 
         //dd($user_courses);
-        return view('layouts.dashboard.user_courses.show', compact('user_courses'));
+        return view('layouts.dashboard.user_courses.show', compact(['user_courses','notifications']));
 
     }
 
@@ -93,7 +93,7 @@ class user_coursesController extends Controller
         $courses = $this->coursesRepository->getAll();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.user_courses.edit', compact('user_course', 'users', 'courses'));
+        return view('layouts.dashboard.user_courses.edit', compact(['user_course', 'users', 'courses','notifications']));
     }
 
     /**
@@ -124,7 +124,7 @@ class user_coursesController extends Controller
         $users = $this->userRepository->getAllUsers();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.user_courses.regindex', compact('users'));
+        return view('layouts.dashboard.user_courses.regindex', compact(['users','notifications']));
 
     }
 

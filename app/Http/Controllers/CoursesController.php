@@ -28,7 +28,7 @@ class CoursesController extends Controller
         coursesModel::with('department')->get();
         $notifications = auth()->user()->unreadNotifications();
 
-       return view('layouts.dashboard.courses.index',compact('courses'));
+       return view('layouts.dashboard.courses.index',compact(['courses','notifications']));
     }
     /**
      * Show the form for creating a new resource.
@@ -37,7 +37,7 @@ class CoursesController extends Controller
     {
         $departments = $this->departmentRepository->getAll();
         $notifications = auth()->user()->unreadNotifications();
-        return view('layouts.dashboard.courses.create', compact('departments'));
+        return view('layouts.dashboard.courses.create', compact(['departments','notifications']));
     }
 
     /**
@@ -72,7 +72,7 @@ class CoursesController extends Controller
         $course = $this->courseRepository->getById($id);
         $departments = $this->departmentRepository->getAll();
         $notifications = auth()->user()->unreadNotifications();
-        return view('layouts.dashboard.courses.edit', compact('course','departments'));
+        return view('layouts.dashboard.courses.edit', compact(['course','departments','notifications']));
 
     }
 

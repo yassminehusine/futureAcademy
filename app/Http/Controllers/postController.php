@@ -22,14 +22,14 @@ class postController extends Controller
         $posts = $this->postRepository->getAll();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.posts.index', compact('posts'));
+        return view('layouts.dashboard.posts.index', compact(['posts','notifications']));
     }
 
     public function create()
     {
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.posts.create');
+        return view('layouts.dashboard.posts.create',compact('notifications'));
     }
 
     public function store(postRequest $request)
@@ -49,14 +49,14 @@ class postController extends Controller
         $post = $this->postRepository->getById($id);
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.posts.show', compact('post'));
+        return view('layouts.dashboard.posts.show', compact(['post','notifications']));
     }
     public function edit($id)
     {
         $post = $this->postRepository->getById($id);
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.posts.edit', compact('post'));
+        return view('layouts.dashboard.posts.edit', compact(['post','notifications']));
     }
     public function update(postRequest $request, string $id)
     {

@@ -33,7 +33,7 @@ class submissionController extends Controller
         $notifications = auth()->user()->unreadNotifications();
 
         //dd($submissions);
-        return view('layouts.dashboard.submissions.index',compact('submissions'));
+        return view('layouts.dashboard.submissions.index',compact(['submissions','notifications']));
        
        }
        
@@ -46,7 +46,7 @@ class submissionController extends Controller
         $notifications = auth()->user()->unreadNotifications();
 
 
-        return view('layouts.dashboard.submissions.create', ['id' => $id , 'assignment' => $assignment ]);
+        return view('layouts.dashboard.submissions.create', ['id' => $id , 'assignment' => $assignment , 'notifications' => $notifications ]);
     }
 
     /**
@@ -68,7 +68,7 @@ class submissionController extends Controller
        $submissions = submissionModel::where('user_id',"=",$id)->get();
        $notifications = auth()->user()->unreadNotifications();
 
-       return view('layouts.dashboard.submissions.show', compact('submissions'));
+       return view('layouts.dashboard.submissions.show', compact(['submissions','notifications']));
     }
 
     public function edit(string $id)
@@ -77,7 +77,7 @@ class submissionController extends Controller
         $submission = $this->submissionRepository->getById($id);
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.submissions.edit', compact($assignment_id,'submission'));
+        return view('layouts.dashboard.submissions.edit', compact([$assignment_id,'submission','notifications']));
 
     }
 

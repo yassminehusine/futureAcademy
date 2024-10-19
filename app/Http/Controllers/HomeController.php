@@ -32,6 +32,6 @@ class HomeController extends Controller
         $instructors = User::where('role','doctors')->with('department')->limit(3)->get();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('welcome', compact(['sliders','instructors','navbar']));
+        return view('welcome', compact(['sliders','instructors','navbar','notifications']));
     }
 }

@@ -39,7 +39,7 @@ class UsersController extends Controller
 
         User::with('department')->get()->pluck('department');
         // dd($users);
-        return view('layouts.dashboard.users.index', compact('users'));
+        return view('layouts.dashboard.users.index', compact(['users','notifications']));
     }
     public function main()
     {
@@ -86,7 +86,7 @@ class UsersController extends Controller
         $departments = $this->departmentRepository->getAll();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.users.create', compact('departments'));
+        return view('layouts.dashboard.users.create', compact(['departments','notifications']));
     }
     /**
      * Store a newly created resource in storage.
@@ -113,7 +113,7 @@ class UsersController extends Controller
         // dd($department);
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.profile.index', compact('user', 'department'));
+        return view('layouts.dashboard.profile.index', compact(['user', 'department','notifications']));
     }
     /**
      * Show the form for editing the specified resource.
@@ -124,7 +124,7 @@ class UsersController extends Controller
         $departments = $this->departmentRepository->getAll();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.users.edit', compact('user', 'departments'));
+        return view('layouts.dashboard.users.edit', compact(['user', 'departments','notifications']));
     }
 
     public function settings(string $id)
@@ -133,7 +133,7 @@ class UsersController extends Controller
         $departments = $this->departmentRepository->getAll();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.profile.edit', compact('user', 'departments'));
+        return view('layouts.dashboard.profile.edit', compact(['user', 'departments','notifications']));
     }
 
     /**

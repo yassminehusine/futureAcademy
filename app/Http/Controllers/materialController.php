@@ -34,7 +34,7 @@ class materialController extends Controller
 
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.material.index', compact('materials'));
+        return view('layouts.dashboard.material.index', compact(['materials','notifications']));
     }
     /**
      * Show the form for creating a new resource.
@@ -45,7 +45,7 @@ class materialController extends Controller
         $users = $this->userRepository->getAllUsers();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.material.create', compact('courses', 'users'));
+        return view('layouts.dashboard.material.create', compact(['courses', 'users','notifications']));
     }
 
     /**
@@ -72,7 +72,7 @@ class materialController extends Controller
         $assignments = assignmentModel::where('course_id','=',$id)->get();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.material.show', compact('materials','assignments'));
+        return view('layouts.dashboard.material.show', compact(['materials','assignments','notifications']));
     }
 
     /**
@@ -85,7 +85,7 @@ class materialController extends Controller
         $users = $this->userRepository->getAllUsers();
         $notifications = auth()->user()->unreadNotifications();
 
-        return view('layouts.dashboard.material.edit', compact('courses', 'material', 'users'));
+        return view('layouts.dashboard.material.edit', compact(['courses', 'material', 'users','notifications']));
 
     }
 
