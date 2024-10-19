@@ -50,7 +50,7 @@ class submissionController extends Controller
         $submission = submissionDTO::handleInputs($request , $id);
         $this->submissionRepository->create($submission);
         Alert::success('Success Toast','success');
-        return redirect()->route('submission.show');   
+        return redirect()->route('submission.show',['id' => Auth::id()] );   
     }
     /**
      * Display the specified resource.
