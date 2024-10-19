@@ -4,6 +4,8 @@ use App\DTO\postDTO;
 use App\Http\Requests\postRequest;
 use App\Repository\interface\IpostRepository;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\User;
+use App\Notifications\UserActivityNotification;
 
 class postController extends Controller
 {
@@ -32,6 +34,8 @@ class postController extends Controller
         $data = postDTO::handleInputs($request);
         $this->postRepository->create($data);
         Alert::success('Success Toast','success');
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->route('post.index');
       
 
@@ -50,11 +54,15 @@ class postController extends Controller
     {
         $data = postDTO::handleInputs($request);
         $this->postRepository->update($data, $id);
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->route('post.index')->with('success', 'post updated successfully');
     }
     public function destroy($id){
         $this->postRepository->delete($id);
         Alert::success('Success', 'post deleted successfully');
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->back();
     }
 }

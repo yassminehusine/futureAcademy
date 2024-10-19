@@ -5,9 +5,8 @@ use App\DTO\coursesDTO;
 use App\Models\coursesModel;
 use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\IdepartmentRepository;
-use App\Notifications\AdminNotification;
-use App\Enums\Rolse;
 use App\Models\User;
+use App\Notifications\UserActivityNotification;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CoursesController extends Controller
@@ -49,6 +48,8 @@ class CoursesController extends Controller
         Alert::success('Success Toast','success');
         // $user = User::where('role','Admin');
         // $user->notify(new AdminNotification());
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->route('course.index');   
     }
     /**
@@ -79,6 +80,8 @@ class CoursesController extends Controller
       // Convert the request to a DTO
       $data = coursesDTO::handleInputs($request);
       $this->courseRepository->update($data, $id);
+    //   $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+    //   $admin->notify(new UserActivityNotification('A new user was created.'));
       return redirect()->route('course.index')->with('success', 'Course updated successfully');
         
     }
@@ -89,6 +92,8 @@ class CoursesController extends Controller
     public function destroy(string $id)
     {
         $this->courseRepository->delete($id);
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->back();
 
     }

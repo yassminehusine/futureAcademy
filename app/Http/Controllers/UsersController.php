@@ -1,8 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-// use App\Http\Requests\departmentRequest;
-// use App\Repository\departmentRepository;
-// use App\Enums\Role;
 use App\Enums\departmentRolse;
 use App\Enums\Rolse;
 use Request;
@@ -14,6 +11,8 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\User;
+use App\Notifications\UserActivityNotification;
+
 class UsersController extends Controller
 {
     protected $userRepository;
@@ -92,6 +91,8 @@ class UsersController extends Controller
         $userDTO = UserDTO::handleInputs($request);
         $this->userRepository->create($userDTO);
         Alert::success('Success', 'User created successfully');
+        // $admin = User::where('role','=','Admin'); 
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->route('user.index');
     }
     /**
@@ -131,10 +132,12 @@ class UsersController extends Controller
         $userDTO = UserDTO::handleInputs($request);
         $this->userRepository->update($userDTO, $id);
         Alert::success('Success', 'User updated successfully');
+        // $admin = User::where('role','=','Admin'); 
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         if (Auth::user()->role == "Admin") {
             return redirect()->route('user.index');
         } else
-            return redirect()->route('user.profile',['id' => Auth::id()]);
+            return redirect()->route('user.profile', ['id' => Auth::id()]);
     }
 
     /**
@@ -144,23 +147,25 @@ class UsersController extends Controller
     {
         $this->userRepository->delete($id);
         Alert::success('Success', 'User deleted successfully');
+        // $admin = User::where('role','=','Admin'); 
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->back();
     }
 
     public function search(Request $request)
-{
-    // Get the search term from the request
-    $searchTerm = request()->input('search');
+    {
+        // Get the search term from the request
+        $searchTerm = request()->input('search');
 
-    // Query the User model based on the search term
-    $users = User::where('name', 'like', '%' . $searchTerm . '%')
-                  ->orWhere('id', $searchTerm)
-                  ->get();
+        // Query the User model based on the search term
+        $users = User::where('name', 'like', '%' . $searchTerm . '%')
+            ->orWhere('id', $searchTerm)
+            ->get();
 
-    // Return the results as JSON
-    dd($users);
-    return response()->json($users);
-}
+        // Return the results as JSON
+        dd($users);
+        return response()->json($users);
+    }
     // public function changePassword(string $id){
 
     //     $user = $this->userRepository->getUserById($id);       

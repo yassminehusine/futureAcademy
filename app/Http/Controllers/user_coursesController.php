@@ -6,9 +6,9 @@ use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\Iuser_coursesRepository;
 use App\Repository\interface\IUserRepository;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Http\Request;
-use App\Models\User;
 use Validator;
+use App\Models\User;
+use App\Notifications\UserActivityNotification;
 use App\Models\user_course;
 class user_coursesController extends Controller
 {
@@ -60,6 +60,9 @@ class user_coursesController extends Controller
         // dd($user_courses);
         $this->user_coursesRepository->create($user_courses);
         Alert::success('Success', 'User Course created successfully');
+        $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        $admin->notify(new UserActivityNotification('A new user has registered in course.'));
+    
         return redirect()->route('user_course.create',['id'=> $request->user_id]);
     }
 

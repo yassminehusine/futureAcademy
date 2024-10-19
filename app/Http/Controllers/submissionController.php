@@ -9,6 +9,8 @@ use Auth;
 use App\Http\Requests\submissionRequest;
 use App\DTO\submissionDTO;
 use App\Repository\interface\IsubmissionRepository;
+use App\Models\User;
+use App\Notifications\UserActivityNotification;
 
 
 class submissionController extends Controller
@@ -50,6 +52,8 @@ class submissionController extends Controller
         $submission = submissionDTO::handleInputs($request , $id);
         $this->submissionRepository->create($submission);
         Alert::success('Success Toast','success');
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->route('submission.show',['id' => Auth::id()] );   
     }
     /**
@@ -77,6 +81,8 @@ class submissionController extends Controller
       // Convert the request to a DTO
       $data = submissionDTO::handleInputs($request, $assign_id);
       $this->submissionRepository->update($data, $id);
+    //   $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+    //   $admin->notify(new UserActivityNotification('A new user was created.'));
       return redirect()->route('submission.index')->with('success', ' updated successfully');
         
     }
@@ -87,6 +93,8 @@ class submissionController extends Controller
     public function destroy(string $id)
     {
         $this->submissionRepository->delete($id);
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->back();
 
     }

@@ -8,6 +8,8 @@ use App\Repository\interface\ImaterialRepository;
 use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\IUserRepository;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\User;
+use App\Notifications\UserActivityNotification;
 
 class materialController extends Controller
 {
@@ -52,7 +54,8 @@ class materialController extends Controller
         // dd($material);
         $this->materialRepository->create($material);
         Alert::success('Success Toast', 'success');
-        
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->route('material.index');
     }
     /**
@@ -86,6 +89,8 @@ class materialController extends Controller
         // Convert the request to a DTO
         $data = materialDTO::handleInputs($request);
         $this->materialRepository->update($data, $id);
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->route('material.index')->with('success', 'Course updated successfully');
 
     }
@@ -96,6 +101,8 @@ class materialController extends Controller
     public function destroy(string $id)
     {
         $this->materialRepository->delete($id);
+        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
+        // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->back();
 
     }
