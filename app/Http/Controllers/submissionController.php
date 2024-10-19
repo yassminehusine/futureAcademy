@@ -50,15 +50,15 @@ class submissionController extends Controller
         $submission = submissionDTO::handleInputs($request , $id);
         $this->submissionRepository->create($submission);
         Alert::success('Success Toast','success');
-        return redirect()->route('submission.index');   
+        return redirect()->route('submission.show');   
     }
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-       //$submission = $this->submissionRepository->getById($id);
-       //return view('layouts.dashboard.submission.show', compact('submission'));
+       $submissions = submissionModel::where('user_id',"=",Auth::id())->get();
+       return view('layouts.dashboard.submissions.show', compact('submissions'));
     }
 
     public function edit(string $id)

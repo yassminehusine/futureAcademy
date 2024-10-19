@@ -395,7 +395,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{route('assignment.show', ['id' => Auth::user()->id])}}" class="nav-link">
+          <a href="{{route('submission.show', ['id' => Auth::user()->id])}}" class="nav-link">
           <i class="fa-solid fa-address-card"></i>
           <p>
             My Assignments

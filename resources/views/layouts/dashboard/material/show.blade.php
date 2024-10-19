@@ -72,5 +72,46 @@
         </div>
         <!-- /.card-body -->
     </div>
+    <div class="card card-dark">
+    <div class="card">
+    <div class="card-header">
+                <h3 class="card-title"> Assignments </h3>
+              </div>
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover text-center">
+                  <thead>
+                  <tr>
+                <th>Assignment</th>
+                <th>author</th>
+                <th>Due date</th>
+                <th>Course</th>
+                <th>Points</th>
+                <th>Status</th>
+                <th>Actions</th>
+                </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($assignments as $assignment)
+                    <tr>
+                        <td>{{$assignment->title}}</td>
+                        <td>{{$assignment->user->name}}</td>
+                        <td>{{$assignment->due_date}}</td>
+                        <td>{{$assignment->course->course_name}}</td> 
+                        <td>{{$assignment->assignment_points}}</td> 
+                        <td>{{$assignment->status}}</td> 
+
+                        <td>
+                         <a href="{{ route('submission.create', ['id' => $assignment->id]) }}" class="text-white btn btn-primary">Submit</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    
+                    </tbody>
+                </table>
+
+
+    </div>
+ </div>
+</div>
 </div>
 @endsection

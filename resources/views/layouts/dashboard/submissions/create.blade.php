@@ -12,8 +12,14 @@
     <form id="quickForm" novalidate="novalidate" action="{{ route('submission.store', ['id' =>$id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
 
+    <div class="form-group w-100 bg-white h-25 my-5 p-4 border text-center">
+
+    <h6>{{$assignment->content}}</h6>
+     
+      </div>
     <div class="form-group">
               <textarea id="summernote"  name="submission_text" rows="5">
+                
             
               </textarea>
               @error('submission_text')

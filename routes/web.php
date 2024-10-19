@@ -129,6 +129,8 @@ Route::group(['prefix'=>'submissions'],function(){
     Route::get('/edit/{id}',[submissionController::class,'edit'])->name('submission.edit');
     Route::post('/update/{id}',[submissionController::class,'update'])->name('submission.update');
     Route::get('/destroy/{id}', [submissionController::class, 'destroy'])->name('submission.destroy');
+    Route::get('/show', [submissionController::class, 'show'])->name('submission.show');
+
 })->middleware('auth');
 // End submissions Controller
 

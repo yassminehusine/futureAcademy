@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\MaterialRequest;
 use App\DTO\materialDTO;
+use App\Models\assignmentModel;
 use App\Models\materialModel;
 use App\Repository\interface\ImaterialRepository;
 use App\Repository\interface\IcoursesRepository;
@@ -59,8 +60,10 @@ class materialController extends Controller
      */
     public function show(string $id)
     {
+        
         $materials = materialModel::where('courses_id','=',$id)->get();
-        return view('layouts.dashboard.material.show', compact('materials'));
+        $assignments = assignmentModel::where('course_id','=',$id)->get();
+        return view('layouts.dashboard.material.show', compact('materials','assignments'));
     }
 
     /**
