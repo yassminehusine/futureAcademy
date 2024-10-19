@@ -64,8 +64,11 @@ class user_coursesController extends Controller
         // dd($user_courses);
         $this->user_coursesRepository->create($user_courses);
         Alert::success('Success', 'User Course created successfully');
-        $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
-        $admin->notify(new UserActivityNotification('A new user has registered in course.'));
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
     
         return redirect()->route('user_course.create',['id'=> $request->user_id]);
     }
@@ -104,6 +107,11 @@ class user_coursesController extends Controller
         $user_course = user_courseDTO::handleInputs($request);
         $this->user_coursesRepository->update($user_course, $id);
         Alert::success('Success', 'User Registered a course successfully');
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         return redirect()->route('user_course.index');
     }
 
@@ -114,6 +122,11 @@ class user_coursesController extends Controller
     {
         $this->user_coursesRepository->delete($id);
         Alert::success('Success', 'User Course deleted successfully');
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         return redirect()->route('user_course.index');
     }
 

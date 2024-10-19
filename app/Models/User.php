@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Enums\Rolse;
 use App\Enums\Year;
+use App\Notifications\UserActivityNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +13,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // ... other model methods
+
+    // public function notify(UserActivityNotification $notification)
+    // {
+    //     // Logic to send the notification
+    //     // For example, using the built-in database notification driver:
+    //     $this->notify($notification);
+    // }
     /**
      * The attributes that are mass assignable.
      *

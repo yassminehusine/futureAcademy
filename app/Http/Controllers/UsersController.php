@@ -48,7 +48,7 @@ class UsersController extends Controller
         $admin = $this->userRepository->getCount(Rolse::ADMIN);
         $totalDepartments = 0;
         $totalDepartments = 0;
-        $user = $this->userRepository->getUserById(\Auth::id());
+        $user = $this->userRepository->getUserById(Auth::id());
         // $notifications = auth()->user()->unreadNotifications();
 
 
@@ -97,8 +97,11 @@ class UsersController extends Controller
         $userDTO = UserDTO::handleInputs($request);
         $this->userRepository->create($userDTO);
         Alert::success('Success', 'User created successfully');
-        // $admin = User::where('role','=','Admin'); 
-        // $admin->notify(new UserActivityNotification('A new user was created.'));
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         return redirect()->route('user.index');
     }
     /**
@@ -144,8 +147,11 @@ class UsersController extends Controller
         $userDTO = UserDTO::handleInputs($request);
         $this->userRepository->update($userDTO, $id);
         Alert::success('Success', 'User updated successfully');
-        // $admin = User::where('role','=','Admin'); 
-        // $admin->notify(new UserActivityNotification('A new user was created.'));
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         if (Auth::user()->role == "Admin") {
             return redirect()->route('user.index');
         } else
@@ -159,8 +165,11 @@ class UsersController extends Controller
     {
         $this->userRepository->delete($id);
         Alert::success('Success', 'User deleted successfully');
-        // $admin = User::where('role','=','Admin'); 
-        // $admin->notify(new UserActivityNotification('A new user was created.'));
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         return redirect()->back();
     }
 

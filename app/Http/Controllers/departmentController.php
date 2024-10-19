@@ -38,8 +38,11 @@ class departmentController extends Controller
         $data = departmentDTO::handleInputs($request);
         $this->departmentRepository->create($data);
         Alert::success('Success Toast','success');
-        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
-        // $admin->notify(new UserActivityNotification('A new user was created.'));
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         return redirect()->route('department.index');
       
 
@@ -63,15 +66,21 @@ class departmentController extends Controller
     {
         $data = departmentDTO::handleInputs($request);
         $this->departmentRepository->update($data, $id);
-        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
-        // $admin->notify(new UserActivityNotification('A new user was created.'));
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         return redirect()->route('department.index')->with('success', 'Department updated successfully');
     }
     public function destroy($id){
         $this->departmentRepository->delete($id);
         Alert::success('Success', 'Department deleted successfully');
-        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
-        // $admin->notify(new UserActivityNotification('A new user was created.'));
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         return redirect()->back();
     }
 }

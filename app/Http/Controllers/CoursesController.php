@@ -6,6 +6,7 @@ use App\Models\coursesModel;
 use App\Repository\interface\IcoursesRepository;
 use App\Repository\interface\IdepartmentRepository;
 use App\Models\User;
+use App\Notifications\AdminNotification;
 use App\Notifications\UserActivityNotification;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -36,6 +37,7 @@ class CoursesController extends Controller
     public function create()
     {
         $departments = $this->departmentRepository->getAll();
+        // $notifications = auth()->user()->notifications()->get();
         $notifications = auth()->user()->unreadNotifications();
         return view('layouts.dashboard.courses.create', compact(['departments','notifications']));
     }
@@ -49,8 +51,11 @@ class CoursesController extends Controller
         // dd($course);
         $this->courseRepository->create($courses);
         Alert::success('Success Toast','success');
-        // $user = User::where('role','Admin');
-        // $user->notify(new AdminNotification());
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
         // $admin->notify(new UserActivityNotification('A new user was created.'));
         return redirect()->route('course.index');   
@@ -84,8 +89,11 @@ class CoursesController extends Controller
       // Convert the request to a DTO
       $data = coursesDTO::handleInputs($request);
       $this->courseRepository->update($data, $id);
-    //   $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
-    //   $admin->notify(new UserActivityNotification('A new user was created.'));
+      $users = User::where('role','Admin')->get();
+      $notification = new UserActivityNotification();
+      foreach ($users as $admin) {
+          $admin->notify($notification);
+      }
       return redirect()->route('course.index')->with('success', 'Course updated successfully');
         
     }
@@ -96,8 +104,11 @@ class CoursesController extends Controller
     public function destroy(string $id)
     {
         $this->courseRepository->delete($id);
-        // $admin = User::where('role','=','Admin'); // Assuming admin user ID is 1
-        // $admin->notify(new UserActivityNotification('A new user was created.'));
+        $users = User::where('role','Admin')->get();
+        $notification = new UserActivityNotification();
+        foreach ($users as $admin) {
+            $admin->notify($notification);
+        }
         return redirect()->back();
 
     }
