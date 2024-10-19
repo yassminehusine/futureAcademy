@@ -37,7 +37,7 @@ class user_coursesController extends Controller
             $notifications = collect();
         }
 
-        return view('layouts.dashboard.user_courses.index', compact(['user_courses','notifications']));
+        return view('layouts.dashboard.user_courses.index', compact(['user_courses', 'notifications']));
     }
     /**
      * Show the form for creating a new resource.
@@ -53,7 +53,7 @@ class user_coursesController extends Controller
         } else {
             $notifications = collect();
         }
-        return view('layouts.dashboard.user_courses.create', compact(['user', 'courses','notifications']));
+        return view('layouts.dashboard.user_courses.create', compact(['user', 'courses', 'notifications']));
     }
 
     /**
@@ -73,13 +73,19 @@ class user_coursesController extends Controller
         // dd($user_courses);
         $this->user_coursesRepository->create($user_courses);
         Alert::success('Success', 'User Course created successfully');
-        $users = User::where('role','Admin')->get();
-        $notification = new UserActivityNotification();
+        $users = User::where('role', 'Admin')->get();
+        $notificationData = [
+            'title' => 'New enrollment Created',
+            'body' => 'A new user enrolled for course ' . $request->course_id . ' has been created.',
+            'icon' => 'fas fa-book',
+            'url' => route('user_course.index'),
+        ];
+
         foreach ($users as $admin) {
-            $admin->notify($notification);
+            $admin->notify(new UserActivityNotification($notificationData));
         }
-    
-        return redirect()->route('user_course.create',['id'=> $request->user_id]);
+
+        return redirect()->route('user_course.create', ['id' => $request->user_id]);
     }
 
     /**
@@ -94,7 +100,7 @@ class user_coursesController extends Controller
             $notifications = collect();
         }
         //dd($user_courses);
-        return view('layouts.dashboard.user_courses.show', compact(['user_courses','notifications']));
+        return view('layouts.dashboard.user_courses.show', compact(['user_courses', 'notifications']));
 
     }
 
@@ -111,7 +117,7 @@ class user_coursesController extends Controller
         } else {
             $notifications = collect();
         }
-        return view('layouts.dashboard.user_courses.edit', compact(['user_course', 'users', 'courses','notifications']));
+        return view('layouts.dashboard.user_courses.edit', compact(['user_course', 'users', 'courses', 'notifications']));
     }
 
     /**
@@ -122,10 +128,16 @@ class user_coursesController extends Controller
         $user_course = user_courseDTO::handleInputs($request);
         $this->user_coursesRepository->update($user_course, $id);
         Alert::success('Success', 'User Registered a course successfully');
-        $users = User::where('role','Admin')->get();
-        $notification = new UserActivityNotification();
+        $users = User::where('role', 'Admin')->get();
+        $notificationData = [
+            'title' => 'Enrollment Updated',
+            'body' => 'Enrollment for user ' . $request->user_id . ' has been updated.',
+            'icon' => 'fas fa-book',
+            'url' => route('user_course.index'),
+        ];
+
         foreach ($users as $admin) {
-            $admin->notify($notification);
+            $admin->notify(new UserActivityNotification($notificationData));
         }
         return redirect()->route('user_course.index');
     }
@@ -137,10 +149,16 @@ class user_coursesController extends Controller
     {
         $this->user_coursesRepository->delete($id);
         Alert::success('Success', 'User Course deleted successfully');
-        $users = User::where('role','Admin')->get();
-        $notification = new UserActivityNotification();
+        $users = User::where('role', 'Admin')->get();
+        $notificationData = [
+            'title' => 'User Unenrolled',
+            'body' => 'enrollment no ' . $id . ' has been deleted.',
+            'icon' => 'fas fa-book',
+            'url' => route('user_course.index'),
+        ];
+
         foreach ($users as $admin) {
-            $admin->notify($notification);
+            $admin->notify(new UserActivityNotification($notificationData));
         }
         return redirect()->route('user_course.index');
     }
@@ -155,7 +173,7 @@ class user_coursesController extends Controller
         } else {
             $notifications = collect();
         }
-        return view('layouts.dashboard.user_courses.regindex', compact(['users','notifications']));
+        return view('layouts.dashboard.user_courses.regindex', compact(['users', 'notifications']));
 
     }
 

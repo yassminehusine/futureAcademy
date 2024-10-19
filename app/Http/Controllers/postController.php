@@ -26,7 +26,7 @@ class postController extends Controller
         } else {
             $notifications = collect();
         }
-        return view('layouts.dashboard.posts.index', compact(['posts','notifications']));
+        return view('layouts.dashboard.posts.index', compact(['posts', 'notifications']));
     }
 
     public function create()
@@ -36,22 +36,28 @@ class postController extends Controller
         } else {
             $notifications = collect();
         }
-        return view('layouts.dashboard.posts.create',compact('notifications'));
+        return view('layouts.dashboard.posts.create', compact('notifications'));
     }
 
     public function store(postRequest $request)
     {
-        
+
         $data = postDTO::handleInputs($request);
         $this->postRepository->create($data);
-        Alert::success('Success Toast','success');
-        $users = User::where('role','Admin')->get();
-        $notification = new UserActivityNotification();
+        Alert::success('Success Toast', 'success');
+        $users = User::where('role', 'Admin')->get();
+        $notificationData = [
+            'title' => 'New Post Created',
+            'body' => 'A new post named ' . $request->title . ' has been created.',
+            'icon' => 'fas fa-sticky-note',
+            'url' => route('post.index'),
+        ];
+
         foreach ($users as $admin) {
-            $admin->notify($notification);
+            $admin->notify(new UserActivityNotification($notificationData));
         }
         return redirect()->route('post.index');
-      
+
 
     }
     public function show(string $id)
@@ -62,7 +68,7 @@ class postController extends Controller
         } else {
             $notifications = collect();
         }
-        return view('layouts.dashboard.posts.show', compact(['post','notifications']));
+        return view('layouts.dashboard.posts.show', compact(['post', 'notifications']));
     }
     public function edit($id)
     {
@@ -72,26 +78,39 @@ class postController extends Controller
         } else {
             $notifications = collect();
         }
-        return view('layouts.dashboard.posts.edit', compact(['post','notifications']));
+        return view('layouts.dashboard.posts.edit', compact(['post', 'notifications']));
     }
     public function update(postRequest $request, string $id)
     {
         $data = postDTO::handleInputs($request);
         $this->postRepository->update($data, $id);
-        $users = User::where('role','Admin')->get();
-        $notification = new UserActivityNotification();
+        $users = User::where('role', 'Admin')->get();
+        $notificationData = [
+            'title' => 'Post Updated',
+            'body' => 'Post named ' . $request->title . ' has been updated.',
+            'icon' => 'fas fa-sticky-note',
+            'url' => route('post.index'),
+        ];
+
         foreach ($users as $admin) {
-            $admin->notify($notification);
+            $admin->notify(new UserActivityNotification($notificationData));
         }
         return redirect()->route('post.index')->with('success', 'post updated successfully');
     }
-    public function destroy($id){
+    public function destroy($id)
+    {
         $this->postRepository->delete($id);
         Alert::success('Success', 'post deleted successfully');
-        $users = User::where('role','Admin')->get();
-        $notification = new UserActivityNotification();
+        $users = User::where('role', 'Admin')->get();
+        $notificationData = [
+            'title' => 'Post Deleted',
+            'body' => 'Post no ' . $id . ' has been deleted.',
+            'icon' => 'fas fa-sticky-note',
+            'url' => route('post.index'),
+        ];
+
         foreach ($users as $admin) {
-            $admin->notify($notification);
+            $admin->notify(new UserActivityNotification($notificationData));
         }
         return redirect()->back();
     }

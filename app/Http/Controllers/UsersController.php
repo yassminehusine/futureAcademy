@@ -104,9 +104,15 @@ class UsersController extends Controller
         $this->userRepository->create($userDTO);
         Alert::success('Success', 'User created successfully');
         $users = User::where('role', 'Admin')->get();
-        $notification = new UserActivityNotification();
+        $notificationData = [
+            'title' => 'New User Registered ',
+            'body' => 'A new user named ' . $request->name . ' has been created.',
+            'icon' => 'fas fa-user',
+            'url' => route('user.index'),
+        ];
+
         foreach ($users as $admin) {
-            $admin->notify($notification);
+            $admin->notify(new UserActivityNotification($notificationData));
         }
         return redirect()->route('user.index');
     }
@@ -163,9 +169,15 @@ class UsersController extends Controller
         $this->userRepository->update($userDTO, $id);
         Alert::success('Success', 'User updated successfully');
         $users = User::where('role', 'Admin')->get();
-        $notification = new UserActivityNotification();
+        $notificationData = [
+            'title' => 'User Updated',
+            'body' => 'User named ' . $request->name . ' has been updated.',
+            'icon' => 'fas fa-user',
+            'url' => route('user.index'),
+        ];
+
         foreach ($users as $admin) {
-            $admin->notify($notification);
+            $admin->notify(new UserActivityNotification($notificationData));
         }
         if (Auth::user()->role == "Admin") {
             return redirect()->route('user.index');
@@ -181,9 +193,15 @@ class UsersController extends Controller
         $this->userRepository->delete($id);
         Alert::success('Success', 'User deleted successfully');
         $users = User::where('role', 'Admin')->get();
-        $notification = new UserActivityNotification();
+        $notificationData = [
+            'title' => 'User Deleted',
+            'body' => 'User no ' . $id . ' has been deleted.',
+            'icon' => 'fas fa-user',
+            'url' => route('user.index'),
+        ];
+
         foreach ($users as $admin) {
-            $admin->notify($notification);
+            $admin->notify(new UserActivityNotification($notificationData));
         }
         return redirect()->back();
     }
