@@ -69,13 +69,15 @@ Route::group(['prefix'=>'courses'],function(){
 
 // Corrected routes/web.php
 Route::group(['prefix'=>'user_courses'],function(){
-    Route::get('/create',[user_coursesController::class,'create'])->name('user_course.create');
+    Route::get('/create/{id}',[user_coursesController::class,'create'])->name('user_course.create');
     Route::get('/index', [user_coursesController::class, 'index'])->name('user_course.index');
     Route::post('/store',[user_coursesController::class,'store'])->name('user_course.store');
     Route::get('/edit/{id}',[user_coursesController::class,'edit'])->name('user_course.edit');
     Route::post('/update/{id}',[user_coursesController::class,'update'])->name('user_course.update');
     Route::get('/destroy/{id}', [user_coursesController::class, 'destroy'])->name('user_course.destroy');
     Route::get('/show/{id}', [user_coursesController::class, 'show'])->name('user.courses');
+    Route::get('/registry',[user_coursesController::class,'registry'])->name('user_course.regindex');
+
 
 })->middleware('auth');
 // Corrected routes/web.php
@@ -129,7 +131,7 @@ Route::group(['prefix'=>'submissions'],function(){
     Route::get('/edit/{id}',[submissionController::class,'edit'])->name('submission.edit');
     Route::post('/update/{id}',[submissionController::class,'update'])->name('submission.update');
     Route::get('/destroy/{id}', [submissionController::class, 'destroy'])->name('submission.destroy');
-    Route::get('/show', [submissionController::class, 'show'])->name('submission.show');
+    Route::get('/show/{id}', [submissionController::class, 'show'])->name('submission.show');
 
 })->middleware('auth');
 // End submissions Controller

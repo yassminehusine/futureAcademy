@@ -150,7 +150,7 @@ class UsersController extends Controller
     public function search(Request $request)
 {
     // Get the search term from the request
-    $searchTerm = $request->input('search');
+    $searchTerm = request()->input('search');
 
     // Query the User model based on the search term
     $users = User::where('name', 'like', '%' . $searchTerm . '%')

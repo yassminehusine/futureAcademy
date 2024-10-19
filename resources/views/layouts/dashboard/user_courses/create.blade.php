@@ -9,35 +9,22 @@
         <!-- /.card-header -->
         <!-- form start -->
         @csrf
-        <form id="quickForm" novalidate="novalidate" action="{{ route('user_course.store') }}" method="POST">
-            @csrf
-            <!-- <input type="hidden" name="user_id" id="selected_user_id"> -->
-            <div class="card-body">
+        <div class="card-body">
+
+            <form id="quickForm" novalidate="novalidate" action="{{ route('user_course.store') }}" method="POST">
+                @csrf
                 <div class="form-group">
-                 <label for="user_id">User</label>
-                <select name="user_id" class="form-control @error('user_id') is-invalid @enderror" id="user_id">
-                    @foreach ($users as $user)
-                    <option value="{{$user->id}}" {{ auth()->user()->id == $user->id ? 'selected' : '' }}>
-                          {{$user->name}}
-                    </option>
-                    @endforeach
-                    </select>
+                    <label for="user_id">User</label>                
+                    <input type="hidden" name="user_id" value={{$user->id}} class="form-control @error('user_id') is-invalid @enderror" id="user_id">
+                    <h3>{{$user->name}}</h3>
+                    <!-- <input type="text" readonly name="name" value={{$user->name}} class="form-control @error('name') is-invalid @enderror" id="user_id"> -->
+                    <!-- </input> -->
                     @error('user_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-            </div>
-                <!-- <div class="form-group">
-                    <label for="user_search">Search User (Name or ID)</label>
-                    <input type="text" name="user_search" class="form-control @error('user_id') is-invalid @enderror"
-                        id="user_search" placeholder="Enter Username or ID">
-                    @error('user_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div> -->
+                </div>
 
                 <div class="form-group">
                     <label for="course_id">Course</label>
@@ -117,7 +104,11 @@
                 <div class="card-footer">
                     <button type="submit" class="btn btn-dark">Submit</button>
                 </div>
-            </div>
+        </div>
+
+
+
+
         </form>
     </div>
 </div>

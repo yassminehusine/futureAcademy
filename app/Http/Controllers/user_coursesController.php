@@ -16,39 +16,43 @@ class user_coursesController extends Controller
      * Display a listing of the resource.
      */
 
-     protected    $user_coursesRepository;
-     protected    $userRepository;
-     protected    $coursesRepository;
-     public function __construct(Iuser_coursesRepository $user_coursesRepository,IUserRepository $userRepository,IcoursesRepository  $coursesRepository) {
-         $this->middleware(['Admin'])->except('show');
-         $this->user_coursesRepository = $user_coursesRepository;
-         $this->userRepository = $userRepository;
-         $this->coursesRepository = $coursesRepository;
-     }
-    public function index(){ 
+    protected $user_coursesRepository;
+    protected $userRepository;
+    protected $coursesRepository;
+    public function __construct(Iuser_coursesRepository $user_coursesRepository, IUserRepository $userRepository, IcoursesRepository $coursesRepository)
+    {
+        $this->middleware(['Admin'])->except('show');
+        $this->user_coursesRepository = $user_coursesRepository;
+        $this->userRepository = $userRepository;
+        $this->coursesRepository = $coursesRepository;
+    }
+    public function index()
+    {
         $user_courses = user_course::with(['user', 'course'])->get();
-        return view('layouts.dashboard.user_courses.index',compact('user_courses'));
+        return view('layouts.dashboard.user_courses.index', compact('user_courses'));
     }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
-        
-       $users = $this->userRepository->getAllUsers();
-       $courses = $this->coursesRepository->getAll();
-       return  view('layouts.dashboard.user_courses.create',compact('users', 'courses'));
+
+        $user = $this->userRepository->getUserById($id);
+        // dd($user);
+        $courses = $this->coursesRepository->getAll();
+        return view('layouts.dashboard.user_courses.create', compact('user', 'courses'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(user_coursesRequest $request){
+    public function store(user_coursesRequest $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required', // Ensure user ID is present
         ]);
-    
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -56,7 +60,7 @@ class user_coursesController extends Controller
         // dd($user_courses);
         $this->user_coursesRepository->create($user_courses);
         Alert::success('Success', 'User Course created successfully');
-        return redirect()->route('user_course.create');
+        return redirect()->route('user_course.create',['id'=> $request->user_id]);
     }
 
     /**
@@ -64,9 +68,9 @@ class user_coursesController extends Controller
      */
     public function show(string $id)
     {
-      $user_courses = user_course::where('user_id', $id)->with(['user', 'course'])->get();
-      //dd($user_courses);
-      return view('layouts.dashboard.user_courses.show', compact('user_courses'));
+        $user_courses = user_course::where('user_id', $id)->with(['user', 'course'])->get();
+        //dd($user_courses);
+        return view('layouts.dashboard.user_courses.show', compact('user_courses'));
 
     }
 
@@ -75,10 +79,10 @@ class user_coursesController extends Controller
      */
     public function edit(string $id)
     {
-         $user_course = $this->user_coursesRepository->getById($id);
-         $users = $this->userRepository->getAllUsers();
-         $courses = $this->coursesRepository->getAll();
-         return view('layouts.dashboard.user_courses.edit', compact('user_course', 'users', 'courses'));
+        $user_course = $this->user_coursesRepository->getById($id);
+        $users = $this->userRepository->getAllUsers();
+        $courses = $this->coursesRepository->getAll();
+        return view('layouts.dashboard.user_courses.edit', compact('user_course', 'users', 'courses'));
     }
 
     /**
@@ -87,9 +91,9 @@ class user_coursesController extends Controller
     public function update(user_coursesRequest $request, string $id)
     {
         $user_course = user_courseDTO::handleInputs($request);
-         $this->user_coursesRepository->update($user_course, $id);
-         Alert::success('Success', 'User Registered a course successfully');
-         return redirect()->route('user_course.index');
+        $this->user_coursesRepository->update($user_course, $id);
+        Alert::success('Success', 'User Registered a course successfully');
+        return redirect()->route('user_course.index');
     }
 
     /**
@@ -102,5 +106,13 @@ class user_coursesController extends Controller
         return redirect()->route('user_course.index');
     }
 
+
+
+    public function registry()
+    {
+        $users = $this->userRepository->getAllUsers();
+        return view('layouts.dashboard.user_courses.regindex', compact('users'));
+
+    }
 
 }

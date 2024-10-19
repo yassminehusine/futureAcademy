@@ -16,7 +16,7 @@ class assignmentController extends Controller
     protected $assignmentRepository;
     protected $userRepository;
     public function __construct(IcoursesRepository $courseRepository, IassignmentRepository $assignmentRepository){
-        $this->middleware(['Doctors']);
+        $this->middleware(['Doctors'])->except('show');
         $this->courseRepository = $courseRepository;
         $this->assignmentRepository = $assignmentRepository;
     }

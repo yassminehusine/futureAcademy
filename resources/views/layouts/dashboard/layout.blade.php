@@ -334,7 +334,7 @@
           </a>
           <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('user_course.create')}}" class="nav-link">
+            <a href="{{route('user_course.regindex')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Register</p>
             </a>
@@ -345,16 +345,16 @@
             <p> Index </p>
             </a>
           </li>
-          
+
           <li class="nav-item">
-          <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
-          <i class="fa-solid fa-address-card"></i>
-          <p>
-            My Courses
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-        </li>
+            <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
+            <i class="fa-solid fa-address-card"></i>
+            <p>
+              My Courses
+              <i class="fas fa-angle-left right"></i>
+            </p>
+            </a>
+          </li>
           </ul>
         </li>
         <li class="nav-item">
@@ -408,11 +408,11 @@
           </p>
           </a>
         </li>
-      
+
 
       @endif
-@if (auth()->user()->role == "Ademin")
-<li class="nav-item">
+            @if (auth()->user()->role == "Admin")
+        <li class="nav-item">
           <a href="#" class="nav-link">
           <!-- <i class="fa-solid fa-bookmark"></i> -->
           <i class="nav-icon fas fa-bookmark"></i>
@@ -472,45 +472,45 @@
           </li>
           </ul>
         </li>
-@endif
+      @endif
 
-      @if(auth()->user()->role === 'students')
+            @if(auth()->user()->role === 'students')
+          <li class="nav-item">
+            <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
+            <i class="fa-solid fa-address-card"></i>
+            <p>
+              My Courses
+              <i class="fas fa-angle-left right"></i>
+            </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('assignment.show', ['id' => Auth::user()->id])}}" class="nav-link">
+            <i class="fa-solid fa-address-card"></i>
+            <p>
+              My Assignments
+              <i class="fas fa-angle-left right"></i>
+            </p>
+            </a>
+          </li>
+          <!-- <ul class="nav nav-treeview"> -->
+          @if (auth()->user()->role !== "Admin")
         <li class="nav-item">
-          <a href="{{route('user.courses', ['id' => Auth::user()->id])}}" class="nav-link">
-          <i class="fa-solid fa-address-card"></i>
-          <p>
-            My Courses
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{route('assignment.show', ['id' => Auth::user()->id])}}" class="nav-link">
-          <i class="fa-solid fa-address-card"></i>
-          <p>
-            My Assignments
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-        </li>
-        <!-- <ul class="nav nav-treeview"> -->
-      @if (auth()->user()->role !== "Admin")
-      <li class="nav-item">
-          <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
-          <i class="fa-solid fa-address-card"></i>
-          <p>
-            Account Settings
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
+        <a href="{{route('user.settings', ['id' => Auth::user()->id])}}" class="nav-link">
+        <i class="fa-solid fa-address-card"></i>
+        <p>
+          Account Settings
+          <i class="fas fa-angle-left right"></i>
+        </p>
+        </a>
         </li>
       @endif
-        <!-- <li class="nav-item">
+          <!-- <li class="nav-item">
           <a href="{{ route('logout') }}" class="nav-link"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <i class="nav-icon fas fa-sign-out-alt"></i>
           <p>
-            Logout
+          Logout
           </p>
           </a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -519,19 +519,19 @@
         </li> -->
 
       @endif
-      <li class="nav-item">
-          <a href="{{ route('logout') }}" class="nav-link"
-          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          <i class="nav-icon fas fa-sign-out-alt"></i>
-          <p>
-            Logout
-            <i class="fas fa-angle-left right"></i>
-          </p>
-          </a>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-          @csrf
-          </form>
-        </li>
+            <li class="nav-item">
+              <a href="{{ route('logout') }}" class="nav-link"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                  Logout
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+              </form>
+            </li>
         </nav>
         <!-- /.sidebar-menu -->
       </div>
@@ -580,6 +580,62 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{asset('assets')}}/dist/js/nny.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
+<script>function generatePassword() {
+    const passwordLength = 12; // Adjust the desired password length
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+    let password = "";
+    for (let i = 0; i
+      < passwordLength; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset.charAt(randomIndex);
+    }
+
+    document.getElementById("password").value
+      = password;
+    document.getElementById("confirm-password").value
+      = password;
+
+  }</script>
+<script>
+
+
+  var options = {
+    valueNames: ['name', 'id']
+  };
+
+  var userList = new List('users', options);
+
+
+  
+</script>
+
+<script>
+
+
+  $(document).ready(function () {
+    $('#user_search').keyup(function () {
+      var searchTerm = $(this).val();
+      var searchUrl = "{{ route('users.search') }}?search=" + searchTerm;
+
+      $.ajax({
+        url: searchUrl, // Use the searchUrl variable
+        data: { search: searchTerm },
+        method: 'GET',
+        dataType: 'json', // Assuming JSON response
+        success: function (response) {
+          console.log('Response:', response);
+          // ... update UI with results
+        },
+        error: function (error) {
+          console.error('Error sending AJAX request:', error);
+        }
+      });
+    });
+  });
+</script>
 
 <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -686,7 +742,7 @@ AdminLTE App -->
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <script>
-  function checkAutofill(){
+  function checkAutofill() {
     datal = document.getElementById('user_search');
     datal = document.getElementById('user_id');
 

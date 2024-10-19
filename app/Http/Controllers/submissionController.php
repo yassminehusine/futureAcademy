@@ -55,9 +55,9 @@ class submissionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(string $id)
     {
-       $submissions = submissionModel::where('user_id',"=",Auth::id())->get();
+       $submissions = submissionModel::where('user_id',"=",$id)->get();
        return view('layouts.dashboard.submissions.show', compact('submissions'));
     }
 

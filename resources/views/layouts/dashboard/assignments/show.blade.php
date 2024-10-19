@@ -29,14 +29,23 @@
                         <td>{{$assignment->assignment_points}}</td> 
                         <td>{{$assignment->status}}</td> 
 
+                        @if (auth()->user()->role == "Admin"||auth()->user()->role == "doctors")
+
                         <td>
-                         <a href="{{ route('assignment.edit', ['id' => $assignment->id]) }}" class="text-success">
+                         <a href="{{ route('submission.edit', ['id' => $submission->id]) }}" class="text-success">
                             <i class="fas fa-edit"></i>
                          </a>
-                         <a href="{{ route('assignment.destroy', ['id' => $assignment->id]) }}" onclick="return confirm('Are you sure you want to delete this item?')" class="text-danger">
+                         <a href="{{ route('submission.destroy', ['id' => $submission->id]) }}" onclick="return confirm('Are you sure you want to delete this item?')" class="text-danger">
                             <i class="fas fa-trash"></i>
                          </a>
                         </td>
+                        
+                        <!-- <td>
+                         <a href="{{ route('submission.edit', ['id' => $submission->id]) }}" class="text-success">
+                            <i class="fas fa-edit"></i>
+                         </a>
+                        </td> -->
+                        @endif
                     </tr>
                     @endforeach
                     

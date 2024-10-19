@@ -338,7 +338,7 @@
           </a>
           <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('user_course.create')}}" class="nav-link">
+            <a href="{{route('user_course.regindex')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Register</p>
             </a>
