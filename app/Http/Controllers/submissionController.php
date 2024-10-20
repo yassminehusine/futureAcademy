@@ -83,8 +83,11 @@ class submissionController extends Controller
     public function show(string $id)
     {
         $submissions = submissionModel::where('user_id', "=", $id)->get();
-        $notifications = auth()->user()->unreadNotifications();
-
+        if (Auth::check()) {
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->limit(15)->get();
+        } else {
+            $notifications = collect();
+        }
         return view('layouts.dashboard.submissions.show', compact(['submissions', 'notifications']));
     }
 

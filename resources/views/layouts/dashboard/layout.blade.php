@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Future Academy | Dashboard</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -91,15 +91,15 @@
         </li>
 
         <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-comments"></i>
             <span class="badge badge-danger navbar-badge">3</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="#" class="dropdown-item">
+            <a href="#" class="dropdown-item"> -->
               <!-- Message Start -->
-              <div class="media">
+              <!-- <div class="media">
                 <img src="{{asset('assets')}}/dist/img/user1-128x128.jpg" alt="User Avatar"
                   class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
@@ -110,13 +110,13 @@
                   <p class="text-sm">Call me whenever you can...</p>
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
-              </div>
+              </div> -->
               <!-- Message End -->
-            </a>
+            <!-- </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="#" class="dropdown-item"> -->
               <!-- Message Start -->
-              <div class="media">
+              <!-- <div class="media">
                 <img src="{{asset('assets')}}/dist/img/user8-128x128.jpg" alt="User Avatar"
                   class="img-size-50 img-circle mr-3">
                 <div class="media-body">
@@ -127,13 +127,13 @@
                   <p class="text-sm">I got your message bro</p>
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
-              </div>
+              </div> -->
               <!-- Message End -->
-            </a>
+            <!-- </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="#" class="dropdown-item"> -->
               <!-- Message Start -->
-              <div class="media">
+              <!-- <div class="media">
                 <img src="{{asset('assets')}}/dist/img/user3-128x128.jpg" alt="User Avatar"
                   class="img-size-50 img-circle mr-3">
                 <div class="media-body">
@@ -144,13 +144,13 @@
                   <p class="text-sm">The subject goes here</p>
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
-              </div>
+              </div> -->
               <!-- Message End -->
-            </a>
+            <!-- </a>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
           </div>
-        </li>
+        </li> -->
 
 
         <!-- Notifications Dropdown Menu -->
@@ -195,7 +195,7 @@
     <a href="{{route('home')}}" class="brand-link">
       <img src="https://futureacademyedu.com/wp-content/uploads/2023/02/Logo-2048x1491.png" alt="AdminLTE Logo"
         class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Future Academyed</span>
+      <span class="brand-text font-weight-light">Future Academy</span>
     </a>
 
     <!-- Sidebar -->
